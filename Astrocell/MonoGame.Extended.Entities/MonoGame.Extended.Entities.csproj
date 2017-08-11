@@ -60,7 +60,6 @@
     <Compile Include="EntityComponentDelegate.cs" />
     <Compile Include="EntityDelegate.cs" />
     <Compile Include="EntityManager.cs" />
-    <Compile Include="EntityProcessingExtensions.cs" />
     <Compile Include="EntityProcessingSystem.cs" />
     <Compile Include="EntitySystemAttribute.cs" />
     <Compile Include="EntityTemplateAttribute.cs" />
