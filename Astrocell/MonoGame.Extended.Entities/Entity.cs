@@ -150,6 +150,13 @@ namespace MonoGame.Extended.Entities
             return Manager.GetComponent<T>(this);
         }
 
+        public void With<T>(Action<T> action) where T : EntityComponent
+        {
+            var component = Get<T>();
+            if (component != null)
+                action(component);
+        }
+
         private void Reset()
         {
             _group = null;

@@ -50,6 +50,7 @@ namespace MonoGame.Extended.Entities
             _dependencyResolver = dependencyResolver ?? new DefaultDependencyResolver();
             _systemManager = new SystemManager(this);
             EntityManager = new EntityManager(_systemManager, _dependencyResolver);
+            Scan(typeof(EntityComponentSystem).GetTypeInfo().Assembly);
         }
 
         // don't call this every frame, lol

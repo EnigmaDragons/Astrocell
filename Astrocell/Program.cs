@@ -1,20 +1,15 @@
 ﻿using System;
+using Astrocell.Scenes;
 
 namespace Astrocell
 {
 #if WINDOWS || LINUX
-    /// <summary>
-    /// The main class.
-    /// </summary>
     public static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new GameMain(() => new BattleScene()))
                 game.Run();
         }
     }
