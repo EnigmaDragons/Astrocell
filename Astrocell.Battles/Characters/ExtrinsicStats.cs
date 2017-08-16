@@ -1,14 +1,5 @@
 ﻿namespace Astrocell.Battles.Characters
 {
-    public interface ICharIntrinsicStats
-    {
-        int Strength { get; }
-        int Agility { get; }
-        int Toughness { get; }
-        int Willpower { get; }
-        int Intelligence { get; }
-    }
-
     public interface ICharExtrinsicStats
     {
         int MaxHp { get; }
@@ -23,38 +14,8 @@
         float CriticalChance { get; }
         float CriticalDamageFactor { get; }
     }
-
-    public interface ICharStats : ICharIntrinsicStats, ICharExtrinsicStats { }
-
-    public sealed class StartingStats : ICharIntrinsicStats
-    {
-        public int Level { get; set; }
-        public int Strength { get; set; }
-        public int Agility { get; set; }
-        public int Toughness { get; set; }
-        public int Willpower { get; set; }
-        public int Intelligence { get; set; }
-    }
-
-    public sealed class CombinedIntrinsicStats : ICharIntrinsicStats
-    {
-        private readonly ICharIntrinsicStats _stats1;
-        private readonly ICharIntrinsicStats _stats2;
-
-        public int Strength => _stats1.Strength + _stats2.Strength;
-        public int Agility => _stats1.Agility + _stats2.Agility;
-        public int Toughness => _stats1.Toughness + _stats2.Toughness;
-        public int Willpower => _stats1.Willpower + _stats2.Willpower;
-        public int Intelligence => _stats1.Intelligence + _stats2.Intelligence;
-
-        public CombinedIntrinsicStats(ICharIntrinsicStats stats1, ICharIntrinsicStats stats2)
-        {
-            _stats1 = stats1;
-            _stats2 = stats2;
-        }
-    }
-
-    public sealed class ExtrinsicStatsFromBaseStats : ICharExtrinsicStats
+    
+    public struct ExtrinsicStatsFromBaseStats : ICharExtrinsicStats
     {
         private readonly ICharIntrinsicStats _char;
 
@@ -76,7 +37,7 @@
         }
     }
 
-    public sealed class CombinedExtrinsicStats : ICharExtrinsicStats
+    public struct CombinedExtrinsicStats : ICharExtrinsicStats
     {
         private readonly ICharExtrinsicStats _stats1;
         private readonly ICharExtrinsicStats _stats2;
@@ -100,7 +61,7 @@
         }
     }
 
-    public sealed class ExtrinsicStatsMods : ICharExtrinsicStats
+    public struct ExtrinsicStatsMods : ICharExtrinsicStats
     {
         public int MaxHp { get; set; }
         public int Attack { get; set; }

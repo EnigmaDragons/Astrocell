@@ -35,6 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OO.Core">
+      <HintPath>..\lib\OO.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -50,11 +57,28 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Characters\CharacterBuilder.cs" />
     <Compile Include="Characters\EquipmentSheet.cs" />
-    <Compile Include="Characters\Stats.cs" />
+    <Compile Include="Characters\IntrinsicStats.cs" />
+    <Compile Include="Characters\ExtrinsicStats.cs" />
     <Compile Include="Characters\CharacterSheet.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Decks\Card.cs" />
+    <Compile Include="Decks\CardTests.cs" />
+    <Compile Include="Decks\EquippedDeck.cs" />
+    <Compile Include="Decks\EquippedDeckFactory.cs" />
+    <Compile Include="Equipments\Equipment.cs" />
+    <Compile Include="Equipments\IEquipment.cs" />
+    <Compile Include="JsonIo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Cards\strike.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Content\Equipment\knife.json" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

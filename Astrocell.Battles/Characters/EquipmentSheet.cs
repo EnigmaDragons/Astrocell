@@ -1,7 +1,12 @@
-﻿
-namespace Astrocell.Battles.Characters
+﻿namespace Astrocell.Battles.Characters
 {
-    public class EquipmentSheet
+    public sealed class EquipmentSheet
     {
+        public static EquipmentSheet Empty = new EquipmentSheet();
+
+        public ICharExtrinsicStats GetStatMods()
+        {
+            return new ExtrinsicStatsMods();
+        }
     }
 }
