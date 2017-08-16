@@ -8,6 +8,7 @@
         public int CardsDrawn { get; set; }
         public float PhysicalDamage { get; set; }
         public float MagicalDamage { get; set; }
+        public ActionTarget TargetType { get; set; }
 
         public static Card Load(string name)
         {

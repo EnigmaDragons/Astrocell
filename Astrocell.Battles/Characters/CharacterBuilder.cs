@@ -1,6 +1,5 @@
 ﻿using System;
 using Astrocell.Battles.Decks;
-using OO.Core.Storage;
 
 namespace Astrocell.Battles.Characters
 {
@@ -30,7 +29,7 @@ namespace Astrocell.Battles.Characters
 
         public CharacterSheet Build()
         {
-            if (_stats.IsEmpty() || _equip.IsEmpty() || _deck.IsEmpty())
+            if (_stats.IsEmpty || _equip.IsEmpty || _deck.IsEmpty)
                 throw new InvalidOperationException("Cannot build character sheet without StartingStats, Equipment, and Deck.");
 
             var stats = _stats.Get();

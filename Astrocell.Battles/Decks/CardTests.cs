@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Astrocell.Battles.Decks
 {
@@ -16,6 +11,7 @@ namespace Astrocell.Battles.Decks
             var card = Card.Load("strike");
 
             Assert.AreEqual(2, card.ActionPointCost);
+            Assert.AreEqual(ActionTarget.One, card.TargetType);
         }
     }
 }
