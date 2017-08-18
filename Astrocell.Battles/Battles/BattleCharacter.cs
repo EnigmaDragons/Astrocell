@@ -13,22 +13,24 @@ namespace Astrocell.Battles.Battles
         public bool CanAct => IsConscious;
         public bool CanPlayACard => CanAct && Hand.Cards.Any(x => x.ActionPointCost <= CurrentActionPoints && x.EnergyCost <= CurrentEnergy);
 
-        public int MaxHp => _stats.MaxHp;
+        public string Name { get; }
         public BattleSide Loyalty { get; }
         public BattleDeck Deck { get; }
         public BattleHand Hand { get; }
+
+        public int MaxHp => _stats.MaxHp;
         public int CurrentHp { get; set; }
         public int CurrentEnergy { get; set; }
         public int CurrentActionPoints { get; set; }
-        public string Name { get; set; }
 
         public static BattleCharacter Init(BattleSide side, CharacterSheet charSheet)
         {
-            return new BattleCharacter(charSheet.Stats, side, BattleDeck.Create(charSheet.Deck.Cards));
+            return new BattleCharacter(charSheet.Name, charSheet.Stats, side, BattleDeck.Create(charSheet.Deck.Cards));
         }
 
-        private BattleCharacter(ICharStats stats, BattleSide loyalty, BattleDeck deck)
+        private BattleCharacter(string name, ICharStats stats, BattleSide loyalty, BattleDeck deck)
         {
+            Name = name;
             Hand = new BattleHand();
             _stats = stats;
             Loyalty = loyalty;

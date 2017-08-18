@@ -37,7 +37,8 @@
     public enum EffectTarget
     {
         One,
-        Many,
+        AllEnemies,
+        AllAllies,
         None,
         Self
     }

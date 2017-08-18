@@ -6,6 +6,11 @@ namespace Astrocell.Battles
 {
     public static class EnumerableExtensions
     {
+        public static List<T> AsList<T>(this T item)
+        {
+            return new List<T> { item };
+        }
+
         public static void PerformNTimes(this int count, Action action)
         {
             Enumerable.Range(0, count).ForEach(x => action());

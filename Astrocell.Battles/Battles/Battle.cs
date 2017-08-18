@@ -6,6 +6,7 @@ namespace Astrocell.Battles.Battles
 {
     public sealed class Battle
     {
+        private readonly ILog _log;
         private readonly Dictionary<BattleSide, IPlayer> _players;
 
         public LoopingSequence<BattleCharacter> TurnOrder { get; }
@@ -21,27 +22,38 @@ namespace Astrocell.Battles.Battles
 
         public static Battle Create(IPlayer gamer, IPlayer enemy, params BattleCharacter[] characters)
         {
-            return new Battle(gamer, enemy, characters.OrderByDescending(x => x.Initiative).ToList());
+            return new Battle(BattleLog.Instance, gamer, enemy, characters.OrderByDescending(x => x.Initiative).ToList());
         }
 
-        private Battle(IPlayer gamer, IPlayer enemy, IList<BattleCharacter> characters)
+        public static Battle Create(ILog log, IPlayer gamer, IPlayer enemy, params BattleCharacter[] characters)
         {
+            return new Battle(log, gamer, enemy, characters.OrderByDescending(x => x.Initiative).ToList());
+        }
+
+        private Battle(ILog log, IPlayer gamer, IPlayer enemy, IList<BattleCharacter> characters)
+        {
+            _log = log;
             _players = new Dictionary<BattleSide, IPlayer> {{ BattleSide.Gamer, gamer}, { BattleSide.Enemy, enemy} };
             TurnOrder = new LoopingSequence<BattleCharacter>(characters.ToList());
         }
 
         public BattleSide Resolve()
         {
+            _log.Write($"Began Battle with {TurnOrder.Items.CommaSeparated(x => x.Name)}");
+
             while (!IsOver)
                 ResolveNextTurn();
-            return PlayerWon
-                ? BattleSide.Gamer
-                : BattleSide.Enemy;
+
+            var winner = PlayerWon ? BattleSide.Gamer : BattleSide.Enemy;
+
+            _log.Write($"Winner: {winner}");
+            return winner;
         }
 
         private void ResolveNextTurn()
         {
             var chr = TurnOrder.Next();
+            _log.Write($"Began turn for: {chr.Loyalty} {chr.Name}");
 
             if (chr.CanAct)
                 chr.BeginTurn();
@@ -54,7 +66,7 @@ namespace Astrocell.Battles.Battles
         private void ResolveAction(BattleCharacter chr)
         {
             var player = _players[chr.Loyalty];
-            var action = player.SelectAction(chr.Hand.Cards, TurnOrder.Items);
+            var action = player.SelectAction(chr, chr.Hand.Cards, TurnOrder.Items);
             action.Apply(this);
         }
     }

@@ -57,8 +57,12 @@
     <Compile Include="Battles\Battle.cs" />
     <Compile Include="Battles\BattleCharacter.cs" />
     <Compile Include="Battles\BattleHand.cs" />
+    <Compile Include="Battles\BattleLog.cs" />
     <Compile Include="Battles\BattleTests.cs" />
     <Compile Include="Battles\BattleSide.cs" />
+    <Compile Include="DebugLog.cs" />
+    <Compile Include="Effects\WithLogging.cs" />
+    <Compile Include="ILog.cs" />
     <Compile Include="Characters\CharacterBuilder.cs" />
     <Compile Include="Characters\EquipmentSheet.cs" />
     <Compile Include="Characters\IntrinsicStats.cs" />
@@ -79,7 +83,9 @@
     <Compile Include="Equipments\IEquipment.cs" />
     <Compile Include="JsonIo.cs" />
     <Compile Include="LoopingSequence.cs" />
+    <Compile Include="NoLog.cs" />
     <Compile Include="Players\DeadPlayer.cs" />
+    <Compile Include="Players\FirstValidCardPlayer.cs" />
     <Compile Include="Players\IPlayer.cs" />
     <Compile Include="Players\WithLogging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
