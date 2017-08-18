@@ -5,9 +5,16 @@ namespace Astrocell.Battles.Characters
 {
     public sealed class CharacterBuilder
     {
+        private readonly Store<string> _name = new Store<string>(Guid.NewGuid().ToString());
         private readonly Store<StartingStats> _stats = new Store<StartingStats>();
         private readonly Store<EquipmentSheet> _equip = new Store<EquipmentSheet>();
         private readonly Store<EquippedDeck> _deck = new Store<EquippedDeck>();
+
+        public CharacterBuilder WithName(string name)
+        {
+            _name.Put(name);
+            return this;
+        }
 
         public CharacterBuilder WithStats(StartingStats stats)
         {
@@ -38,7 +45,7 @@ namespace Astrocell.Battles.Characters
             var charExtrinsicStats = new ExtrinsicStatsFromBaseStats(stats);
             var modifiedExtrinsicStats = new CombinedExtrinsicStats(charExtrinsicStats, equipStatsMods);
             var currentStats = new CurrentStats(stats, modifiedExtrinsicStats);
-            return new CharacterSheet(currentStats, equipment, _deck.Get());
+            return new CharacterSheet(_name.Get(), currentStats, equipment, _deck.Get());
         }
     }
 }

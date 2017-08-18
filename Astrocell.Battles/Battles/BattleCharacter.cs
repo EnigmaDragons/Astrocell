@@ -1,4 +1,5 @@
-﻿using Astrocell.Battles.Characters;
+﻿using System.Linq;
+using Astrocell.Battles.Characters;
 using Astrocell.Battles.Decks;
 
 namespace Astrocell.Battles.Battles
@@ -10,6 +11,7 @@ namespace Astrocell.Battles.Battles
         public int Initiative => _stats.Agility;
         public bool IsConscious => CurrentHp > 0;
         public bool CanAct => IsConscious;
+        public bool CanPlayACard => CanAct && Hand.Cards.Any(x => x.ActionPointCost <= CurrentActionPoints && x.EnergyCost <= CurrentEnergy);
 
         public int MaxHp => _stats.MaxHp;
         public BattleSide Loyalty { get; }
@@ -17,6 +19,8 @@ namespace Astrocell.Battles.Battles
         public BattleHand Hand { get; }
         public int CurrentHp { get; set; }
         public int CurrentEnergy { get; set; }
+        public int CurrentActionPoints { get; set; }
+        public string Name { get; set; }
 
         public static BattleCharacter Init(BattleSide side, CharacterSheet charSheet)
         {
@@ -31,22 +35,50 @@ namespace Astrocell.Battles.Battles
             Deck = deck;
             CurrentHp = MaxHp;
             CurrentEnergy = _stats.StartingEnergy;
-            DrawStartingHand();
+            DrawCards(_stats.StartingCards);
         }
 
-        private void DrawStartingHand()
+        public void BeginTurn()
         {
-            _stats.StartingCards.PerformNTimes(DrawCard);
+            CurrentActionPoints = _stats.ActionPoints;
+            DrawCards(_stats.Draw);
         }
 
-        public void DrawForTurn()
+        public void Play(Card card)
         {
-            _stats.Draw.PerformNTimes(DrawCard);
+            Hand.Take(card);
+            CurrentEnergy -= card.EnergyCost;
+            CurrentActionPoints -= card.ActionPointCost;
+
+            DrawCards(card.CardsDrawn);
+            CurrentEnergy += card.EnergyGain;
         }
 
-        private void DrawCard()
+        public void ChangeHp(int amount)
         {
-            Hand.Add(Deck.Draw());
+            CurrentHp += amount;
+            if (CurrentHp > MaxHp)
+                CurrentHp = MaxHp;
+            if (CurrentHp < 0)
+                CurrentHp = 0;
+        }
+
+        public void EndTurn()
+        {
+        }
+
+        public int GetStat(EffectStat stat)
+        {
+            if (stat == EffectStat.Attack)
+                return _stats.Attack;
+            if (stat == EffectStat.Magic)
+                return _stats.Magic;
+            return 0;
+        }
+
+        private void DrawCards(int n)
+        {
+            n.PerformNTimes(() => Hand.Add(Deck.Draw()));
         }
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Astrocell.Battles.Players;
 
 namespace Astrocell.Battles.Battles
 {
     public sealed class Battle
     {
-        private readonly IList<BattleCharacter> _characters;
+        private readonly Dictionary<BattleSide, IPlayer> _players;
 
         public LoopingSequence<BattleCharacter> TurnOrder { get; }
 
-        private bool EnemyWon => SideIsAllUnconscious(BattleSide.Player);
+        private bool EnemyWon => SideIsAllUnconscious(BattleSide.Gamer);
         private bool PlayerWon => SideIsAllUnconscious(BattleSide.Enemy);
         private bool IsOver => EnemyWon || PlayerWon;
 
@@ -18,15 +19,15 @@ namespace Astrocell.Battles.Battles
             return TurnOrder.Items.Where(x => x.Loyalty.Equals(side)).All(x => !x.IsConscious);
         }
 
-        public static Battle Create(params BattleCharacter[] characters)
+        public static Battle Create(IPlayer gamer, IPlayer enemy, params BattleCharacter[] characters)
         {
-            return new Battle(characters.OrderByDescending(x => x.Initiative).ToList());
+            return new Battle(gamer, enemy, characters.OrderByDescending(x => x.Initiative).ToList());
         }
 
-        private Battle(IList<BattleCharacter> characters)
+        private Battle(IPlayer gamer, IPlayer enemy, IList<BattleCharacter> characters)
         {
-            _characters = characters;
-            TurnOrder = new LoopingSequence<BattleCharacter>(_characters.ToList());
+            _players = new Dictionary<BattleSide, IPlayer> {{ BattleSide.Gamer, gamer}, { BattleSide.Enemy, enemy} };
+            TurnOrder = new LoopingSequence<BattleCharacter>(characters.ToList());
         }
 
         public BattleSide Resolve()
@@ -34,13 +35,27 @@ namespace Astrocell.Battles.Battles
             while (!IsOver)
                 ResolveNextTurn();
             return PlayerWon
-                ? BattleSide.Player
+                ? BattleSide.Gamer
                 : BattleSide.Enemy;
         }
 
         private void ResolveNextTurn()
         {
-            throw new System.NotImplementedException();
+            var chr = TurnOrder.Next();
+
+            if (chr.CanAct)
+                chr.BeginTurn();
+            while (chr.CanPlayACard)
+                ResolveAction(chr);
+
+            chr.EndTurn();
+        }
+
+        private void ResolveAction(BattleCharacter chr)
+        {
+            var player = _players[chr.Loyalty];
+            var action = player.SelectAction(chr.Hand.Cards, TurnOrder.Items);
+            action.Apply(this);
         }
     }
 }

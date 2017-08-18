@@ -11,7 +11,7 @@ namespace Astrocell.Battles.Decks
             var card = Card.Load("strike");
 
             Assert.AreEqual(2, card.ActionPointCost);
-            Assert.AreEqual(ActionTarget.One, card.TargetType);
+            Assert.AreEqual(EffectTarget.One, card.Effect.Target);
         }
     }
 }

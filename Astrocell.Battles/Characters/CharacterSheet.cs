@@ -4,12 +4,14 @@ namespace Astrocell.Battles.Characters
 {
     public sealed class CharacterSheet
     {
+        public string Name { get; }
         public ICharStats Stats { get; }
         public EquipmentSheet Equipment { get; }
         public EquippedDeck Deck { get; }
 
-        public CharacterSheet(ICharStats stats, EquipmentSheet equip, EquippedDeck deck)
+        public CharacterSheet(string name, ICharStats stats, EquipmentSheet equip, EquippedDeck deck)
         {
+            Name = name;
             Stats = stats;
             Equipment = equip;
             Deck = deck;

@@ -3,7 +3,7 @@
     public enum BattleSide
     {
         Neutral,
-        Player,
+        Gamer,
         Enemy
     }
 }

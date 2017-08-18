@@ -58,24 +58,30 @@
     <Compile Include="Battles\BattleCharacter.cs" />
     <Compile Include="Battles\BattleHand.cs" />
     <Compile Include="Battles\BattleTests.cs" />
-    <Compile Include="Battles\BattleTurn.cs" />
     <Compile Include="Battles\BattleSide.cs" />
     <Compile Include="Characters\CharacterBuilder.cs" />
     <Compile Include="Characters\EquipmentSheet.cs" />
     <Compile Include="Characters\IntrinsicStats.cs" />
     <Compile Include="Characters\ExtrinsicStats.cs" />
     <Compile Include="Characters\CharacterSheet.cs" />
-    <Compile Include="Decks\BattleDeck.cs" />
+    <Compile Include="Battles\BattleDeck.cs" />
     <Compile Include="Decks\Card.cs" />
+    <Compile Include="Decks\CardAction.cs" />
     <Compile Include="Decks\CardTests.cs" />
-    <Compile Include="Decks\ActionTarget.cs" />
     <Compile Include="Decks\EquippedDeck.cs" />
     <Compile Include="Decks\EquippedDeckFactory.cs" />
+    <Compile Include="Effects\BattleEffect.cs" />
+    <Compile Include="Effects\DamageEffect.cs" />
+    <Compile Include="Effects\IBattleEffect.cs" />
+    <Compile Include="Effects\NoEffect.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Equipments\Equipment.cs" />
     <Compile Include="Equipments\IEquipment.cs" />
     <Compile Include="JsonIo.cs" />
     <Compile Include="LoopingSequence.cs" />
+    <Compile Include="Players\DeadPlayer.cs" />
+    <Compile Include="Players\IPlayer.cs" />
+    <Compile Include="Players\WithLogging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rng.cs" />
     <Compile Include="Store.cs" />
@@ -85,9 +91,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Players\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Content\Equipment\knife.json" />
   </ItemGroup>

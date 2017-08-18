@@ -1,4 +1,8 @@
 ﻿{
     "ActionPointCost": 2,
-    "PhysicalDamage": 1
+    "Effect": {
+        "Type": "Damage",
+        "Stat":  "Attack",
+        "Factor": 1
+    }
 }

@@ -8,6 +8,14 @@ namespace Astrocell.Battles
 
         public bool IsEmpty => _value == null;
 
+        public Store() 
+            : this(default(T)) { }
+
+        public Store(T defaultValue)
+        {
+            _value = defaultValue;
+        }
+
         public T Get()
         {
             if (IsEmpty)
