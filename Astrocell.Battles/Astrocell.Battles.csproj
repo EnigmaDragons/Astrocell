@@ -56,10 +56,12 @@
   <ItemGroup>
     <Compile Include="Battles\Battle.cs" />
     <Compile Include="Battles\BattleCharacter.cs" />
+    <Compile Include="Battles\BattleCharacters.cs" />
     <Compile Include="Battles\BattleHand.cs" />
     <Compile Include="Battles\BattleLog.cs" />
     <Compile Include="Battles\BattleTests.cs" />
     <Compile Include="Battles\BattleSide.cs" />
+    <Compile Include="Characters\ProceduralStartingStatGenerator.cs" />
     <Compile Include="DebugLog.cs" />
     <Compile Include="Effects\WithLogging.cs" />
     <Compile Include="ILog.cs" />
@@ -99,6 +101,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Content\Cards\contemplate.json" />
+    <None Include="Content\Cards\focus.json" />
+    <None Include="Content\Cards\hit.json" />
+    <None Include="Content\Cards\savagestrike.json" />
+    <None Include="Content\Cards\template.json" />
+    <None Include="Content\Cards\viciousstrike.json" />
+    <None Include="Content\Cards\visualize.json" />
     <None Include="Content\Equipment\knife.json" />
   </ItemGroup>
   <Choose>

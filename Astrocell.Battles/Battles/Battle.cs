@@ -66,7 +66,7 @@ namespace Astrocell.Battles.Battles
         private void ResolveAction(BattleCharacter chr)
         {
             var player = _players[chr.Loyalty];
-            var action = player.SelectAction(chr, chr.Hand.Cards, TurnOrder.Items);
+            var action = player.SelectAction(chr, chr.Hand.Cards, new BattleCharacters(TurnOrder.Items));
             action.Apply(this);
         }
     }

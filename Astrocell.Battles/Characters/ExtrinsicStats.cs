@@ -21,7 +21,7 @@
 
         public int MaxHp => _char.Toughness * 3 + _char.Strength;
         public int Draw => _char.Intelligence / 6;
-        public int StartingCards => 2 + Draw;
+        public int StartingCards => 2;
         public int Attack => _char.Strength;
         public int Magic => _char.Willpower;
         public int Defense => _char.Toughness / 6;

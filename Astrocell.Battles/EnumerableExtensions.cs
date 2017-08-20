@@ -28,7 +28,7 @@ namespace Astrocell.Battles
 
         public static string CommaSeparated<T>(this IEnumerable<T> items, Func<T, string> valueSelector)
         {
-            return string.Join(",", items.Select(valueSelector));
+            return string.Join(", ", items.Select(valueSelector));
         }
     }
 }

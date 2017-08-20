@@ -56,9 +56,9 @@ namespace Astrocell.Battles.Battles
             CurrentEnergy += card.EnergyGain;
         }
 
-        public void ChangeHp(int amount)
+        public void TakePhysicalDamage(int amount)
         {
-            CurrentHp += amount;
+            CurrentHp -= (amount - _stats.Defense);
             if (CurrentHp > MaxHp)
                 CurrentHp = MaxHp;
             if (CurrentHp < 0)

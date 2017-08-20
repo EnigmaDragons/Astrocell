@@ -6,6 +6,6 @@ namespace Astrocell.Battles.Players
 {
     public interface IPlayer
     {
-        CardAction SelectAction(BattleCharacter forCharacter, IList<Card> cards, IList<BattleCharacter> allCharacters);
+        CardAction SelectAction(BattleCharacter forCharacter, IList<Card> cards, BattleCharacters characters);
     }
 }

@@ -13,7 +13,7 @@ namespace Astrocell.Battles.Effects
 
         public void ApplyTo(BattleCharacter target)
         {
-            target.ChangeHp(-_amount);
+            target.TakePhysicalDamage(_amount);
         }
     }
 }

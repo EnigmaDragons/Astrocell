@@ -1,10 +1,11 @@
-﻿{
-    "Name":  "Strike",
+{    
+    "Name": "Savage Strike",
     "ActionPointCost": 2,
+    "EnergyCost": 3,
     "Effect": {
         "Target": "One",
         "Type": "Damage",
         "Stat": "Attack",
-        "Factor": 1
+        "Factor": 2.5
     }
 }

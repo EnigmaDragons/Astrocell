@@ -15,8 +15,9 @@ namespace Astrocell.Battles.Players
             _player = player;
         }
 
-        public CardAction SelectAction(BattleCharacter forCharacter, IList<Card> cards, IList<BattleCharacter> allCharacters)
+        public CardAction SelectAction(BattleCharacter forCharacter, IList<Card> cards, BattleCharacters allCharacters)
         {
+            _log.Write($"{forCharacter.CurrentActionPoints}A, {forCharacter.CurrentEnergy}E: Selecting from {cards.CommaSeparated(x => x.Name)}");
             var action = _player.SelectAction(forCharacter, cards, allCharacters);
             _log.Write($"Selected {action.Card.Name}, targetting {action.Targets.CommaSeparated(x => x.Name)}");
             return action;

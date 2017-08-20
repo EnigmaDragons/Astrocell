@@ -8,7 +8,7 @@ namespace Astrocell.Battles.Decks
     {
         public BattleCharacter Source { get; set; }
         public Card Card { get; set; }
-        public List<BattleCharacter> Targets { get; set; }
+        public IList<BattleCharacter> Targets { get; set; }
 
         public void Apply(Battle battle)
         {

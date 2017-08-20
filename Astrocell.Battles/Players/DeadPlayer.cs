@@ -7,7 +7,7 @@ namespace Astrocell.Battles.Players
 {
     public sealed class DeadPlayer : IPlayer
     {
-        public CardAction SelectAction(BattleCharacter forCharacter, IList<Card> cards, IList<BattleCharacter> allCharacters)
+        public CardAction SelectAction(BattleCharacter forCharacter, IList<Card> cards, BattleCharacters allCharacters)
         {
             throw new InvalidOperationException("Player is dead and cannot act.");
         }
