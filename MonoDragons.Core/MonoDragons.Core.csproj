@@ -59,9 +59,6 @@
     <Compile Include="Common\Store.cs" />
     <Compile Include="Engine\Automation.cs" />
     <Compile Include="Engine\IControl.cs" />
-    <Compile Include="Engine\ISpatialVisual.cs" />
-    <Compile Include="Engine\ISpatialVisualControl.cs" />
-    <Compile Include="Engine\IVisualControl.cs" />
     <Compile Include="Entities\EntitiesExtensions.cs" />
     <Compile Include="Components\Item.cs" />
     <Compile Include="Components\Items.cs" />
@@ -78,7 +75,6 @@
     <Compile Include="Common\SubscriptionAction.cs" />
     <Compile Include="EngimaDragons\LogoScene.cs" />
     <Compile Include="Engine\Hack.cs" />
-    <Compile Include="Engine\IVisualAutomaton.cs" />
     <Compile Include="Engine\Metrics.cs" />
     <Compile Include="Engine\Timer.cs" />
     <Compile Include="Entities\Entity.cs" />
@@ -208,7 +204,6 @@
     <Compile Include="UserInterface\ImageLabel.cs" />
     <Compile Include="UserInterface\ImageTextButton.cs" />
     <Compile Include="UserInterface\ImageWithDescription.cs" />
-    <Compile Include="Engine\IVisualAutomatonControl.cs" />
     <Compile Include="UserInterface\Label.cs" />
     <Compile Include="UserInterface\Layouts\Layout.cs" />
     <Compile Include="MouseControls\MouseDrag.cs" />
@@ -221,7 +216,6 @@
     <Compile Include="UserInterface\NoneClickableUIElement.cs" />
     <Compile Include="UserInterface\OffsetClickableUIElement.cs" />
     <Compile Include="UserInterface\ScreenClickable.cs" />
-    <Compile Include="UserInterface\ScrollableElements.cs" />
     <Compile Include="UserInterface\SimpleClickable.cs" />
     <Compile Include="UserInterface\SingleImageButton.cs" />
     <Compile Include="UserInterface\SmartControl.cs" />

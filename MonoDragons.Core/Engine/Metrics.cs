@@ -8,7 +8,7 @@ using MonoDragons.Core.Entities;
 
 namespace MonoDragons.Core.Engine
 {
-    public sealed class Metrics : IVisualAutomaton
+    public sealed class Metrics : IVisual, IAutomaton
     {
         private readonly Timer _timer;
 
