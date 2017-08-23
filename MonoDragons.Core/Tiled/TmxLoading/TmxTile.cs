@@ -1,16 +1,19 @@
 ﻿namespace MonoDragons.Core.Tiled.TmxLoading
 {
-    public class TmxTile
+    public struct TmxTile
     {
-        public int Column { get; }
-        public int Row { get; }
-        public int TextureId { get; }
+        public int Column;
+        public int Row;
+        public int TextureId;
 
-        public TmxTile(int column, int row, int textureId)
+        public static TmxTile Create(int column, int row, int textureId)
         {
-            Column = column;
-            Row = row;
-            TextureId = textureId;
+            return new TmxTile
+            {
+                Column = column,
+                Row = row,
+                TextureId = textureId,
+            };
         }
     }
 }

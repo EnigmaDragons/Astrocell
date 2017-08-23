@@ -14,9 +14,9 @@ namespace MonoDragons.Core.Tiled.Orthographic
             tmx.Tilesets.ForEach(AddTileset);
         }
 
-        public TileDetail Get(int id)
+        public TileDetail Get(int textureId)
         {
-            return _tiles[id];
+            return _tiles[textureId];
         }
 
         private void AddTileset(Tsx tsx)

@@ -5,21 +5,28 @@ using System.Xml.Linq;
 
 namespace MonoDragons.Core.Tiled.TmxLoading
 {
-    public class TmxLayer
+    public struct TmxLayer
     {
-        public int ZIndex { get; }
-        public int Width { get; }
-        public int Height { get; }
-        public List<TmxTile> Tiles { get; } = new List<TmxTile>();
+        public int ZIndex;
+        public int Width;
+        public int Height;
+        public List<TmxTile> Tiles;
 
-        public TmxLayer(int zIndex, XElement layer)
+        public static TmxLayer Create(int zIndex, XElement layer)
         {
-            ZIndex = zIndex;
-            Width = new XValue(layer, "width").AsInt();
-            Height = new XValue(layer, "height").AsInt();
-            var textureIds = new IntegersInText(layer.Element(XName.Get("data")).Value).Get().ToList();
+            var result = new TmxLayer
+            {
+                ZIndex = zIndex,
+                Width = new XValue(layer, "width").AsInt(),
+                Height = new XValue(layer, "height").AsInt(),
+                Tiles = new List<TmxTile>()
+            };
+            var layerData = layer.Element(XName.Get("data")).Value;
+            var textureIds = new IntegersInText(layerData).Get().ToList();
             for (var i = 0; i < textureIds.Count; i++)
-                Tiles.Add(new TmxTile(i % Width, (int)Math.Floor((double)i / Width), textureIds[i]));
+                if (textureIds[i] != 0)
+                    result.Tiles.Add(TmxTile.Create(i % result.Width, (int)Math.Floor((double)i / result.Width), textureIds[i]));
+            return result;
         }
     }
 }
