@@ -2,11 +2,13 @@
 using Astrocell.Battles.Characters;
 using Astrocell.Battles.Decks;
 using MonoDragons.Core.Common;
+using MonoDragons.Core.Logs;
 
 namespace Astrocell.Battles.Battles
 {
     public sealed class BattleCharacter
     {
+        private readonly ILog _log;
         private readonly ICharStats _stats;
 
         public int Initiative => _stats.Agility;
@@ -26,11 +28,12 @@ namespace Astrocell.Battles.Battles
 
         public static BattleCharacter Init(BattleSide side, CharacterSheet charSheet)
         {
-            return new BattleCharacter(charSheet.Name, charSheet.Stats, side, BattleDeck.Create(charSheet.Deck.Cards));
+            return new BattleCharacter(BattleLog.Instance, charSheet.Name, charSheet.Stats, side, BattleDeck.Create(charSheet.Deck.Cards));
         }
 
-        private BattleCharacter(string name, ICharStats stats, BattleSide loyalty, BattleDeck deck)
+        private BattleCharacter(ILog log, string name, ICharStats stats, BattleSide loyalty, BattleDeck deck)
         {
+            _log = log;
             Name = name;
             Hand = new BattleHand();
             _stats = stats;
@@ -49,6 +52,8 @@ namespace Astrocell.Battles.Battles
 
         public void Play(Card card)
         {
+            _log.Write($"{Name} plays {card.Name}.");
+
             Hand.Take(card);
             CurrentEnergy -= card.EnergyCost;
             CurrentActionPoints -= card.ActionPointCost;
@@ -57,13 +62,13 @@ namespace Astrocell.Battles.Battles
             CurrentEnergy += card.EnergyGain;
         }
 
+        // TODO: This design for applying effects can't be right.
         public void TakePhysicalDamage(int amount)
         {
-            CurrentHp -= (amount - _stats.Defense);
-            if (CurrentHp > MaxHp)
-                CurrentHp = MaxHp;
-            if (CurrentHp < 0)
-                CurrentHp = 0;
+            var dmgAmount = amount - _stats.Defense;
+            ChangeHp(-dmgAmount);
+
+            _log.Write($"{Name} suffers {dmgAmount} physical damage.");
         }
 
         public void EndTurn()
@@ -77,6 +82,15 @@ namespace Astrocell.Battles.Battles
             if (stat == EffectStat.Magic)
                 return _stats.Magic;
             return 0;
+        }
+
+        private void ChangeHp(int amount)
+        {
+            CurrentHp += amount;
+            if (CurrentHp > MaxHp)
+                CurrentHp = MaxHp;
+            if (CurrentHp < 0)
+                CurrentHp = 0;
         }
 
         private void DrawCards(int n)

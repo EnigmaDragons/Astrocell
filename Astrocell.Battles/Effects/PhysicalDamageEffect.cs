@@ -2,11 +2,11 @@
 
 namespace Astrocell.Battles.Effects
 {
-    public struct DamageEffect : IBattleEffect
+    public struct PhysicalDamageEffect : IBattleEffect
     {
         private readonly int _amount;
 
-        public DamageEffect(int amount)
+        public PhysicalDamageEffect(int amount)
         {
             _amount = amount;
         }

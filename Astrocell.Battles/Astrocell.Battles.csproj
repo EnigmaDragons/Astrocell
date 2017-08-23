@@ -76,7 +76,7 @@
     <Compile Include="Decks\EquippedDeck.cs" />
     <Compile Include="Decks\EquippedDeckFactory.cs" />
     <Compile Include="Effects\BattleEffect.cs" />
-    <Compile Include="Effects\DamageEffect.cs" />
+    <Compile Include="Effects\PhysicalDamageEffect.cs" />
     <Compile Include="Effects\IBattleEffect.cs" />
     <Compile Include="Effects\NoEffect.cs" />
     <Compile Include="Equipments\Equipment.cs" />

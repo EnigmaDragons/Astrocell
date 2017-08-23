@@ -82,11 +82,9 @@ namespace Astrocell.Battles.Battles
                     Strength = 6,
                     Willpower = 6,
                 });
-
-            var log = new DebugLog();
-            var battle = Battle.Create(log, 
-                new WithLogging(log, new FirstValidCardPlayer()), 
-                new WithLogging(log, new FirstValidCardPlayer()), hero, enemy);
+            
+            var battle = Battle.Create(new FirstValidCardPlayer(), 
+                new FirstValidCardPlayer(), hero, enemy);
 
             var result = battle.Resolve();
             Assert.AreEqual(BattleSide.Gamer, result);
