@@ -15,7 +15,7 @@ namespace MonoDragons.Core.Tiled.TmxLoading
 
         public int AsInt()
         {
-            return int.Parse(AsString());
+            return int.Parse(_element.Attribute(XName.Get(_key))?.Value ?? "0");
         }
 
         public string AsString()

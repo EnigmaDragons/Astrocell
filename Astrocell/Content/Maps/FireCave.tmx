@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="48" tileheight="48" nextobjectid="1">
- <tileset firstgid="1" source="Dungeon_A2"/>
- <tileset firstgid="193" source="Dungeon_A4"/>
+ <tileset firstgid="1" source="Dungeon_A2.tsx"/>
+ <tileset firstgid="193" source="Dungeon_A4.tsx"/>
  <tileset firstgid="433" source="Shadow.tsx"/>
- <tileset firstgid="434" source="Dungeon_A1"/>
- <tileset firstgid="626" source="Inside_C"/>
+ <tileset firstgid="434" source="Dungeon_A1.tsx"/>
+ <tileset firstgid="626" source="Inside_C.tsx"/>
  <layer name="Ground" width="16" height="16">
   <data encoding="csv">
 97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,

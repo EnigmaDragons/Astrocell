@@ -25,7 +25,7 @@ namespace MonoDragons.Core.Tiled.TmxLoading
                 TileWidth = new XValue(map, "tilewidth").AsInt(),
                 TileHeight = new XValue(map, "tileheight").AsInt(),
                 Tilesets = map.Elements(XName.Get("tileset"))
-                    .Select(x => Tsx.Create(new XValue(x, "firstgid").AsInt(), new XValue(x, "source").AsString()))
+                    .Select(x => Tsx.Create(new XValue(x, "firstgid").AsInt(), GetTsxPath(x, tmxPath)))
                     .ToList(),
                 Layers = new List<TmxLayer>(),
             };
@@ -33,6 +33,13 @@ namespace MonoDragons.Core.Tiled.TmxLoading
             for (var i = 0; i < layers.Count; i++)
                  result.Layers.Add(TmxLayer.Create(i, layers[i]));
             return result;
+        }
+
+        private static string GetTsxPath(XElement tileset, string tmxPath)
+        {
+            var tilesetSource = new XValue(tileset, "source").AsString();
+            var tmxDirectory = Path.GetDirectoryName(tmxPath);
+            return Path.Combine(tmxDirectory, tilesetSource);
         }
     }
 }

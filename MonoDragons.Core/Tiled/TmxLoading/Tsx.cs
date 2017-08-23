@@ -15,7 +15,7 @@ namespace MonoDragons.Core.Tiled.TmxLoading
 
         public static Tsx Create(int firstId, string tsxPath)
         {
-            var doc = XDocument.Load($"Content/{tsxPath}");
+            var doc = XDocument.Load(Path.Combine("Content", tsxPath));
             var tileset = doc.Element(XName.Get("tileset"));
             return new Tsx
             {
@@ -25,8 +25,15 @@ namespace MonoDragons.Core.Tiled.TmxLoading
                 Spacing = new XValue(tileset, "spacing").AsInt(),
                 TileCount = new XValue(tileset, "tilecount").AsInt(),
                 Columns = new XValue(tileset, "columns").AsInt(),
-                TileSource = Path.Combine("Content", new XValue(tileset.Element(XName.Get("image")), "source").AsString()),
+                TileSource = GetSourcePath(tileset.Element(XName.Get("image")), tsxPath),
             };
+        }
+
+        private static string GetSourcePath(XElement image, string tsxPath)
+        {
+            var imageSource = new XValue(image, "source").AsString();
+            var tsxDirectory = Path.GetDirectoryName(tsxPath);
+            return Path.Combine("Content", tsxDirectory, imageSource);
         }
     }
 }
