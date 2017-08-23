@@ -3,6 +3,8 @@ using Astrocell.Battles.Characters;
 using Astrocell.Battles.Decks;
 using Astrocell.Battles.Players;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MonoDragons.Core.Common;
+using MonoDragons.Core.Logs;
 
 namespace Astrocell.Battles.Battles
 {

@@ -56,6 +56,7 @@
     <Compile Include="Audio\Ecs\SoundSystems.cs" />
     <Compile Include="Common\Condition.cs" />
     <Compile Include="Common\FancyMaths.cs" />
+    <Compile Include="Common\Store.cs" />
     <Compile Include="Engine\Automation.cs" />
     <Compile Include="Engine\IControl.cs" />
     <Compile Include="Engine\ISpatialVisual.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="IO\JsonIo.cs" />
     <Compile Include="KeyboardControls\KeyboardInput.cs" />
     <Compile Include="KeyboardControls\TypingInput.cs" />
+    <Compile Include="Logs\DebugLog.cs" />
+    <Compile Include="Logs\ILog.cs" />
+    <Compile Include="Logs\NoLog.cs" />
     <Compile Include="MouseControls\MouseClickTarget.cs" />
     <Compile Include="MouseControls\MouseDropTarget.cs" />
     <Compile Include="MouseControls\MouseSnapshot.cs" />

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Astrocell.Battles
+namespace MonoDragons.Core.Common
 {
     public sealed class Store<T>
     {

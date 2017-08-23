@@ -1,4 +1,6 @@
-﻿namespace Astrocell.Battles.Equipments
+﻿using MonoDragons.Core.IO;
+
+namespace Astrocell.Battles.Equipments
 {
     public struct Equipment : IEquipment
     {

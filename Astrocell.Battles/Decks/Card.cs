@@ -1,4 +1,6 @@
-﻿namespace Astrocell.Battles.Decks
+﻿using MonoDragons.Core.IO;
+
+namespace Astrocell.Battles.Decks
 {
     public struct Card
     {

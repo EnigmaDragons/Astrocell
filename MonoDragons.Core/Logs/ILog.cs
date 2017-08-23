@@ -1,5 +1,5 @@
 ﻿
-namespace Astrocell.Battles.Battles
+namespace MonoDragons.Core.Logs
 {
     public interface ILog
     {

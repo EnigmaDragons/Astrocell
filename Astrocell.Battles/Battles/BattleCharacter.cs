@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Astrocell.Battles.Characters;
 using Astrocell.Battles.Decks;
+using MonoDragons.Core.Common;
 
 namespace Astrocell.Battles.Battles
 {
