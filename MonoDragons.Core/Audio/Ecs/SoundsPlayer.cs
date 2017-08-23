@@ -2,7 +2,7 @@
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Entities;
 
-namespace MonoDragons.Core.Audio
+namespace MonoDragons.Core.Audio.Ecs
 {
     public sealed class SoundsPlayer : ISystem
     {

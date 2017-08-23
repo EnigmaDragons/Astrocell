@@ -1,6 +1,6 @@
 ﻿using MonoDragons.Core.Common;
 
-namespace MonoDragons.Core.Audio
+namespace MonoDragons.Core.Audio.Ecs
 {
     public class BackgroundMusic
     {
