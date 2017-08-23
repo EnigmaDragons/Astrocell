@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MonoDragons.Core.Entities;
 
-namespace MonoDragons.Core.Entities
+namespace MonoDragons.Core.Components
 {
     public class Items : IList<GameObject>
     {

@@ -3,7 +3,7 @@ using MonoDragons.Core.PhysicsEngine;
 
 namespace MonoDragons.Core.UserInterface
 {
-    public class SmartControl : IVisualControl
+    public class SmartControl : IVisual, IControl
     {
         private IVisual _visual;
 
