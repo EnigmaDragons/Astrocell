@@ -181,6 +181,17 @@
     <Compile Include="Text\EnumExtensions.cs" />
     <Compile Include="Text\TextAlign.cs" />
     <Compile Include="Text\WrappingText.cs" />
+    <Compile Include="Tiled\IntegersInText.cs" />
+    <Compile Include="Tiled\Orthographic\Tile.cs" />
+    <Compile Include="Tiled\Orthographic\TileDetail.cs" />
+    <Compile Include="Tiled\Orthographic\TileMapDetails.cs" />
+    <Compile Include="Tiled\Orthographic\TileMapFactory.cs" />
+    <Compile Include="Tiled\TileRenderer.cs" />
+    <Compile Include="Tiled\TmxLoading\Tmx.cs" />
+    <Compile Include="Tiled\TmxLoading\TmxLayer.cs" />
+    <Compile Include="Tiled\TmxLoading\TmxTile.cs" />
+    <Compile Include="Tiled\TmxLoading\Tsx.cs" />
+    <Compile Include="Tiled\TmxLoading\XValue.cs" />
     <Compile Include="UserInterface\Graphs\Graph.cs" />
     <Compile Include="UserInterface\Graphs\GraphDefaults.cs" />
     <Compile Include="UserInterface\Graphs\GraphGrid.cs" />
@@ -246,6 +257,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
