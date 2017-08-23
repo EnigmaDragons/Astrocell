@@ -1,0 +1,11 @@
+{
+    "Name": "Shake It Off",
+    "ActionPointCost": 2,
+    "Effects": [ {
+            "Target": "Self",
+            "Type": "Heal",
+            "Stat": "Toughness",
+            "Factor": 1.5
+        }
+    ]
+}

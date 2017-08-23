@@ -1,0 +1,14 @@
+{
+    "Name": "Stunning Bolt",
+    "ActionPointCost": 2,
+    "EnergyCost": 3,
+    "Effects": [ {
+            "Target": "One",
+            "Type": "Damage",
+            "Stat": "Magic",
+            "Status": "Stun",
+            "Duration": 1,
+            "Factor": 0.75
+        }
+    ]
+}

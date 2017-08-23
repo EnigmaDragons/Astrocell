@@ -1,10 +1,10 @@
-﻿{
-    "Name":  "Strike",
+{
+    "Name": "Jolt",
     "ActionPointCost": 1,
     "Effects": [ {
             "Target": "One",
             "Type": "Damage",
-            "Stat": "Attack",
+            "Stat": "Magic",
             "Factor": 0.75
         }
     ]

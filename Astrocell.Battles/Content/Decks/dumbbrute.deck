@@ -1,0 +1,10 @@
+{
+  "Name": "Dumb Brute",
+  "CardCounts": {
+    "strike": 16,
+    "shakeitoff": 8,
+    "focus": 8,
+    "viciousstrike": 8,
+    "enrage": 5
+  }
+}

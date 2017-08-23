@@ -2,10 +2,11 @@
     "Name": "Vicious Strike",
     "ActionPointCost": 2,
     "EnergyCost": 2,
-    "Effect": {
-        "Target": "One",
-        "Type": "Damage",
-        "Stat": "Attack",
-        "Factor": 2
-    }
+    "Effects": [ {
+            "Target": "One",
+            "Type": "Damage",
+            "Stat": "Attack",
+            "Factor": 2
+        }
+    ]
 }

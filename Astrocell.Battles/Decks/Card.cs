@@ -1,4 +1,5 @@
-﻿using MonoDragons.Core.IO;
+﻿using System.Collections.Generic;
+using MonoDragons.Core.IO;
 
 namespace Astrocell.Battles.Decks
 {
@@ -13,7 +14,7 @@ namespace Astrocell.Battles.Decks
         public int EnergyGain { get; set; }
         public int CardsDrawn { get; set; }
 
-        public CardEffect Effect { get; set; }
+        public List<CardEffect> Effects { get; set; }
 
         public static Card Load(string name)
         {
@@ -26,6 +27,8 @@ namespace Astrocell.Battles.Decks
         public EffectTarget Target { get; set; }
         public EffectType Type { get; set; }
         public EffectStat Stat { get; set; }
+        public StatusEffect Status { get; set; }
+        public int Duration { get; set; }
         public float Factor { get; set; }
     }
 
@@ -33,7 +36,8 @@ namespace Astrocell.Battles.Decks
     {
         None,
         Magic,
-        Attack
+        Attack,
+        Toughness,
     }
 
     public enum EffectTarget
@@ -51,5 +55,12 @@ namespace Astrocell.Battles.Decks
         Damage,
         Heal,
         Status
+    }
+
+    public enum StatusEffect
+    {
+        None,
+        Buff,
+        Stun,
     }
 }

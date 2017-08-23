@@ -20,14 +20,15 @@
         private readonly ICharIntrinsicStats _char;
 
         public int MaxHp => _char.Toughness * 3 + _char.Strength;
-        public int Draw => _char.Intelligence / 6;
         public int StartingCards => 2;
+        public int Draw => _char.Intelligence / 6;
         public int Attack => _char.Strength;
         public int Magic => _char.Willpower;
         public int Defense => _char.Toughness / 6;
         public int Resistance => _char.Toughness / 6;
         public int ActionPoints => 1 + _char.Agility / 6;
         public int StartingEnergy => _char.Willpower / 6;
+        public int EnergyGain => _char.Willpower / 6;
         public float CriticalChance => (_char.Agility + _char.Intelligence) / 6f;
         public float CriticalDamageFactor => (_char.Agility + _char.Intelligence) / 10f;
 

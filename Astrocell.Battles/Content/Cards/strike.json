@@ -1,10 +1,11 @@
 ﻿{
     "Name":  "Strike",
     "ActionPointCost": 2,
-    "Effect": {
-        "Target": "One",
-        "Type": "Damage",
-        "Stat": "Attack",
-        "Factor": 1
-    }
+    "Effects": [ {
+            "Target": "One",
+            "Type": "Damage",
+            "Stat": "Attack",
+            "Factor": 1
+        }
+    ]
 }

@@ -1,12 +1,11 @@
-{    
-    "Name": "Savage Strike",
+{
+    "Name": "Lightning Bolt",
     "ActionPointCost": 2,
-    "EnergyCost": 3,
     "Effects": [ {
             "Target": "One",
             "Type": "Damage",
-            "Stat": "Attack",
-            "Factor": 2.5
+            "Stat": "Magic",
+            "Factor": 1.0
         }
     ]
 }

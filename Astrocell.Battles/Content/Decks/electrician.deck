@@ -1,0 +1,11 @@
+{
+  "Name": "Electrician",
+  "CardCounts": {
+    "visualize": 14,
+    "jolt": 9,
+    "lightningbolt": 12,
+    "shockingbolt": 5,
+    "stunningbolt": 3,
+    "quickdecision": 2
+  }
+}

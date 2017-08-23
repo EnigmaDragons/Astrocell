@@ -11,7 +11,7 @@ namespace Astrocell.Battles.Players
         public CardAction SelectAction(BattleCharacter forCharacter, IList<Card> cards, BattleCharacters allCharacters)
         {
             var card = cards[0];
-            var targets = SelectTargets(forCharacter, card.Effect.Target, allCharacters);
+            var targets = SelectTargets(forCharacter, card.Effects[0].Target, allCharacters);
             return new CardAction { Source = forCharacter, Card = card, Targets = targets };
         }
 
