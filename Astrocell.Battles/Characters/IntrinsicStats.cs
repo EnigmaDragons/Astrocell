@@ -18,6 +18,12 @@
         public int Toughness { get; set; }
         public int Willpower { get; set; }
         public int Intelligence { get; set; }
+
+        // TODO: Evolve this to give specific error messages and validate min values
+        public bool IsValid()
+        {
+            return Strength + Agility + Toughness + Willpower + Intelligence == (Level * 6) + 33;
+        }
     }
 
     public struct CombinedIntrinsicStats : ICharIntrinsicStats

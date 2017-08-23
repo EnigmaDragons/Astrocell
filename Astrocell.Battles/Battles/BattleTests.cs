@@ -42,8 +42,8 @@ namespace Astrocell.Battles.Battles
         [TestMethod]
         public void Battle_Create_CharactersAreInInitiativeOrder()
         {
-            var slowChar = CreateHero(new StartingStats {Agility = 6});
-            var fastChar = CreateEnemy(new StartingStats {Agility = 18});
+            var slowChar = CreateHero(new StartingStats { Level = 1, Agility = 6, Intelligence = 6, Strength = 6, Toughness = 6, Willpower = 15 });
+            var fastChar = CreateEnemy(new StartingStats { Level = 1, Agility = 15, Intelligence = 6, Strength = 6, Toughness = 6, Willpower = 6 });
 
             var battle = Battle.Create(new DeadPlayer(), new DeadPlayer(), slowChar, fastChar);
 
@@ -54,8 +54,8 @@ namespace Astrocell.Battles.Battles
         [TestMethod]
         public void Battle_Create_CharactersHasDrawnTheirStartingHands()
         {
-            var slowChar = CreateHero(new StartingStats { Agility = 6 });
-            var fastChar = CreateEnemy(new StartingStats { Agility = 18 });
+            var slowChar = CreateHero(new StartingStats { Level = 1, Agility = 6, Intelligence = 6, Strength = 6, Toughness = 6, Willpower = 15 });
+            var fastChar = CreateEnemy(new StartingStats { Level = 1, Agility = 15, Intelligence = 6, Strength = 6, Toughness = 6, Willpower = 6 });
 
             var battle = Battle.Create(new DeadPlayer(), new DeadPlayer(), slowChar, fastChar);
 
@@ -66,23 +66,10 @@ namespace Astrocell.Battles.Battles
         [TestMethod]
         public void Battle_Resolve_CanResolveBattle()
         {
-            var hero = CreateHero(new StartingStats
-                {
-                    Agility = 18,
-                    Intelligence = 6,
-                    Toughness = 6,
-                    Strength = 12,
-                    Willpower = 6,
-                });
-            var enemy = CreateEnemy(new StartingStats
-                {
-                    Agility = 18,
-                    Intelligence = 6,
-                    Toughness = 6,
-                    Strength = 6,
-                    Willpower = 6,
-                });
-            
+            var hero = CreateHero(new StartingStats { Level = 1, Agility = 6, Intelligence = 6, Strength = 15, Toughness = 6, Willpower = 6 });
+            var enemy = CreateEnemy(new StartingStats { Level = 1, Agility = 6, Intelligence = 15, Strength = 6, Toughness = 6, Willpower = 6 });
+
+
             var battle = Battle.Create(new FirstValidCardPlayer(), 
                 new FirstValidCardPlayer(), hero, enemy);
 

@@ -63,6 +63,7 @@
     <Compile Include="Battles\BattleTests.cs" />
     <Compile Include="Battles\BattleSide.cs" />
     <Compile Include="Characters\ProceduralStartingStatGenerator.cs" />
+    <Compile Include="ContentTests.cs" />
     <Compile Include="Decks\DeckDefinition.cs" />
     <Compile Include="Decks\DeckTests.cs" />
     <Compile Include="Effects\WithLogging.cs" />
