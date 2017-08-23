@@ -11,7 +11,7 @@ namespace MonoDragons.Core.Tiled
     {
         public void Draw(IEntities entities, SpriteBatch sprites)
         {
-            entities.With<Tile>(x => sprites.Draw(Resources.Load<Texture2D>(x.Texture), x.DestRect, x.SourceRect, Color.White, 0, Vector2.Zero, SpriteEffects.None, GetDepth(x.ZIndex)));
+            entities.With<Tile>((o, x) => sprites.Draw(x.Texture, o.Transform.ToRectangle(), x.SourceRect, Color.White, 0, Vector2.Zero, SpriteEffects.None, GetDepth(x.ZIndex)));
         }
 
         private float GetDepth(int zIndex)

@@ -1,20 +1,36 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.IO;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using MonoDragons.Core.Engine;
 
 namespace MonoDragons.Core.Tiled.Orthographic
 {
     public class Tile
     {
-        public string Texture { get; }
+        private readonly string _texturePath;
+
+        private Texture2D _texture;
+
         public Rectangle SourceRect { get; }
-        public Rectangle DestRect { get; }
         public int ZIndex { get; }
 
-        public Tile(TileDetail detail, Rectangle destRect, int zIndex)
+        public Tile(TileDetail detail, int zIndex)
         {
-            Texture = detail.Texture;
+            _texturePath = detail.Texture;
             SourceRect = detail.SourceRect;
-            DestRect = destRect;
             ZIndex = zIndex;
+        }
+
+
+        public Texture2D Texture
+        {
+            get
+            {
+                if (_texture == null)
+                    using (var fileStream = new FileStream(_texturePath, FileMode.Open))
+                        _texture = Texture2D.FromStream(Hack.TheGame.GraphicsDevice, fileStream);
+                return _texture;
+            }
         }
     }
 }
