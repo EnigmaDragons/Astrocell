@@ -63,9 +63,7 @@
     <Compile Include="Battles\BattleTests.cs" />
     <Compile Include="Battles\BattleSide.cs" />
     <Compile Include="Characters\ProceduralStartingStatGenerator.cs" />
-    <Compile Include="DebugLog.cs" />
     <Compile Include="Effects\WithLogging.cs" />
-    <Compile Include="ILog.cs" />
     <Compile Include="Characters\CharacterBuilder.cs" />
     <Compile Include="Characters\EquipmentSheet.cs" />
     <Compile Include="Characters\IntrinsicStats.cs" />
@@ -78,29 +76,29 @@
     <Compile Include="Decks\EquippedDeck.cs" />
     <Compile Include="Decks\EquippedDeckFactory.cs" />
     <Compile Include="Effects\BattleEffect.cs" />
-    <Compile Include="Effects\DamageEffect.cs" />
+    <Compile Include="Effects\PhysicalDamageEffect.cs" />
     <Compile Include="Effects\IBattleEffect.cs" />
     <Compile Include="Effects\NoEffect.cs" />
-    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Equipments\Equipment.cs" />
     <Compile Include="Equipments\IEquipment.cs" />
-    <Compile Include="JsonIo.cs" />
     <Compile Include="LoopingSequence.cs" />
-    <Compile Include="NoLog.cs" />
     <Compile Include="Players\DeadPlayer.cs" />
     <Compile Include="Players\FirstValidCardPlayer.cs" />
     <Compile Include="Players\IPlayer.cs" />
     <Compile Include="Players\WithLogging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rng.cs" />
-    <Compile Include="Store.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Cards\strike.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MonoDragons.Core\MonoDragons.Core.csproj">
+      <Project>{a33f8fe3-a35a-4ddf-b96c-0157224f602c}</Project>
+      <Name>MonoDragons.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Content\Cards\contemplate.json" />
     <None Include="Content\Cards\focus.json" />

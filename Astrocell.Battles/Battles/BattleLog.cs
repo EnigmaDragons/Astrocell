@@ -1,4 +1,6 @@
-﻿namespace Astrocell.Battles.Battles
+﻿using MonoDragons.Core.Logs;
+
+namespace Astrocell.Battles.Battles
 {
     public static class BattleLog
     {

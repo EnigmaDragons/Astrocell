@@ -1,35 +1,25 @@
 ﻿using NAudio.Wave;
-using System;
 
-namespace MonoDragons.Core.Audio
+namespace MonoDragons.Core.Audio.Internal
 {
-    class DisposingFileReader : ISampleProvider
+    internal class LoopingFileReader : ISampleProvider
     {
-        public event EventHandler Disposed;
-
         public WaveFormat WaveFormat => _reader.WaveFormat;
         private readonly AudioFileReader _reader;
 
-        public DisposingFileReader(AudioFileReader reader)
+        public LoopingFileReader(AudioFileReader reader)
         {
             _reader = reader;
         }
 
-        private bool isDisposed;
         public int Read(float[] buffer, int offset, int count)
         {
-            if (isDisposed)
-                return 0;
-
             var read = _reader.Read(buffer, offset, count);
             if (read < count)
             {
-                _reader.Dispose();
-                isDisposed = true;
-
-                Disposed?.Invoke(this, EventArgs.Empty);
+                _reader.Position = 0;
+                read = _reader.Read(buffer, offset, count);
             }
-
             return read;
         }
     }

@@ -2,9 +2,9 @@
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 
-namespace MonoDragons.Core.Audio
+namespace MonoDragons.Core.Audio.Internal
 {
-    class AudioPlaybackEngine : IDisposable
+    internal class AudioPlaybackEngine : IDisposable
     {
         public static readonly AudioPlaybackEngine Instance = new AudioPlaybackEngine(44100, 2);
 

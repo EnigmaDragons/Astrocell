@@ -68,5 +68,12 @@ namespace MonoDragons.Core.Common
                 list[n] = value;
             }
         }
+
+        public static IList<T> Shuffled<T>(this IEnumerable<T> items)
+        {
+            var result = items.ToList();
+            Shuffle(result);
+            return result;
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-namespace MonoDragons.Core.Audio
+﻿namespace MonoDragons.Core.Audio.Ecs
 {
     public class Sound
     {

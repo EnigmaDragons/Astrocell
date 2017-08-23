@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Astrocell.Battles.Battles;
 using Astrocell.Battles.Decks;
+using MonoDragons.Core.Common;
+using MonoDragons.Core.Logs;
 
 namespace Astrocell.Battles.Players
 {

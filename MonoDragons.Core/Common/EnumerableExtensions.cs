@@ -32,5 +32,20 @@ namespace MonoDragons.Core.Common
         {
             return collection.FirstOrDefault();
         }
+
+        public static void PerformNTimes(this int count, Action action)
+        {
+            Enumerable.Range(0, count).ForEach(x => action());
+        }
+
+        public static IList<T> SelectN<T>(this int count, Func<int, T> selector)
+        {
+            return Enumerable.Range(0, count).Select(selector).ToList();
+        }
+
+        public static string CommaSeparated<T>(this IEnumerable<T> items, Func<T, string> valueSelector)
+        {
+            return string.Join(", ", items.Select(valueSelector));
+        }
     }
 }

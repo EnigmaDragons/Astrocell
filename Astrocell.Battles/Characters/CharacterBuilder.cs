@@ -1,5 +1,6 @@
 ﻿using System;
 using Astrocell.Battles.Decks;
+using MonoDragons.Core.Common;
 
 namespace Astrocell.Battles.Characters
 {

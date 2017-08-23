@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Astrocell.Battles.Decks;
+using MonoDragons.Core.Common;
 
 namespace Astrocell.Battles.Battles
 {

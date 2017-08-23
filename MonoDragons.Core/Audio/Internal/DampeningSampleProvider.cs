@@ -1,9 +1,9 @@
 ﻿using NAudio.Wave;
 using System.Threading;
 
-namespace MonoDragons.Core.Audio
+namespace MonoDragons.Core.Audio.Internal
 {
-    public class DampeningSampleProvider : ISampleProvider
+    internal class DampeningSampleProvider : ISampleProvider
     {
         public int Dampeners => _dampeners;
         int _dampeners;

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using Astrocell.Battles.Battles;
 
-namespace Astrocell.Battles
+namespace MonoDragons.Core.Logs
 {
     public sealed class DebugLog : ILog
     {

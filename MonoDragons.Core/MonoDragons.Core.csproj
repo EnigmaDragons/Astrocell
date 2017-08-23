@@ -44,18 +44,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Audio\Audio.cs" />
-    <Compile Include="Audio\AudioPlaybackEngine.cs" />
-    <Compile Include="Audio\BackgroundMusic.cs" />
-    <Compile Include="Audio\DisposingFileReader.cs" />
-    <Compile Include="Audio\LoopingFileReader.cs" />
-    <Compile Include="Audio\DampeningSampleProvider.cs" />
-    <Compile Include="Audio\MusicPlayer.cs" />
-    <Compile Include="Audio\Sound.cs" />
-    <Compile Include="Audio\Sounds.cs" />
-    <Compile Include="Audio\SoundsPlayer.cs" />
-    <Compile Include="Audio\SoundSystems.cs" />
+    <Compile Include="Audio\Internal\AudioPlaybackEngine.cs" />
+    <Compile Include="Audio\Ecs\BackgroundMusic.cs" />
+    <Compile Include="Audio\Internal\DisposingFileReader.cs" />
+    <Compile Include="Audio\Internal\LoopingFileReader.cs" />
+    <Compile Include="Audio\Internal\DampeningSampleProvider.cs" />
+    <Compile Include="Audio\Ecs\MusicPlayer.cs" />
+    <Compile Include="Audio\Ecs\Sound.cs" />
+    <Compile Include="Audio\Ecs\Sounds.cs" />
+    <Compile Include="Audio\Ecs\SoundsPlayer.cs" />
+    <Compile Include="Audio\Ecs\SoundSystems.cs" />
     <Compile Include="Common\Condition.cs" />
     <Compile Include="Common\FancyMaths.cs" />
+    <Compile Include="Common\Store.cs" />
     <Compile Include="Engine\Automation.cs" />
     <Compile Include="Engine\IControl.cs" />
     <Compile Include="Engine\ISpatialVisual.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="IO\JsonIo.cs" />
     <Compile Include="KeyboardControls\KeyboardInput.cs" />
     <Compile Include="KeyboardControls\TypingInput.cs" />
+    <Compile Include="Logs\DebugLog.cs" />
+    <Compile Include="Logs\ILog.cs" />
+    <Compile Include="Logs\NoLog.cs" />
     <Compile Include="MouseControls\MouseClickTarget.cs" />
     <Compile Include="MouseControls\MouseDropTarget.cs" />
     <Compile Include="MouseControls\MouseSnapshot.cs" />
