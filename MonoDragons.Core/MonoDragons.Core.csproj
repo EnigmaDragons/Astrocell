@@ -67,9 +67,6 @@
     <Compile Include="Graphics\CachingRules.cs" />
     <Compile Include="Graphics\RectangleBorderTexture.cs" />
     <Compile Include="Inputs\Controls.cs" />
-    <Compile Include="Characters\Health.cs" />
-    <Compile Include="Characters\Mortal.cs" />
-    <Compile Include="Characters\Reaper.cs" />
     <Compile Include="Common\EnumerableExtensions.cs" />
     <Compile Include="Common\ISubscription.cs" />
     <Compile Include="Common\ISubject.cs" />
@@ -112,19 +109,10 @@
     <Compile Include="MouseControls\MouseStateActions.cs" />
     <Compile Include="MouseControls\MouseSystems.cs" />
     <Compile Include="Navigation\INavigation.cs" />
-    <Compile Include="Networking\ILatencyMonitor.cs" />
-    <Compile Include="Networking\IMessenger.cs" />
-    <Compile Include="Networking\LatencyMonitorMethod.cs" />
-    <Compile Include="Networking\MyIP.cs" />
-    <Compile Include="Networking\Message.cs" />
-    <Compile Include="Networking\Messenger.cs" />
-    <Compile Include="Networking\PeerToPeerClient.cs" />
-    <Compile Include="Networking\PeerToPeerHost.cs" />
     <Compile Include="PhysicsEngine\DurationTravel.cs" />
     <Compile Include="PhysicsEngine\Travelling.cs" />
     <Compile Include="PhysicsEngine\ZGravitation.cs" />
     <Compile Include="PhysicsEngine\ZGravity.cs" />
-    <Compile Include="Players\Owner.cs" />
     <Compile Include="Players\SimplePlayer.cs" />
     <Compile Include="Render\BorderRenderer.cs" />
     <Compile Include="Render\BorderTexture.cs" />
@@ -241,10 +229,6 @@
     <Compile Include="UserInterface\WrapGrid.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Lidgren.Network, Version=3.5.1.1679, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lidgren-network-gen3-master\Lidgren.Network\bin\Debug\Lidgren.Network.dll</HintPath>
-    </Reference>
     <Reference Include="NAudio, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\NAudio.dll</HintPath>
