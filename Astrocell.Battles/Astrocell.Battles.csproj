@@ -60,6 +60,7 @@
     <Compile Include="Battles\BattleCharacters.cs" />
     <Compile Include="Battles\BattleHand.cs" />
     <Compile Include="Battles\BattleLog.cs" />
+    <Compile Include="Battles\BattleSimulator.cs" />
     <Compile Include="Battles\BattleTests.cs" />
     <Compile Include="Battles\BattleSide.cs" />
     <Compile Include="Characters\ProceduralStartingStatGenerator.cs" />

@@ -69,12 +69,17 @@ namespace Astrocell.Battles.Battles
             var hero = CreateHero(new StartingStats { Level = 1, Agility = 6, Intelligence = 6, Strength = 15, Toughness = 6, Willpower = 6 });
             var enemy = CreateEnemy(new StartingStats { Level = 1, Agility = 6, Intelligence = 15, Strength = 6, Toughness = 6, Willpower = 6 });
 
-
             var battle = Battle.Create(new FirstValidCardPlayer(), 
                 new FirstValidCardPlayer(), hero, enemy);
 
             var result = battle.Resolve();
             Assert.AreEqual(BattleSide.Gamer, result);
+        }
+
+        [TestMethod]
+        public void Battle_BruteVersusElectrician_CanResolveBattle()
+        {
+            var result = new BattleSimulator().Resolve1V1(Samples.CreateElectrician(), Samples.CreateDumbBrute());
         }
     }
 }

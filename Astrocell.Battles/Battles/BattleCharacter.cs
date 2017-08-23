@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Astrocell.Battles.Characters;
 using Astrocell.Battles.Decks;
 using MonoDragons.Core.Common;
@@ -14,12 +15,18 @@ namespace Astrocell.Battles.Battles
         public int Initiative => _stats.Agility;
         public bool IsConscious => CurrentHp > 0;
         public bool CanAct => IsConscious;
-        public bool CanPlayACard => CanAct && Hand.Cards.Any(x => x.ActionPointCost <= CurrentActionPoints && x.EnergyCost <= CurrentEnergy);
+        public bool CanPlayACard => CanAct && Hand.Cards.Any(CanAfford);
+
+        private bool CanAfford(Card x)
+        {
+            return x.ActionPointCost <= CurrentActionPoints && x.EnergyCost <= CurrentEnergy;
+        }
 
         public string Name { get; }
         public BattleSide Loyalty { get; }
         public BattleDeck Deck { get; }
         public BattleHand Hand { get; }
+        public IList<Card> PlayableCards => Hand.Cards.Where(CanAfford).ToList();
 
         public int MaxHp => _stats.MaxHp;
         public int CurrentHp { get; set; }
@@ -58,7 +65,12 @@ namespace Astrocell.Battles.Battles
             CurrentEnergy -= card.EnergyCost;
             CurrentActionPoints -= card.ActionPointCost;
 
+            if (card.CardsDrawn > 0)
+                _log.Write($"{Name} draws {card.CardsDrawn} Cards.");
             DrawCards(card.CardsDrawn);
+
+            if (card.EnergyGain > 0)
+                _log.Write($"{Name} gains {card.EnergyGain} Energy");
             CurrentEnergy += card.EnergyGain;
         }
 

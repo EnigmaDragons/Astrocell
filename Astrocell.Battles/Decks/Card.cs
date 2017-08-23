@@ -3,7 +3,7 @@ using MonoDragons.Core.IO;
 
 namespace Astrocell.Battles.Decks
 {
-    public struct Card
+    public class Card
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,7 +14,7 @@ namespace Astrocell.Battles.Decks
         public int EnergyGain { get; set; }
         public int CardsDrawn { get; set; }
 
-        public List<CardEffect> Effects { get; set; }
+        public List<CardEffect> Effects { get; set; } = new List<CardEffect>();
 
         public static Card Load(string name)
         {
