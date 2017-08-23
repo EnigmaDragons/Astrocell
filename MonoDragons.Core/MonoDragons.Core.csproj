@@ -63,8 +63,8 @@
     <Compile Include="Engine\ISpatialVisualControl.cs" />
     <Compile Include="Engine\IVisualControl.cs" />
     <Compile Include="Entities\EntitiesExtensions.cs" />
-    <Compile Include="Entities\Item.cs" />
-    <Compile Include="Entities\Items.cs" />
+    <Compile Include="Components\Item.cs" />
+    <Compile Include="Components\Items.cs" />
     <Compile Include="Graphics\CachingRules.cs" />
     <Compile Include="Graphics\RectangleBorderTexture.cs" />
     <Compile Include="Inputs\Controls.cs" />

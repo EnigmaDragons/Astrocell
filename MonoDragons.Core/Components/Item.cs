@@ -1,4 +1,6 @@
-﻿namespace MonoDragons.Core.Entities
+﻿using MonoDragons.Core.Entities;
+
+namespace MonoDragons.Core.Components
 {
     public class Item
     {

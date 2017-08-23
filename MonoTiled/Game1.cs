@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoTiled.Tiled.Orthographic;
@@ -14,7 +15,7 @@ namespace MonoTiled
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        private TileMap tileMap;
+        private List<Tile> tiles;
 
         public Game1()
         {
@@ -30,7 +31,7 @@ namespace MonoTiled
         /// </summary>
         protected override void Initialize()
         {
-            tileMap = new TileMapFactory().CreateMap(new Tmx(GraphicsDevice, "Test.tmx"));
+            tiles = new TileMapFactory().CreateMap(new Tmx(GraphicsDevice, "Test.tmx"));
             base.Initialize();
         }
 
@@ -78,7 +79,7 @@ namespace MonoTiled
         {
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            tileMap.Draw(spriteBatch);
+            tiles.ForEach(x => x.Draw(spriteBatch));
             spriteBatch.End();
             base.Draw(gameTime);
         }

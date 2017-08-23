@@ -47,8 +47,6 @@
     <Compile Include="Tiled\IntegersInText.cs" />
     <Compile Include="Tiled\Orthographic\Tile.cs" />
     <Compile Include="Tiled\Orthographic\TileDetail.cs" />
-    <Compile Include="Tiled\Orthographic\TileLayer.cs" />
-    <Compile Include="Tiled\Orthographic\TileMap.cs" />
     <Compile Include="Tiled\Orthographic\TileMapFactory.cs" />
     <Compile Include="Tiled\Orthographic\TileMapDetails.cs" />
     <Compile Include="Tiled\Texture2DFromPath.cs" />

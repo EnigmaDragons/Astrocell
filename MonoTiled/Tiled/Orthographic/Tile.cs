@@ -8,16 +8,18 @@ namespace MonoTiled.Tiled.Orthographic
     {
         private readonly TileDetail _detail;
         private readonly Rectangle _destRect;
+        private readonly int _zIndex;
 
-        public Tile(TileDetail detail, Rectangle destRect)
+        public Tile(TileDetail detail, Rectangle destRect, int zIndex)
         {
             _detail = detail;
             _destRect = destRect;
+            _zIndex = zIndex;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_detail.Texture, _destRect, _detail.SourceRect, Color.White);
-        } 
+            spriteBatch.Draw(_detail.Texture, _destRect, _detail.SourceRect, Color.White, 0, Vector2.Zero, SpriteEffects.None, _zIndex);
+        }
     }
 }
