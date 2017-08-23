@@ -6,6 +6,16 @@ namespace MonoDragons.Core.IO
 {
     public sealed class JsonIo
     {
+        static JsonIo()
+        {
+            JsonConvert.DefaultSettings = (() =>
+            {
+                var settings = new JsonSerializerSettings();
+                settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                return settings;
+            });
+        }
+
         public T Load<T>(string filePath)
         {
             return JsonConvert.DeserializeObject<T>(File.ReadAllText(filePath));
