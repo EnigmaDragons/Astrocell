@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using MonoTiled.Tiled.TmxLoading;
+using MonoDragons.Core.Tiled.TmxLoading;
 
-namespace MonoTiled.Tiled.Orthographic
+namespace MonoDragons.Core.Tiled.Orthographic
 {
     public class TileMapDetails
     {
@@ -14,9 +14,9 @@ namespace MonoTiled.Tiled.Orthographic
             tmx.Tilesets.ForEach(AddTileset);
         }
 
-        public TileDetail Get(int id)
+        public TileDetail Get(int textureId)
         {
-            return _tiles[id];
+            return _tiles[textureId];
         }
 
         private void AddTileset(Tsx tsx)

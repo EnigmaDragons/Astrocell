@@ -1,14 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace MonoTiled.Tiled.Orthographic
+namespace MonoDragons.Core.Tiled.Orthographic
 {
     public class TileDetail
     {
-        public Texture2D Texture { get; }
+        public string Texture { get; }
         public Rectangle SourceRect { get; }
 
-        public TileDetail(Texture2D texture, Rectangle sourceRect)
+        public TileDetail(string texture, Rectangle sourceRect)
         {
             Texture = texture;
             SourceRect = sourceRect;

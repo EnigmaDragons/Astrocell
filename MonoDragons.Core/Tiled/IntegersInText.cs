@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace TiledExample.Tiled
+namespace MonoDragons.Core.Tiled
 {
     public class IntegersInText
     {

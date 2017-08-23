@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace MonoTiled.Tiled.TmxLoading
+namespace MonoDragons.Core.Tiled.TmxLoading
 {
     public class XValue
     {
