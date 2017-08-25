@@ -1,6 +1,8 @@
-﻿namespace MonoDragons.Core.PhysicsEngine
+﻿using MonoDragons.Core.Entities;
+
+namespace MonoDragons.Core.PhysicsEngine
 {
-    public sealed class Sprite
+    public sealed class Sprite : EntityComponent
     {
         private string _suffix;
         public string Prefix { get; set; } = "";

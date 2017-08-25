@@ -1,8 +1,9 @@
 ﻿using System;
+using MonoDragons.Core.Entities;
 
 namespace MonoDragons.Core.MouseControls
 {
-    public sealed class MouseStateActions
+    public sealed class MouseStateActions : EntityComponent
     {
         private MouseState CurrentState { get; set; } = MouseState.None;
         private DateTime ClickedAt { get; set; } = DateTime.MinValue;

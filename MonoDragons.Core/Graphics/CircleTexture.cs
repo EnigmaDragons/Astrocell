@@ -43,7 +43,7 @@ namespace MonoDragons.Core.Graphics
                         colorData[index] = Color.Transparent;
                 }
 
-            var texture = new Texture2D(Hack.TheGame.GraphicsDevice, _diam, _diam);
+            var texture = new Texture2D(GameInstance.TheGame.GraphicsDevice, _diam, _diam);
             texture.SetData(colorData);
             if (CachingRules.CacheTextures)
                 CachedTextures.Add(this, texture);

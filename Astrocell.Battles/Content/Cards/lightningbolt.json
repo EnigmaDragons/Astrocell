@@ -1,0 +1,11 @@
+{
+    "Name": "Lightning Bolt",
+    "ActionPointCost": 2,
+    "Effects": [ {
+            "Target": "One",
+            "Type": "Damage",
+            "Stat": "Magic",
+            "Factor": 1.0
+        }
+    ]
+}

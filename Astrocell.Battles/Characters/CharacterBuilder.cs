@@ -19,6 +19,8 @@ namespace Astrocell.Battles.Characters
 
         public CharacterBuilder WithStats(StartingStats stats)
         {
+            if (!stats.IsValid())
+                throw new ArgumentException("Starting stats are invalid");
             _stats.Put(stats);
             return this;
         }

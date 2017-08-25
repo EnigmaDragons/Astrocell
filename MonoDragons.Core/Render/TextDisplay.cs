@@ -1,11 +1,12 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using MonoDragons.Core.Entities;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Text;
 
 namespace MonoDragons.Core.Render
 {
-    public class TextDisplay
+    public class TextDisplay : EntityComponent
     {
         public string Font { get; set; } = DefaultFont.Name;
         public Color Color { get; set; } = Color.White;

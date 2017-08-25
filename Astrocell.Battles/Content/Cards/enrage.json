@@ -1,0 +1,13 @@
+{
+    "Name": "Enrage",
+    "ActionPointCost": 2,
+    "Effects": [ {
+            "Target": "Self",
+            "Type": "Status",
+            "Stat": "Attack",
+            "Status": "Buff",
+            "Duration": 5,
+            "Factor": 1.5
+        }   
+    ] 
+}

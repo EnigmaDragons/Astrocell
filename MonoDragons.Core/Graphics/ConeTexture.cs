@@ -36,7 +36,7 @@ namespace MonoDragons.Core.Graphics
             var diam = radius * 2;
             var colorData = new Color[(diam + 1) * (diam + 1)];
 
-            float perLayerAmount = _angle.Value / 45;
+            float perLayerAmount = _angle.Degrees / 45;
             var baseRequirement = 6 * radius;
             var index = -1;
             var y = 0;
@@ -155,7 +155,7 @@ namespace MonoDragons.Core.Graphics
                         colorData[index] = Color.Transparent;
                 }
             }
-            var texture = new Texture2D(Hack.TheGame.GraphicsDevice, diam + 1, diam + 1);
+            var texture = new Texture2D(GameInstance.TheGame.GraphicsDevice, diam + 1, diam + 1);
             texture.SetData(colorData);
             if (CachingRules.CacheTextures)
                 CachedTextures.Add(this, texture);

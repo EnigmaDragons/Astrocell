@@ -22,7 +22,7 @@ namespace MonoDragons.Core.MouseControls
         public bool RightButtonJustReleased => _last.RightButton == ButtonState.Pressed && !RightIsPressed;
         public bool ButtonJustPressed => LeftButtonJustPressed || RightButtonJustPressed;
         public bool ButtonJustReleased => LeftButtonJustReleased || RightButtonJustReleased;
-        public bool IsOnGameScreen => Hack.TheGame.IsActive;
+        public bool IsOnGameScreen => GameInstance.TheGame.IsActive;
 
         public MouseSnapshot()
             : this(new Microsoft.Xna.Framework.Input.MouseState()) { }

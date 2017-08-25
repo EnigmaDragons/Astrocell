@@ -58,10 +58,12 @@
     <Compile Include="Common\FancyMaths.cs" />
     <Compile Include="Common\Store.cs" />
     <Compile Include="Engine\Automation.cs" />
-    <Compile Include="Engine\IControl.cs" />
+    <Compile Include="Engine\UpdateComponent.cs" />
+    <Compile Include="Entities\EntityComponent.cs" />
     <Compile Include="Entities\EntitiesExtensions.cs" />
     <Compile Include="Components\Item.cs" />
     <Compile Include="Components\Items.cs" />
+    <Compile Include="Entities\EntityResources.cs" />
     <Compile Include="Graphics\CachingRules.cs" />
     <Compile Include="Graphics\RectangleBorderTexture.cs" />
     <Compile Include="Inputs\Controls.cs" />
@@ -74,7 +76,7 @@
     <Compile Include="Common\Subject.cs" />
     <Compile Include="Common\SubscriptionAction.cs" />
     <Compile Include="EngimaDragons\LogoScene.cs" />
-    <Compile Include="Engine\Hack.cs" />
+    <Compile Include="Engine\GameInstance.cs" />
     <Compile Include="Engine\Metrics.cs" />
     <Compile Include="Engine\Timer.cs" />
     <Compile Include="Entities\Entity.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="Inputs\ControlHandler.cs" />
     <Compile Include="Inputs\DirectionHandler.cs" />
     <Compile Include="IO\AppDataJsonIo.cs" />
+    <Compile Include="IO\FileTexture2D.cs" />
     <Compile Include="IO\JsonIo.cs" />
     <Compile Include="KeyboardControls\KeyboardInput.cs" />
     <Compile Include="KeyboardControls\TypingInput.cs" />
@@ -123,8 +126,7 @@
     <Compile Include="Engine\IAutomaton.cs" />
     <Compile Include="Engine\IVisual.cs" />
     <Compile Include="Engine\NeedlesslyComplexMainGame.cs" />
-    <Compile Include="Engine\Map.cs" />
-    <Compile Include="Scenes\SceneAutomatons.cs" />
+    <Compile Include="Common\Map.cs" />
     <Compile Include="Scenes\SceneContents.cs" />
     <Compile Include="Scenes\SceneFactory.cs" />
     <Compile Include="PhysicsEngine\BoxCollision.cs" />
@@ -192,14 +194,6 @@
     <Compile Include="Tiled\TmxLoading\TmxTile.cs" />
     <Compile Include="Tiled\TmxLoading\TmxTileset.cs" />
     <Compile Include="Tiled\TmxLoading\XValue.cs" />
-    <Compile Include="UserInterface\Graphs\Graph.cs" />
-    <Compile Include="UserInterface\Graphs\GraphDefaults.cs" />
-    <Compile Include="UserInterface\Graphs\GraphGrid.cs" />
-    <Compile Include="UserInterface\Graphs\Line.cs" />
-    <Compile Include="UserInterface\Graphs\GraphLine.cs" />
-    <Compile Include="UserInterface\Graphs\GraphPoint.cs" />
-    <Compile Include="UserInterface\Graphs\LineRenderer.cs" />
-    <Compile Include="UserInterface\KeyboardTyping.cs" />
     <Compile Include="UserInterface\Layouts\ConcreteDefinition.cs" />
     <Compile Include="UserInterface\Layouts\Definition.cs" />
     <Compile Include="UserInterface\Layouts\ShareDefintion.cs" />
@@ -207,34 +201,18 @@
     <Compile Include="UserInterface\Layouts\GridLayout.cs" />
     <Compile Include="UserInterface\HorizontalAlignment.cs" />
     <Compile Include="UserInterface\AutoSizingLabel.cs" />
-    <Compile Include="UserInterface\ClickUIBranch.cs" />
     <Compile Include="UserInterface\Cone.cs" />
     <Compile Include="UserInterface\ColoredRectangle.cs" />
     <Compile Include="Graphics\ConeTexture.cs" />
-    <Compile Include="UserInterface\IconButton.cs" />
     <Compile Include="UserInterface\ImageLabel.cs" />
-    <Compile Include="UserInterface\ImageTextButton.cs" />
-    <Compile Include="UserInterface\ImageWithDescription.cs" />
     <Compile Include="UserInterface\Label.cs" />
     <Compile Include="UserInterface\Layouts\Layout.cs" />
     <Compile Include="MouseControls\MouseDrag.cs" />
     <Compile Include="UserInterface\MutableTextPage.cs" />
-    <Compile Include="UserInterface\ClickableUIElement.cs" />
-    <Compile Include="UserInterface\ClickUI.cs" />
     <Compile Include="UserInterface\ImageBox.cs" />
     <Compile Include="Text\DefaultFont.cs" />
-    <Compile Include="UserInterface\ImageButton.cs" />
-    <Compile Include="UserInterface\NoneClickableUIElement.cs" />
-    <Compile Include="UserInterface\OffsetClickableUIElement.cs" />
-    <Compile Include="UserInterface\ScreenClickable.cs" />
-    <Compile Include="UserInterface\SimpleClickable.cs" />
-    <Compile Include="UserInterface\SingleImageButton.cs" />
-    <Compile Include="UserInterface\SmartControl.cs" />
-    <Compile Include="UserInterface\TextButton.cs" />
-    <Compile Include="UserInterface\TextClickable.cs" />
     <Compile Include="UserInterface\UI.cs" />
     <Compile Include="UserInterface\VerticalAlignment.cs" />
-    <Compile Include="UserInterface\VisualClickableUIElement.cs" />
     <Compile Include="UserInterface\WrapGrid.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +276,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

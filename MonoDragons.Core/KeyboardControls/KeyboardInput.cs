@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Input;
 using Microsoft.Xna.Framework.Input;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Entities;

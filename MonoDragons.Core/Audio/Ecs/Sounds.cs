@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Engine;
+using MonoDragons.Core.Entities;
 
 namespace MonoDragons.Core.Audio.Ecs
 {
-    public sealed class Sounds
+    public sealed class Sounds : EntityComponent
     {
         private readonly List<Sound> _queued = new List<Sound>();
         private Map<string, Sound> Values { get; } = new Map<string, Sound>();

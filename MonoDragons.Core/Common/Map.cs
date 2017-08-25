@@ -2,7 +2,7 @@
 
 namespace MonoDragons.Core.Engine
 {
-    public class Map<K, V> : Dictionary<K, V>
+    public class Map<TKey, TValue> : Dictionary<TKey, TValue>
     {
     }
 }

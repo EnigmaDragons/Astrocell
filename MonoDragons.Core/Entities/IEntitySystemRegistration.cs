@@ -1,5 +1,4 @@
-﻿
-namespace MonoDragons.Core.Entities
+﻿namespace MonoDragons.Core.Entities
 {
     public interface IEntitySystemRegistration
     {

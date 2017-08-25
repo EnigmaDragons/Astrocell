@@ -1,8 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using MonoDragons.Core.Entities;
 
 namespace MonoDragons.Core.Render
 {
-    public class BorderTexture
+    public class BorderTexture : EntityComponent
     {
         public Texture2D Value { get; set; }
     }

@@ -1,0 +1,11 @@
+{
+    "Name": "Jolt",
+    "ActionPointCost": 1,
+    "Effects": [ {
+            "Target": "One",
+            "Type": "Damage",
+            "Stat": "Magic",
+            "Factor": 0.75
+        }
+    ]
+}

@@ -1,13 +1,12 @@
 ﻿using System;
 using MonoDragons.Core.Entities;
 using System.Collections.Generic;
-using MonoDragons.Core.Characters;
 
 namespace MonoDragons.Core.Inputs
 {
     public sealed class ControlHandler : ISystem
     {
-        private List<Control> _unprocessedControls = new List<Control>();
+        private readonly List<Control> _unprocessedControls = new List<Control>();
 
         public ControlHandler()
         {

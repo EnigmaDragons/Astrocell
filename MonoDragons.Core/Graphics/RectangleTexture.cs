@@ -39,7 +39,7 @@ namespace MonoDragons.Core.Graphics
             for (var i = 0; i < data.Length; ++i)
                 data[i] = _color;
 
-            var texture = new Texture2D(Hack.TheGame.GraphicsDevice, _width, _height);
+            var texture = new Texture2D(GameInstance.TheGame.GraphicsDevice, _width, _height);
             texture.SetData(data);
             if(CachingRules.CacheTextures)
                 CachedTextures.Add(this, texture);

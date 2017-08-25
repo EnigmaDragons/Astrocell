@@ -26,7 +26,7 @@ namespace MonoDragons.Core.Graphics
             if (CachedTextures.ContainsKey(this))
                 return CachedTextures[this];
             var data = new[] { _color };
-            var result = new Texture2D(Hack.TheGame.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+            var result = new Texture2D(GameInstance.TheGame.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             result.SetData(data, 0, result.Width * result.Height);
             if (CachingRules.CacheTextures)
                 CachedTextures.Add(this, result);

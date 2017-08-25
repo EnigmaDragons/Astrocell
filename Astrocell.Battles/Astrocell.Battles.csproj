@@ -60,9 +60,14 @@
     <Compile Include="Battles\BattleCharacters.cs" />
     <Compile Include="Battles\BattleHand.cs" />
     <Compile Include="Battles\BattleLog.cs" />
+    <Compile Include="Battles\BattleSimulator.cs" />
     <Compile Include="Battles\BattleTests.cs" />
     <Compile Include="Battles\BattleSide.cs" />
     <Compile Include="Characters\ProceduralStartingStatGenerator.cs" />
+    <Compile Include="ContentTests.cs" />
+    <Compile Include="Decks\DeckDefinition.cs" />
+    <Compile Include="Decks\DeckTests.cs" />
+    <Compile Include="Effects\MagicDamageEffect.cs" />
     <Compile Include="Effects\WithLogging.cs" />
     <Compile Include="Characters\CharacterBuilder.cs" />
     <Compile Include="Characters\EquipmentSheet.cs" />
@@ -87,6 +92,7 @@
     <Compile Include="Players\IPlayer.cs" />
     <Compile Include="Players\WithLogging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Samples.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Cards\strike.json">
@@ -100,15 +106,57 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\Cards\contemplate.json" />
-    <None Include="Content\Cards\focus.json" />
-    <None Include="Content\Cards\hit.json" />
-    <None Include="Content\Cards\savagestrike.json" />
-    <None Include="Content\Cards\template.json" />
-    <None Include="Content\Cards\viciousstrike.json" />
-    <None Include="Content\Cards\visualize.json" />
+    <Content Include="Content\Cards\contemplate.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\enrage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\focus.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\hit.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\jolt.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\lightningbolt.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\quickdecision.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\savagestrike.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\shakeitoff.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\shockingbolt.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\stunningbolt.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\template.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\viciousstrike.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\visualize.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Decks\dumbbrute.deck">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Decks\electrician.deck">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\Equipment\knife.json" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

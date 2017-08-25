@@ -1,6 +1,8 @@
-﻿namespace MonoDragons.Core.KeyboardControls
+﻿using MonoDragons.Core.Entities;
+
+namespace MonoDragons.Core.KeyboardControls
 {
-    public class TypingInput
+    public sealed class TypingInput : EntityComponent
     {
         public bool IsActive { get; set; }
         public int MaxChars { get; set; } = 32;

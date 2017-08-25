@@ -9,6 +9,7 @@ using MonoDragons.Core.UserInterface;
 using System;
 using Microsoft.Xna.Framework.Input;
 using MonoDragons.Core.Entities;
+using MonoDragons.Core.MouseControls;
 using MonoDragons.Core.Navigation;
 using MonoDragons.Core.Scenes;
 
@@ -58,6 +59,7 @@ namespace MonoDragons.Core.Engine
             _ecs = Entity.System;
             Renderers.RegisterAll(_ecs);
             PhysicsSystems.RegisterAll(_ecs);
+            MouseSystems.RegisterAll(_ecs);
 
             Window.Title = title;
         }
@@ -71,7 +73,7 @@ namespace MonoDragons.Core.Engine
             IsMouseVisible = true;
             _sprites = new SpriteBatch(GraphicsDevice);
             Resources.Init(this);
-            Hack.TheGame = this;
+            GameInstance.Init(this);
             Input.SetController(_controller);
             _ecs.Register(new ControlHandler());
             _ecs.Register(new DirectionHandler());
@@ -154,7 +156,7 @@ namespace MonoDragons.Core.Engine
 #if DEBUG  
             var state = Keyboard.GetState();
             if(state.IsKeyDown(Keys.Escape))
-                Hack.TheGame.Exit();
+                Engine.GameInstance.TheGame.Exit();
 #endif
         }
     }

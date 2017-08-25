@@ -1,8 +1,9 @@
 ﻿using System;
+using MonoDragons.Core.Entities;
 
 namespace MonoDragons.Core.PhysicsEngine
 {
-    public sealed class DurationTravel
+    public sealed class DurationTravel : EntityComponent
     {
         private Transform2 _target;
         private TimeSpan _remainingDuration;

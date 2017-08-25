@@ -1,10 +1,10 @@
-﻿using MonoDragons.Core.Engine;
-using MonoDragons.Core.Inputs;
-using System;
+﻿using System;
+using MonoDragons.Core.Engine;
+using MonoDragons.Core.Entities;
 
-namespace MonoDragons.Core.Characters
+namespace MonoDragons.Core.Inputs
 {
-    public sealed class Controls
+    public sealed class Controls : EntityComponent
     {
         public Map<Control, Action> Bindings { get; set; }
 

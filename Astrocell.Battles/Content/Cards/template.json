@@ -5,10 +5,13 @@
     "EnergyCost": 1,
     "EnergyGain": 0,
     "CardsDrawn": 0,
-    "Effect": {
-        "Target": "One/AllEnemies/AllAllies/Self/None",
-        "Type": "None/Damage/Heal/Status",
-        "Stat": "None/Magic/Attack",
-        "Factor": 1.0
-    }
+    "Effects": [ {
+            "Target": "One/AllEnemies/AllAllies/Self/None",
+            "Type": "None/Damage/Heal/Status",
+            "Stat": "None/Magic/Attack",
+            "Status": "None/Buff",
+            "Duration": 0,
+            "Factor": 1.0
+        }
+    ]
 }

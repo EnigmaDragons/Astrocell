@@ -5,7 +5,7 @@ using MonoDragons.Core.Inputs;
 
 namespace MonoDragons.Core.PhysicsEngine
 {
-    public class Velocity2
+    public sealed class Velocity2
     {
         public float Speed { get; set; } = 0f;
         public Rotation2 Direction { get; set; } = Rotation2.Default;

@@ -62,7 +62,7 @@ namespace MonoDragons.Core.UserInterface
                 new Rectangle(ScalePoint(_display.GameWidth / 2 / _display.Scale - widthHeight.X / 2 + offSet.X,
                     _display.GameHeight / 2 / _display.Scale - widthHeight.Y / 2 + offSet.Y),
                     ScalePoint(widthHeight.X, widthHeight.Y)),
-                null, null, rotation.Value * .017453292519f, new Vector2(1, 1));
+                null, null, rotation.Degrees * .017453292519f, new Vector2(1, 1));
         }
 
         public static void DrawText(string text, Vector2 position, Color color)

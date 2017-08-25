@@ -1,0 +1,12 @@
+{
+    "Name": "Shocking Bolt",
+    "ActionPointCost": 2,
+    "EnergyCost": 2,
+    "Effects": [ {
+            "Target": "One",
+            "Type": "Damage",
+            "Stat": "Magic",
+            "Factor": 2.0
+        }
+    ]
+}

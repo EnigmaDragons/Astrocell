@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using MonoDragons.Core.Common;
+using MonoDragons.Core.Entities;
 
 namespace MonoDragons.Core.MouseControls
 {
-    public sealed class MouseDrag
+    public sealed class MouseDrag : EntityComponent
     {
         public Func<bool> IsEnabled { get; set; } = () => true;
 
