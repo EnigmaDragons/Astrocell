@@ -67,6 +67,7 @@
     <Compile Include="ContentTests.cs" />
     <Compile Include="Decks\DeckDefinition.cs" />
     <Compile Include="Decks\DeckTests.cs" />
+    <Compile Include="Effects\MagicDamageEffect.cs" />
     <Compile Include="Effects\WithLogging.cs" />
     <Compile Include="Characters\CharacterBuilder.cs" />
     <Compile Include="Characters\EquipmentSheet.cs" />

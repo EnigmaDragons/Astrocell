@@ -6,12 +6,18 @@ namespace Astrocell.Battles.Effects
 {
     public static class BattleEffect
     {
+        //TODO: This is the wrong way to solve this
         public static IBattleEffect Create(BattleCharacter source, CardEffect effect)
         {
             if (effect.Type == EffectType.Damage && effect.Stat == EffectStat.Attack)
             {
                 var amount = Convert.ToInt32(Math.Ceiling(source.GetStat(effect.Stat) * effect.Factor));
                 return new PhysicalDamageEffect(amount);
+            }
+            if (effect.Type == EffectType.Damage && effect.Stat == EffectStat.Magic)
+            {
+                var amount = Convert.ToInt32(Math.Ceiling(source.GetStat(effect.Stat) * effect.Factor));
+                return new MagicDamageEffect(amount);
             }
             return WithLogging(x => "No/Unknown Effect", new NoEffect());
         }

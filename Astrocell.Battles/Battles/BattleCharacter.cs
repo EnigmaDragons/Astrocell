@@ -17,11 +17,6 @@ namespace Astrocell.Battles.Battles
         public bool CanAct => IsConscious;
         public bool CanPlayACard => CanAct && Hand.Cards.Any(CanAfford);
 
-        private bool CanAfford(Card x)
-        {
-            return x.ActionPointCost <= CurrentActionPoints && x.EnergyCost <= CurrentEnergy;
-        }
-
         public string Name { get; }
         public BattleSide Loyalty { get; }
         public BattleDeck Deck { get; }
@@ -70,7 +65,7 @@ namespace Astrocell.Battles.Battles
             DrawCards(card.CardsDrawn);
 
             if (card.EnergyGain > 0)
-                _log.Write($"{Name} gains {card.EnergyGain} Energy");
+                _log.Write($"{Name} gains {card.EnergyGain} Energy.");
             CurrentEnergy += card.EnergyGain;
         }
 
@@ -79,8 +74,14 @@ namespace Astrocell.Battles.Battles
         {
             var dmgAmount = amount - _stats.Defense;
             ChangeHp(-dmgAmount);
-
             _log.Write($"{Name} suffers {dmgAmount} physical damage.");
+        }
+
+        public void TakeMagicDamage(int amount)
+        {
+            var dmgAmount = amount - _stats.Resistance;
+            ChangeHp(-dmgAmount);
+            _log.Write($"{Name} suffers {dmgAmount} magic damage.");
         }
 
         public void EndTurn()
@@ -94,6 +95,11 @@ namespace Astrocell.Battles.Battles
             if (stat == EffectStat.Magic)
                 return _stats.Magic;
             return 0;
+        }
+
+        private bool CanAfford(Card x)
+        {
+            return x.ActionPointCost <= CurrentActionPoints && x.EnergyCost <= CurrentEnergy;
         }
 
         private void ChangeHp(int amount)
