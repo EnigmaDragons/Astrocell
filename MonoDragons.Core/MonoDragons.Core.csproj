@@ -190,7 +190,7 @@
     <Compile Include="Tiled\TmxLoading\Tmx.cs" />
     <Compile Include="Tiled\TmxLoading\TmxLayer.cs" />
     <Compile Include="Tiled\TmxLoading\TmxTile.cs" />
-    <Compile Include="Tiled\TmxLoading\Tsx.cs" />
+    <Compile Include="Tiled\TmxLoading\TmxTileset.cs" />
     <Compile Include="Tiled\TmxLoading\XValue.cs" />
     <Compile Include="UserInterface\Graphs\Graph.cs" />
     <Compile Include="UserInterface\Graphs\GraphDefaults.cs" />

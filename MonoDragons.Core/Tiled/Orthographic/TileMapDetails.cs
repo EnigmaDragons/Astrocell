@@ -19,19 +19,19 @@ namespace MonoDragons.Core.Tiled.Orthographic
             return _tiles[textureId];
         }
 
-        private void AddTileset(Tsx tsx)
+        private void AddTileset(TmxTileset tileset)
         {
-            for (int i = 0; i < tsx.TileCount; i++)
-                _tiles[tsx.FirstId + i] = new TileDetail(tsx.TileSource, GetTileRectangle(i, tsx));
+            for (int i = 0; i < tileset.TileCount; i++)
+                _tiles[tileset.FirstId + i] = new TileDetail(tileset.TileSource, GetTileRectangle(i, tileset));
         }
 
-        private Rectangle GetTileRectangle(int tile, Tsx tsx)
+        private Rectangle GetTileRectangle(int tile, TmxTileset tileset)
         {
-            var column = tile % tsx.Columns;
-            var row = (int)Math.Floor((double)tile / tsx.Columns);
-            var x = column * tsx.TileWidth + (column + 1) * tsx.Spacing;
-            var y = row * tsx.TileHeight + (row + 1) * tsx.Spacing;
-            return new Rectangle(x, y, tsx.TileWidth, tsx.TileHeight);
+            var column = tile % tileset.Columns;
+            var row = (int)Math.Floor((double)tile / tileset.Columns);
+            var x = column * tileset.TileWidth + (column + 1) * tileset.Spacing;
+            var y = row * tileset.TileHeight + (row + 1) * tileset.Spacing;
+            return new Rectangle(x, y, tileset.TileWidth, tileset.TileHeight);
         }
     }
 }
