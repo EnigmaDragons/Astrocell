@@ -3,7 +3,7 @@ using MonoDragons.Core.Entities;
 
 namespace MonoDragons.Core.MouseControls
 {
-    public sealed class MouseDropTarget
+    public sealed class MouseDropTarget : EntityComponent
     {
         public Action OnEnter { get; set; }
         public Action OnExit { get; set; }

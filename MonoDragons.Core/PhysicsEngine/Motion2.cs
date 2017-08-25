@@ -1,6 +1,8 @@
-﻿namespace MonoDragons.Core.PhysicsEngine
+﻿using MonoDragons.Core.Entities;
+
+namespace MonoDragons.Core.PhysicsEngine
 {
-    public class Motion2
+    public class Motion2 : EntityComponent
     {
         public Velocity2 Velocity { get; set; }
 

@@ -47,5 +47,11 @@ namespace MonoDragons.Core.Common
         {
             return string.Join(", ", items.Select(valueSelector));
         }
+
+        public static void ForEach<TKey, TValue>(this IDictionary<TKey, TValue> items, Action<TValue> action)
+        {
+            foreach (var item in items)
+                action(item.Value);
+        }
     }
 }

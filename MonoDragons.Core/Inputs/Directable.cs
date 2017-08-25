@@ -1,9 +1,9 @@
-﻿
-using System;
+﻿using System;
+using MonoDragons.Core.Entities;
 
 namespace MonoDragons.Core.Inputs
 {
-    public sealed class Directable
+    public sealed class Directable : EntityComponent
     {
         public Action<Direction> Binding { get; set; }
 

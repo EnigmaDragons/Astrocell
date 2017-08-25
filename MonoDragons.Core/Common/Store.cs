@@ -27,5 +27,10 @@ namespace MonoDragons.Core.Common
         {
             _value = value;
         }
+
+        public void Clear()
+        {
+            _value = default(T);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MonoDragons.Core.Common;
 using MonoDragons.Core.PhysicsEngine;
 
 namespace MonoDragons.Core.Entities
@@ -21,11 +22,6 @@ namespace MonoDragons.Core.Entities
             return Objs.Create(transform);
         }
 
-        public static void Destroy(int id)
-        {
-            Objs.Remove(id);
-        }
-
         public static void Destroy(GameObject obj)
         {
             Objs.Remove(obj);
@@ -33,7 +29,7 @@ namespace MonoDragons.Core.Entities
 
         public static void Destroy(IEnumerable<GameObject> objs)
         {
-            Objs.Remove(objs);
+            objs.ForEach(Destroy);
         }
     }
 }
