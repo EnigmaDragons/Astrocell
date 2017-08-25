@@ -19,7 +19,7 @@ namespace MonoDragons.Core.Render
 
         private float GetRotation(GameObject t)
         {
-            return t.Transform.Rotation.Value * .017453292519f;
+            return t.Transform.Rotation.Degrees * .017453292519f;
         }
 
         private float GetDepth(GameObject t)

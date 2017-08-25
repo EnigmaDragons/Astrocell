@@ -42,7 +42,7 @@ namespace MonoDragons.Core.Graphics
             if (_borderColors == null || _borderColors.Count == 0) throw new ArgumentException("Must define at least one border color (up to three).");
             if (_borderThickness + _borderRadius > _height / 2 || _borderThickness + _borderRadius > _width / 2) throw new ArgumentException("Border will be too thick and/or rounded to fit on the texture.");
 
-            Texture2D texture = new Texture2D(Hack.TheGame.GraphicsDevice, _width, _height, false, SurfaceFormat.Color);
+            Texture2D texture = new Texture2D(GameInstance.TheGame.GraphicsDevice, _width, _height, false, SurfaceFormat.Color);
             var color = new Color[texture.Width * texture.Height];
             for (var x = 0; x < texture.Width; x++)
                 for (var y = 0; y < _height; y++)

@@ -17,7 +17,12 @@ namespace Astrocell
         [STAThread]
         public static void Main()
         {
-            using (var game = new NeedlesslyComplexMainGame("Astrocell", "Fire Cave", new Display(1600, 900, false, 1), CreateSceneFactory(), CreateController()))
+            using (var game = new NeedlesslyComplexMainGame(
+                "Astrocell", 
+                "DisposeScene", 
+                new Display(1600, 900, false, 1), 
+                CreateSceneFactory(), 
+                CreateController()))
             {
                 game.Run();
             }
@@ -33,10 +38,10 @@ namespace Astrocell
 
         private static SceneFactory CreateSceneFactory()
         {
-            return new SceneFactory(
-                new Dictionary<string, Func<IScene>>
+            return new SceneFactory(new Dictionary<string, Func<IScene>>
                 {
-                    { "Fire Cave", () => new FireCave() }
+                    { "Fire Cave", () => new FireCave() },
+                    { "DisposeScene", () => new EcsDisposeScene() }
                 });
         }
     }

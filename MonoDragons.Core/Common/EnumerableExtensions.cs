@@ -53,5 +53,31 @@ namespace MonoDragons.Core.Common
             foreach (var item in items)
                 action(item.Value);
         }
+
+        public static int DecrementCounter<TKey>(this IDictionary<TKey, int> counters, TKey key)
+        {
+            if (!counters.ContainsKey(key))
+                counters[key] = 0;
+            counters[key] = Math.Max(0, counters[key] - 1);
+            return counters[key];
+        }
+
+        public static int IncrementCounter<TKey>(this IDictionary<TKey, int> counters, TKey key)
+        {
+            if (!counters.ContainsKey(key))
+                counters[key] = 0;
+            counters[key] = counters[key] + 1;
+            return counters[key];
+        }
+
+        public static IList<TKey> KeysWhere<TKey, TValue>(this IDictionary<TKey, TValue> items, 
+            Predicate<KeyValuePair<TKey, TValue>> condition)
+        {
+            var results = new List<TKey>();
+            foreach (var item in items)
+                if (condition(item))
+                    results.Add(item.Key);
+            return results;
+        }
     }
 }

@@ -9,15 +9,21 @@ namespace MonoDragons.Core.Entities
 {
     public sealed class GameObjects : IEntities
     {
+        private readonly EntityResources _resources;
         private readonly Map<int, GameObject> _entities = new Map<int, GameObject>();
 
         private int _nextId;
 
         public int Count => _entities.Count;
 
+        public GameObjects(EntityResources resources)
+        {
+            _resources = resources;
+        }
+
         public GameObject Create(Transform2 transform)
         {
-            var obj = new GameObject(_nextId++, transform);
+            var obj = new GameObject(_nextId++, transform, _resources);
             _entities.Add(obj.Id, obj);
             return obj;
         }

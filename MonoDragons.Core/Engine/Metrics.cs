@@ -47,6 +47,7 @@ namespace MonoDragons.Core.Engine
             UI.DrawText($"Sub: {World.CurrentEventSubscriptionCount}", new Vector2(0, 120), color);
             UI.DrawText($"Scn: {Resources.CurrentSceneDisposableCount}", new Vector2(0, 160), color);
             UI.DrawText($"Ent: {Entity.Count}", new Vector2(0, 200), color);
+            UI.DrawText($"Res: {Entity.ResourceCount}", new Vector2(0, 240), color);
             _framesThisSecond++;
 #endif
         }
@@ -65,11 +66,6 @@ namespace MonoDragons.Core.Engine
             _frameRateTroubleCount = _framesPerSecond < 12 ? _frameRateTroubleCount + 1 : 0;
             if (_framesPerSecond < 12)
                 Debug.WriteLine("Framerate Warning: Framerate = " + _framesPerSecond);
-            if (_frameRateTroubleCount > 4)
-            {
-                Debug.WriteLine("Framerate Exception: Exiting Program.");
-                //Hack.TheGame.Exit();
-            }
         }
     }
 }

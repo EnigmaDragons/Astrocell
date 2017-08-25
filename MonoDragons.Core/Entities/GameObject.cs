@@ -7,14 +7,16 @@ namespace MonoDragons.Core.Entities
 {
     public sealed class GameObject
     {
+        private readonly EntityResources _resources;
         private readonly Map<Type, EntityComponent> _components = new Map<Type, EntityComponent>();
 
         public int Id { get; }
         public bool IsEnabled { get; set; }
         public Transform2 Transform { get; }
 
-        internal GameObject(int id, Transform2 transform)
+        internal GameObject(int id, Transform2 transform, EntityResources resources)
         {
+            _resources = resources;
             Id = id;
             IsEnabled = true;
             Transform = transform;
@@ -28,6 +30,12 @@ namespace MonoDragons.Core.Entities
         public override int GetHashCode()
         {
             return Id;
+        }
+
+        public GameObject Add(Func<GameObject, EntityResources, EntityComponent> componentBuilder)
+        {
+            Add(componentBuilder(this, _resources));
+            return this;
         }
 
         public GameObject Add(Func<GameObject, EntityComponent> componentBuilder)
@@ -74,6 +82,7 @@ namespace MonoDragons.Core.Entities
         {
             _components.ForEach(x => x.Release());
             _components.Clear();
+            _resources.Release(this);
         }
     }
 }

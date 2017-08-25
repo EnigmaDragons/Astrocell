@@ -17,7 +17,7 @@ namespace MonoDragons.Core.Render
                 var wrapped = new WrappingText(() => spriteFont, () => o.Transform.WithPadding(t.Margin).ToRectangle().Width).Wrap(t.Text());
                 var size = spriteFont.MeasureString(wrapped);
                 sprites.DrawString(spriteFont, wrapped, _alignPositions[t.Align](o.Transform.WithPadding(t.Margin).ToRectangle(), size), t.Color,
-                    o.Transform.Rotation.Value * .017453292519f, Vector2.Zero, 1, SpriteEffects.None, 1);
+                    o.Transform.Rotation.Degrees * .017453292519f, Vector2.Zero, 1, SpriteEffects.None, 1);
             });
         }
 

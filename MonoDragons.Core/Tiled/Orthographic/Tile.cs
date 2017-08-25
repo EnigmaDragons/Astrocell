@@ -29,7 +29,7 @@ namespace MonoDragons.Core.Tiled.Orthographic
             {
                 if (_texture == null)
                     using (var fileStream = new FileStream(_texturePath, FileMode.Open))
-                        _texture = Texture2D.FromStream(Hack.TheGame.GraphicsDevice, fileStream);
+                        _texture = Texture2D.FromStream(GameInstance.TheGame.GraphicsDevice, fileStream);
                 return _texture;
             }
         }

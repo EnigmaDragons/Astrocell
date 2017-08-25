@@ -15,7 +15,6 @@ using System;
 using MonoDragons.Core.Navigation;
 using MonoDragons.Core.Render;
 using MonoDragons.Core.Scenes;
-using MonoDragons.Core.UserInterface.Graphs;
 
 namespace MonoDragons.Core.Engine
 {
@@ -92,7 +91,7 @@ namespace MonoDragons.Core.Engine
             Resources.Put(texture.GetHashCode().ToString(), texture);
             var ScaledRect = ScaleRectangle(rectPosition);
             _spriteBatch.Draw(texture, null, ScaledRect, null, new Vector2(ScaledRect.Width / 2, ScaledRect.Height / 2),
-                rotation.Value * .017453292519f, new Vector2(1, 1));
+                rotation.Degrees * .017453292519f, new Vector2(1, 1));
         }
 
         //[DebuggerStepThrough]
@@ -134,19 +133,14 @@ namespace MonoDragons.Core.Engine
         public static void Draw(string name, Transform2 transform)
         {
             var resource = Resources.Load<Texture2D>(name);
-            var x = transform.Rotation.Value;
+            var x = transform.Rotation.Degrees;
             _spriteBatch.Draw(resource, null, ScaleRectangle(transform.ToRectangle()), null, new Vector2(resource.Width / 2, resource.Height / 2),
-                transform.Rotation.Value * .017453292519f, new Vector2(1, 1));
+                transform.Rotation.Degrees * .017453292519f, new Vector2(1, 1));
         }
 
         public static void Draw(Texture2D texture, Transform2 transform)
         {
             Draw(texture, transform.ToRectangle(), transform.Rotation);
-        }
-
-        public static void DrawLine(Texture2D texture, Vector2 start, Vector2 end)
-        {
-            _spriteBatch.DrawLine(texture, start, end);
         }
 
         public static void Darken()

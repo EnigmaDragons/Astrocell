@@ -17,31 +17,33 @@ namespace MonoDragons.Core.PhysicsEngine
         public static Rotation2 DownLeft = new Rotation2(215);
         public static Rotation2 DownRight = new Rotation2(135);
 
-        public float Value { get; }
+        public float Degrees { get; }
+        public float Radians { get; }
 
-        public Rotation2(float value)
+        public Rotation2(float degrees)
         {
-            Value = value % 360;
+            Degrees = degrees % 360;
+            Radians = Degrees * .017453292519f;
         }
 
         public override bool Equals(object obj)
         {
-            return Math.Abs(Value - ((Rotation2)obj).Value) < 0.01;
+            return Math.Abs(Degrees - ((Rotation2)obj).Degrees) < 0.01;
         }
 
         public override int GetHashCode()
         {
-            return (int)Value;
+            return (int)Degrees;
         }
 
         public override string ToString()
         {
-            return Value.ToString();
+            return Degrees.ToString();
         }
 
         public static Rotation2 operator +(Rotation2 r1, Rotation2 r2)
         {
-            var newValue = r1.Value + r2.Value;
+            var newValue = r1.Degrees + r2.Degrees;
             while (newValue >= 360)
                 newValue -= 360;
             return new Rotation2(newValue);
@@ -50,29 +52,29 @@ namespace MonoDragons.Core.PhysicsEngine
         public Direction ToDirection()
         {
             var hDir = HorizontalDirection.None;
-            if (0 < Value && Value < 180)
+            if (0 < Degrees && Degrees < 180)
                 hDir = HorizontalDirection.Right;
-            if (180 < Value && Value < 360)
+            if (180 < Degrees && Degrees < 360)
                 hDir = HorizontalDirection.Left;
             var vDir = VerticalDirection.None;
-            if (90 < Value && Value < 270)
+            if (90 < Degrees && Degrees < 270)
                 vDir = VerticalDirection.Down;
-            if (270 < Value || Value < 90)
+            if (270 < Degrees || Degrees < 90)
                 vDir = VerticalDirection.Up;
             return new Direction(hDir, vDir);
         }
 
         public static float Difference(Rotation2 r1, Rotation2 r2)
         {
-            var higher = Math.Max(r1.Value, r2.Value);
-            var lower = Math.Min(r1.Value, r2.Value);
+            var higher = Math.Max(r1.Degrees, r2.Degrees);
+            var lower = Math.Min(r1.Degrees, r2.Degrees);
             return higher - lower;
         }
 
         public static Rotation2 Lerp(Rotation2 r1, Rotation2 r2, float amount)
         {
             var degrees = Difference(r1, r2);
-            return new Rotation2(r1.Value + (amount * degrees));
+            return new Rotation2(r1.Degrees + (amount * degrees));
         }
     }
 }

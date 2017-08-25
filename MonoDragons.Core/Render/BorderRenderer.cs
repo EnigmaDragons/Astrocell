@@ -11,7 +11,7 @@ namespace MonoDragons.Core.Render
         {
             entities.With<BorderTexture>((o, b) => {
                 Resources.Put(b.Value.GetHashCode().ToString(), b.Value);
-                sprites.Draw(b.Value, null, o.Transform.ToRectangle(), null, null, o.Transform.Rotation.Value * .017453292519f, new Vector2(1, 1));
+                sprites.Draw(b.Value, null, o.Transform.ToRectangle(), null, null, o.Transform.Rotation.Degrees * .017453292519f, new Vector2(1, 1));
             });
         }
     }

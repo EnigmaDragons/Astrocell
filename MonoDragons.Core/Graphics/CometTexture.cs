@@ -39,7 +39,7 @@ namespace MonoDragons.Core.Graphics
             var height = _isHorizontal ? 1 : length;
             var width = _isHorizontal ? length : 1;
 
-            var texture = new Texture2D(Hack.TheGame.GraphicsDevice, width, height);
+            var texture = new Texture2D(GameInstance.TheGame.GraphicsDevice, width, height);
             texture.SetData(data);
             if (CachingRules.CacheTextures)
                 CachedTextures.Add(this, texture);
