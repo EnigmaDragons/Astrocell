@@ -11,8 +11,6 @@
         int ActionPoints { get; }
         int StartingEnergy { get; }
         int StartingCards { get; }
-        float CriticalChance { get; }
-        float CriticalDamageFactor { get; }
     }
     
     public struct ExtrinsicStatsFromBaseStats : ICharExtrinsicStats
@@ -29,8 +27,6 @@
         public int ActionPoints => 1 + _char.Agility / 6;
         public int StartingEnergy => _char.Willpower / 6;
         public int EnergyGain => _char.Willpower / 6;
-        public float CriticalChance => (_char.Agility + _char.Intelligence) / 6f;
-        public float CriticalDamageFactor => (_char.Agility + _char.Intelligence) / 10f;
 
         public ExtrinsicStatsFromBaseStats(ICharIntrinsicStats charStats)
         {
@@ -52,8 +48,6 @@
         public int ActionPoints => _stats1.ActionPoints + _stats2.ActionPoints;
         public int StartingEnergy => _stats1.StartingEnergy + _stats2.StartingEnergy;
         public int StartingCards => _stats1.StartingCards + _stats2.StartingCards;
-        public float CriticalChance => _stats1.CriticalChance + _stats2.CriticalChance;
-        public float CriticalDamageFactor => _stats1.CriticalDamageFactor * _stats2.CriticalDamageFactor;
 
         public CombinedExtrinsicStats(ICharExtrinsicStats stats1, ICharExtrinsicStats stats2)
         {
@@ -73,7 +67,5 @@
         public int ActionPoints { get; set; }
         public int StartingEnergy { get; set; }
         public int StartingCards { get; set; }
-        public float CriticalChance { get; set; }
-        public float CriticalDamageFactor { get; set; }
     }
 }

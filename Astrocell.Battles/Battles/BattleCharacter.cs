@@ -84,6 +84,12 @@ namespace Astrocell.Battles.Battles
             _log.Write($"{Name} suffers {dmgAmount} magic damage.");
         }
 
+        public void Heal(int amount)
+        {
+            ChangeHp(amount);
+            _log.Write($"{Name} heals {amount} HP.");
+        }
+
         public void EndTurn()
         {
         }
@@ -94,7 +100,9 @@ namespace Astrocell.Battles.Battles
                 return _stats.Attack;
             if (stat == EffectStat.Magic)
                 return _stats.Magic;
-            return 0;
+            if (stat == EffectStat.Toughness)
+                return _stats.Toughness;
+            throw new KeyNotFoundException($"Unknown EffectStat {stat}");
         }
 
         private bool CanAfford(Card x)

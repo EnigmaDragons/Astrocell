@@ -47,7 +47,5 @@ namespace Astrocell.Battles.Characters
         public int ActionPoints => _extrinsic.ActionPoints;
         public int StartingEnergy => _extrinsic.StartingEnergy;
         public int StartingCards => _extrinsic.StartingCards;
-        public float CriticalChance => _extrinsic.CriticalChance;
-        public float CriticalDamageFactor => _extrinsic.CriticalDamageFactor;
     }
 }

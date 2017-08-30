@@ -27,11 +27,6 @@ namespace Astrocell.Battles.Battles
             return new Battle(BattleLog.Instance, gamer, enemy, characters.OrderByDescending(x => x.Initiative).ToList());
         }
 
-        public static Battle Create(ILog log, IPlayer gamer, IPlayer enemy, params BattleCharacter[] characters)
-        {
-            return new Battle(log, gamer, enemy, characters.OrderByDescending(x => x.Initiative).ToList());
-        }
-
         private Battle(ILog log, IPlayer gamer, IPlayer enemy, IList<BattleCharacter> characters)
         {
             _log = log;
