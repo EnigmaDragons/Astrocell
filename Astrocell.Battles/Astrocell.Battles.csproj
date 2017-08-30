@@ -89,6 +89,7 @@
     <Compile Include="Equipments\Equipment.cs" />
     <Compile Include="Equipments\IEquipment.cs" />
     <Compile Include="LoopingSequence.cs" />
+    <Compile Include="Players\AiPlayer.cs" />
     <Compile Include="Players\DeadPlayer.cs" />
     <Compile Include="Players\FirstValidCardPlayer.cs" />
     <Compile Include="Players\IPlayer.cs" />

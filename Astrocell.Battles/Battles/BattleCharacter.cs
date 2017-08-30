@@ -26,6 +26,7 @@ namespace Astrocell.Battles.Battles
         public int CurrentHp => _stats.CurrentHp;
         public int CurrentEnergy => _stats.CurrentEnergy;
         public int CurrentActionPoints => _stats.CurrentActionPoints;
+        public float MissingHpPercent => _stats[BattleStat.MaxHp] - CurrentHp / (float)_stats[BattleStat.MaxHp];
 
         public static BattleCharacter Init(BattleSide side, CharacterSheet charSheet)
         {
