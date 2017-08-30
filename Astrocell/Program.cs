@@ -6,6 +6,7 @@ using MonoDragons.Core.Common;
 using MonoDragons.Core.Engine;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.Inputs;
+using MonoDragons.Core.KeyboardControls;
 using MonoDragons.Core.Render;
 using MonoDragons.Core.Scenes;
 using MonoDragons.Core.Tiled;
@@ -19,12 +20,13 @@ namespace Astrocell
         public static void Main()
         {
             using (var game = new NeedlesslyComplexMainGame(
-                "Astrocell", 
-                "DisposeScene", 
+                "Astrocell",
+                "Fire Cave", 
                 new Display(1600, 900, false, 1), 
                 CreateSceneFactory(), 
                 CreateController()))
             {
+                Entity.Register(new TopDownController());
                 game.Run();
             }
         }

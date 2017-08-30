@@ -31,7 +31,7 @@ namespace MonoDragons.Core.Tiled.TmxLoading
         {
             var imageSource = new XValue(image, "source").AsString();
             var tmxDirectory = Path.GetDirectoryName(tmxPath);
-            return Path.Combine("Content", tmxDirectory, imageSource);
+            return Path.Combine(tmxDirectory, imageSource);
         }
     }
 }

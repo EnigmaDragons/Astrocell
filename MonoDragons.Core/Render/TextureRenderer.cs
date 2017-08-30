@@ -9,8 +9,8 @@ namespace MonoDragons.Core.Render
         public void Draw(IEntities entities, SpriteBatch sprites)
         {
             entities.With<Texture>((o, t) => 
-                sprites.Draw(t.Value, o.Transform.ToRectangle(), null, Color.White, 
-                    o.Transform.Rotation.Radians, Vector2.Zero, SpriteEffects.None, o.Transform.ZIndex));
+                sprites.Draw(t.Value, o.Transform.ToRectangle(), t.SourceRect, Color.White, 
+                    o.Transform.Rotation.Radians, Vector2.Zero, SpriteEffects.None, o.Transform.ZIndex.AsDepth()));
         }
     }
 }
