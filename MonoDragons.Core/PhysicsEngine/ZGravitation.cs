@@ -20,9 +20,9 @@ namespace MonoDragons.Core.PhysicsEngine
             var minZ = min.Value;
             var currentZ = obj.Transform.ZIndex;
             var grav = obj.Get<ZGravity>();
-            if (grav.IsEnabled && currentZ > minZ)
-                obj.Transform.ZIndex = Math.Max(minZ, currentZ - grav.Acceleration);
-            min.Value = obj.Transform.ZIndex + 1;
+            if (grav.IsEnabled && currentZ.Value > minZ)
+                obj.Transform.ZIndex = new ZIndex(Math.Max(minZ, currentZ.Value - grav.Acceleration));
+            min.Value = obj.Transform.ZIndex.Value + 1;
         }
 
         private class MinHeight

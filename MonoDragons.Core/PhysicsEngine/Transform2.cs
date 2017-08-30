@@ -11,14 +11,17 @@ namespace MonoDragons.Core.PhysicsEngine
         public Rotation2 Rotation { get; set; } = Rotation2.None;
         public float Scale { get; set; } = 1.0f;
         public Size2 Size { get; set; } = Size2.Zero;
-        public int ZIndex { get; set; } = 1;
+        public ZIndex ZIndex { get; set; } = new ZIndex { Value = 1 };
 
         public Transform2()
         {
         }
 
         public Transform2(Rectangle rectangle)
-            : this(new Vector2(rectangle.Location.X, rectangle.Location.Y), new Size2(rectangle.Size.X, rectangle.Size.Y)) { }
+            : this(rectangle, new ZIndex()) { }
+
+        public Transform2(Rectangle rectangle, ZIndex zIndex) 
+            : this(new Vector2(rectangle.Location.X, rectangle.Location.Y), Rotation2.Default, new Size2(rectangle.Size.X, rectangle.Size.Y), 1, zIndex) {}
 
         public Transform2(float scale)
             : this(Vector2.Zero, Rotation2.Default, Size2.Zero, scale) { }
@@ -42,9 +45,12 @@ namespace MonoDragons.Core.PhysicsEngine
             : this(location, Rotation2.Default, size, 1) { }
 
         public Transform2(Vector2 location, Rotation2 rotation, Size2 size, float scale)
-            : this(location, rotation, size, scale, 0) { }
+            : this(location, rotation, size, scale, new ZIndex()) { }
 
         public Transform2(Vector2 location, Rotation2 rotation, Size2 size, float scale, int zIndex)
+            : this(location, rotation, size, scale, new ZIndex(zIndex)) { }
+
+        public Transform2(Vector2 location, Rotation2 rotation, Size2 size, float scale, ZIndex zIndex)
         {
             Location = location;
             Rotation = rotation;
@@ -52,6 +58,8 @@ namespace MonoDragons.Core.PhysicsEngine
             Scale = scale;
             ZIndex = zIndex;
         }
+
+
 
         public Vector2 Center
         {
@@ -125,7 +133,7 @@ namespace MonoDragons.Core.PhysicsEngine
                 Rotation2.Lerp(t1.Rotation, t2.Rotation, amount),
                 Size2.Lerp(t1.Size, t2.Size, amount),
                 MathHelper.Lerp(t1.Scale, t2.Scale, amount),
-                Convert.ToInt32(MathHelper.Lerp(t1.ZIndex, t2.ZIndex, amount)));
+                Convert.ToInt32(MathHelper.Lerp(t1.ZIndex.Value, t2.ZIndex.Value, amount)));
 
         }
 
