@@ -12,9 +12,9 @@ namespace Astrocell.Battles.Effects
             var statAmount = source.GetStat(effect.Stat);
             var amount = Multiply(statAmount, effect.Factor);
 
-            if (effect.Type == EffectType.Damage && effect.Stat == EffectStat.Attack)
+            if (effect.Type == EffectType.Damage && effect.Stat == BattleStat.Attack)
                 return new PhysicalDamageEffect(amount);
-            if (effect.Type == EffectType.Damage && effect.Stat == EffectStat.Magic)
+            if (effect.Type == EffectType.Damage && effect.Stat == BattleStat.Magic)
                 return new MagicDamageEffect(amount);
             if (effect.Type == EffectType.Heal)
                 return new HealEffect(amount);

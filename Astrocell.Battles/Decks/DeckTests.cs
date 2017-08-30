@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MonoDragons.Core.Common;
 using MonoDragons.Core.Engine;
 
 namespace Astrocell.Battles.Decks

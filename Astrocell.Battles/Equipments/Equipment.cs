@@ -1,9 +1,14 @@
-﻿using MonoDragons.Core.IO;
+﻿using Astrocell.Battles.Characters;
+using MonoDragons.Core.Common;
+using MonoDragons.Core.Common.Reflection;
+using MonoDragons.Core.IO;
 
 namespace Astrocell.Battles.Equipments
 {
     public struct Equipment : IEquipment
     {
+        public int this[Extrinsic stat] => this.GetPropertyValue<int>(stat.ToString()).Value;
+
         public int MaxHp { get; set; }
         public int Attack { get; set; }
         public int Magic { get; set; }
@@ -13,8 +18,6 @@ namespace Astrocell.Battles.Equipments
         public int ActionPoints { get; set; }
         public int StartingEnergy { get; set; }
         public int StartingCards { get; set; }
-        public float CriticalChance { get; set; }
-        public float CriticalDamageFactor { get; set; }
 
         public static Equipment Load(string name)
         {

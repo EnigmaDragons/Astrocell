@@ -58,12 +58,13 @@
     <Compile Include="Battles\Battle.cs" />
     <Compile Include="Battles\BattleCharacter.cs" />
     <Compile Include="Battles\BattleCharacters.cs" />
+    <Compile Include="Battles\BattleCharacterStats.cs" />
     <Compile Include="Battles\BattleHand.cs" />
     <Compile Include="Battles\BattleLog.cs" />
     <Compile Include="Battles\BattleSimulator.cs" />
     <Compile Include="Battles\BattleTests.cs" />
     <Compile Include="Battles\BattleSide.cs" />
-    <Compile Include="Characters\ProceduralStartingStatGenerator.cs" />
+    <Compile Include="Characters\ReflectionStat.cs" />
     <Compile Include="ContentTests.cs" />
     <Compile Include="Decks\DeckDefinition.cs" />
     <Compile Include="Decks\DeckTests.cs" />

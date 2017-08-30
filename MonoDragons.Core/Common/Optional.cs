@@ -6,13 +6,13 @@ namespace MonoDragons.Core.Common
     {
         private readonly T _value;
 
-        public bool HasValue { get; }
+        public bool IsPresent { get; }
 
         public T Value
         {
             get
             {
-                if (!HasValue)
+                if (!IsPresent)
                     throw new InvalidOperationException($"Optional {typeof(T).Name} has no value.");
                 return _value;
             }
@@ -20,33 +20,33 @@ namespace MonoDragons.Core.Common
 
         public Optional()
         {
-            HasValue = false;   
+            IsPresent = false;
         }
 
         public Optional(T value)
         {
             _value = value;
-            HasValue = value != null;
+            IsPresent = value != null;
         }
 
         public override string ToString()
         {
-            return HasValue ? _value.ToString() : "Nothing";
+            return IsPresent ? _value.ToString() : "Nothing";
         }
 
         public bool IsTrue(Predicate<T> condition)
         {
-            return HasValue && condition(_value);
+            return IsPresent && condition(_value);
         }
 
         public bool IsFalse(Predicate<T> condition)
         {
-            return HasValue && !condition(_value);
+            return IsPresent && !condition(_value);
         }
 
         public void IfPresent(Action<T> action)
         {
-            if (HasValue)
+            if (IsPresent)
                 action(_value);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Astrocell.Battles.Battles;
 using MonoDragons.Core.IO;
 
 namespace Astrocell.Battles.Decks
@@ -26,18 +27,10 @@ namespace Astrocell.Battles.Decks
     {
         public EffectTarget Target { get; set; }
         public EffectType Type { get; set; }
-        public EffectStat Stat { get; set; }
+        public BattleStat Stat { get; set; }
         public StatusEffect Status { get; set; }
         public int Duration { get; set; }
         public float Factor { get; set; }
-    }
-
-    public enum EffectStat
-    {
-        None,
-        Magic,
-        Attack,
-        Toughness,
     }
 
     public enum EffectTarget
