@@ -7,8 +7,7 @@ namespace Astrocell.Battles.Effects
     public enum StatusEffect
     {
         None,
-        Stunned,
-        Enraged,
+        Stunned
     }
 
     public static class CardStatusEffectConverter
@@ -22,8 +21,6 @@ namespace Astrocell.Battles.Effects
         {
             if (effect == CardStatusEffect.Stun)
                 return StatusEffect.Stunned;
-            if (effect == CardStatusEffect.Enrage)
-                return StatusEffect.Enraged;
             if (effect == CardStatusEffect.None)
                 return StatusEffect.None;
             throw new KeyNotFoundException($"No Status Effect found for {effect}");

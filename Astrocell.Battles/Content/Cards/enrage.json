@@ -3,9 +3,8 @@
     "ActionPointCost": 2,
     "Effects": [ {
             "Target": "Self",
-            "Type": "Status",
+            "Type": "Buff",
             "Stat": "Attack",
-            "Status": "Enrage",
             "Duration": 5,
             "Factor": 1.5
         }   

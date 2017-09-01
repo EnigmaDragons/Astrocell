@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Astrocell.Battles.Characters;
+using Astrocell.Battles.Effects;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Common.Reflection;
 
@@ -33,10 +35,10 @@ namespace Astrocell.Battles.Battles
 
     public sealed class BattleCharacterStats
     {
-        public int this[BattleStat stat] => GetStat(stat.ToString());
+        private readonly Store<IBattleCharacterStats> _stats = new Store<IBattleCharacterStats>();
+        private readonly IList<DurationBattleCharacterStatsMod> _mods = new List<DurationBattleCharacterStatsMod>();
 
-        private readonly ICharStats _base;
-        private readonly Store<ICharStats> _stats = new Store<ICharStats>();
+        public int this[BattleStat stat] => GetStat(stat);
 
         public int Initiative => this[BattleStat.Agility];
         public int CurrentHp { get; set; }
@@ -45,8 +47,7 @@ namespace Astrocell.Battles.Battles
 
         public BattleCharacterStats(ICharStats stats)
         {
-            _base = stats;
-            _stats.Put(stats);
+            _stats.Put(new CharStatsAsBattleStats(stats));
             CurrentHp = this[BattleStat.MaxHp];
             CurrentEnergy = this[BattleStat.StartingEnergy];
         }
@@ -60,13 +61,80 @@ namespace Astrocell.Battles.Battles
                 CurrentHp = 0;
         }
 
-        private int GetStat(string statName)
+        public void ApplyBuff(BattleStat stat, float factor, int duration)
         {
-            if (Enum.GetNames(typeof(Intrinsic)).Any(x => x.Equals(statName)))
-                return _stats.Get()[(Intrinsic)Enum.Parse(typeof(Intrinsic), statName)];
-            if (Enum.GetNames(typeof(Extrinsic)).Any(x => x.Equals(statName)))
-                return _stats.Get()[(Extrinsic)Enum.Parse(typeof(Extrinsic), statName)];
-            return this.GetPropertyValue<int>(statName).Value;
+            var mod = new DurationBattleCharacterStatsMod(_stats.Get(), stat, factor, duration);
+            _mods.Add(mod);
+            _stats.Put(mod);
+        }
+
+        public void EndTurn()
+        {
+            _mods.ForEach(x => x.EndTurn());
+        }
+
+        private int GetStat(BattleStat stat)
+        {
+            var statName = stat.ToString();
+            return statName.MatchesOneOf<Extrinsic>() || statName.MatchesOneOf<Intrinsic>()
+                ? _stats.Get()[stat]
+                : this.GetPropertyValue<int>(statName).Value;
+        }
+
+        private interface IBattleCharacterStats
+        {
+            int this[BattleStat stat] { get; }
+        }
+
+        private struct CharStatsAsBattleStats : IBattleCharacterStats
+        {
+            private readonly ICharStats _stats;
+
+            public int this[BattleStat stat] => GetStat(stat.ToString());
+
+            public CharStatsAsBattleStats(ICharStats stats)
+            {
+                _stats = stats;
+            }
+
+            private int GetStat(string statName)
+            {
+                if (Enum.GetNames(typeof(Intrinsic)).Any(x => x.Equals(statName)))
+                    return _stats[(Intrinsic)Enum.Parse(typeof(Intrinsic), statName)];
+                if (Enum.GetNames(typeof(Extrinsic)).Any(x => x.Equals(statName)))
+                    return _stats[(Extrinsic)Enum.Parse(typeof(Extrinsic), statName)];
+                return this.GetPropertyValue<int>(statName).Value;
+            }
+        }
+
+        private sealed class DurationBattleCharacterStatsMod : IBattleCharacterStats
+        {
+            private readonly IBattleCharacterStats _base;
+            private readonly BattleStat _stat;
+            private readonly float _factor;
+            private int _remainingTurnsActive;
+
+            public int this[BattleStat stat] => _base[stat].StatMultiplyBy(FactorFor(stat));
+
+            public DurationBattleCharacterStatsMod(IBattleCharacterStats baseStats, BattleStat stat, float factor, int duration)
+            {
+                _base = baseStats;
+                _stat = stat;
+                _factor = factor;
+                _remainingTurnsActive = duration;
+            }
+
+            private float FactorFor(BattleStat stat)
+            {
+                return _remainingTurnsActive > 0 && stat == _stat
+                    ? _factor
+                    : 1.0f;
+            }
+
+            public void EndTurn()
+            {
+                _remainingTurnsActive = Math.Max(0, _remainingTurnsActive - 1);
+            }
         }
     }
 }

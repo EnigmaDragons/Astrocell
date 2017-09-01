@@ -69,8 +69,7 @@ namespace Astrocell.Battles.Battles
                 _log.Write($"{Name} gains {card.EnergyGain} Energy.");
             _stats.CurrentEnergy += card.EnergyGain;
         }
-
-        // TODO: This design for applying effects can't be right.
+        
         public void TakePhysicalDamage(int amount)
         {
             var dmgAmount = amount - _stats[BattleStat.Defense];
@@ -91,6 +90,15 @@ namespace Astrocell.Battles.Battles
             _log.Write($"{Name} heals {amount} HP.");
         }
 
+        public void ApplyBuff(BattleStat stat, float factor, int duration)
+        {
+            if (stat == BattleStat.None)
+                return;
+
+            _stats.ApplyBuff(stat, factor, duration);
+            _log.Write($"{Name} has {stat} increased by {factor:0.0}x for {duration} turns.");
+        }
+
         public void ApplyStatusEffect(StatusEffect effect, int duration)
         {
             if (effect == StatusEffect.None)
@@ -102,6 +110,7 @@ namespace Astrocell.Battles.Battles
 
         public void EndTurn()
         {
+            _stats.EndTurn();
             _effects.EndTurn();
         }
 

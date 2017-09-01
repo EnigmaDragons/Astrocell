@@ -13,30 +13,25 @@ namespace Astrocell.Battles.Effects
             var battleEffect = Create(src, cardEffect);
             targets.ForEach(x => battleEffect.ApplyTo(x));
         }
-
-        //TODO: This is the wrong way to solve this
-        public static IBattleEffect Create(BattleCharacter source, CardEffect effect)
+        
+        public static IBattleEffect Create(BattleCharacter src, CardEffect e)
         {
-            var effects = new List<IBattleEffect>();
-            var statAmount = source.GetStat(effect.Stat);
-            var amount = Multiply(statAmount, effect.Factor);
+            var amount = src.GetStat(e.Stat).StatMultiplyBy(e.Factor);
 
-            if (effect.Type == EffectType.Damage && effect.Stat == BattleStat.Attack)
-                effects.Add(new PhysicalDamageEffect(amount));
-            if (effect.Type == EffectType.Damage && effect.Stat == BattleStat.Magic)
-                effects.Add(new MagicDamageEffect(amount));
-            if (effect.Type == EffectType.Heal)
-                effects.Add(new HealEffect(amount));
-            if (effect.Status != CardStatusEffect.None)
-                effects.Add(new DurationStatusEffect(effect.Status.ToStatusEffect(), effect.Duration));
-            if (effects.None())
-                effects.Add(WithLogging(x => "No/Unknown Effect", new NoEffect()));
-            return new CompositeEffect(effects);
-        }
-
-        private static int Multiply(int statAmount, float factor)
-        {
-            return Convert.ToInt32(Math.Ceiling(statAmount * factor));
+            var fx = new List<IBattleEffect>();
+            if (e.Type == EffectType.Damage && e.Stat == BattleStat.Attack)
+                fx.Add(new PhysicalDamageEffect(amount));
+            if (e.Type == EffectType.Damage && e.Stat == BattleStat.Magic)
+                fx.Add(new MagicDamageEffect(amount));
+            if (e.Type == EffectType.Heal)
+                fx.Add(new HealEffect(amount));
+            if (e.Status != CardStatusEffect.None)
+                fx.Add(new DurationStatusEffect(e.Status.ToStatusEffect(), e.Duration));
+            if (e.Type == EffectType.Buff)
+                fx.Add(new DurationBuffEffect(e.Stat, e.Factor, e.Duration));
+            if (fx.None())
+                fx.Add(WithLogging(x => "No/Unknown Effect", new NoEffect()));
+            return new CompositeEffect(fx);
         }
 
         private static IBattleEffect WithLogging(Func<BattleCharacter, string> description, IBattleEffect fx)

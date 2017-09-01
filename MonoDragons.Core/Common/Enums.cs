@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace MonoDragons.Core.Common
@@ -21,6 +22,12 @@ namespace MonoDragons.Core.Common
             where T : struct, IConvertible
         {
             Values<T>(typeof(T)).ForEach(enumAction);
+        }
+
+        public static bool MatchesOneOf<T>(this string value)
+            where T : struct, IConvertible
+        {
+            return Enum.GetNames(typeof(T)).Any(x => x.Equals(value));
         }
     }
 }

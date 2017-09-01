@@ -47,13 +47,13 @@ namespace Astrocell.Battles.Decks
         None,
         Damage,
         Heal,
-        Status
+        Status,
+        Buff,
     }
 
     public enum CardStatusEffect
     {
         None,
-        Enrage,
         Stun,
     }
 }

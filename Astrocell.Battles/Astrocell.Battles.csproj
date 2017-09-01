@@ -69,10 +69,12 @@
     <Compile Include="ContentTests.cs" />
     <Compile Include="Decks\DeckDefinition.cs" />
     <Compile Include="Decks\DeckTests.cs" />
+    <Compile Include="Effects\BuffEffect.cs" />
     <Compile Include="Effects\CompositeEffect.cs" />
     <Compile Include="Effects\DurationStatusEffect.cs" />
     <Compile Include="Effects\HealEffect.cs" />
     <Compile Include="Effects\MagicDamageEffect.cs" />
+    <Compile Include="Effects\StatMath.cs" />
     <Compile Include="Effects\StatusEffect.cs" />
     <Compile Include="Effects\WithLogging.cs" />
     <Compile Include="Characters\CharacterBuilder.cs" />
