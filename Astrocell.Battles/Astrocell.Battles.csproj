@@ -59,6 +59,7 @@
     <Compile Include="Battles\BattleCharacter.cs" />
     <Compile Include="Battles\BattleCharacters.cs" />
     <Compile Include="Battles\BattleCharacterStats.cs" />
+    <Compile Include="Battles\BattleCharacterStatusEffects.cs" />
     <Compile Include="Battles\BattleHand.cs" />
     <Compile Include="Battles\BattleLog.cs" />
     <Compile Include="Battles\BattleSimulator.cs" />
@@ -68,8 +69,11 @@
     <Compile Include="ContentTests.cs" />
     <Compile Include="Decks\DeckDefinition.cs" />
     <Compile Include="Decks\DeckTests.cs" />
+    <Compile Include="Effects\CompositeEffect.cs" />
+    <Compile Include="Effects\DurationStatusEffect.cs" />
     <Compile Include="Effects\HealEffect.cs" />
     <Compile Include="Effects\MagicDamageEffect.cs" />
+    <Compile Include="Effects\StatusEffect.cs" />
     <Compile Include="Effects\WithLogging.cs" />
     <Compile Include="Characters\CharacterBuilder.cs" />
     <Compile Include="Characters\EquipmentSheet.cs" />

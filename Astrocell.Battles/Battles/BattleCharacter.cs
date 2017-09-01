@@ -2,6 +2,7 @@
 using System.Linq;
 using Astrocell.Battles.Characters;
 using Astrocell.Battles.Decks;
+using Astrocell.Battles.Effects;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Logs;
 
@@ -11,10 +12,11 @@ namespace Astrocell.Battles.Battles
     {
         private readonly ILog _log;
         private readonly BattleCharacterStats _stats;
+        private readonly BattleCharacterStatusEffects _effects;
 
         public int Initiative => _stats[BattleStat.Initiative];
         public bool IsConscious => _stats[BattleStat.CurrentHp] > 0;
-        public bool CanAct => IsConscious;
+        public bool CanAct => IsConscious && _effects.CanAct;
         public bool CanPlayACard => CanAct && Hand.Cards.Any(CanAfford);
 
         public string Name { get; }
@@ -39,6 +41,7 @@ namespace Astrocell.Battles.Battles
             Name = name;
             Hand = new BattleHand();
             _stats = new BattleCharacterStats(stats);
+            _effects = new BattleCharacterStatusEffects();
             Loyalty = loyalty;
             Deck = deck;
             DrawCards(_stats[BattleStat.StartingCards]);
@@ -88,8 +91,18 @@ namespace Astrocell.Battles.Battles
             _log.Write($"{Name} heals {amount} HP.");
         }
 
+        public void ApplyStatusEffect(StatusEffect effect, int duration)
+        {
+            if (effect == StatusEffect.None)
+                return;
+
+            _effects.Apply(effect, duration);
+            _log.Write($"{Name} is {effect} for {duration} turns.");
+        }
+
         public void EndTurn()
         {
+            _effects.EndTurn();
         }
 
         public int GetStat(BattleStat stat)

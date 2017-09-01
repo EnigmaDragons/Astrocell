@@ -182,7 +182,7 @@
     <Compile Include="Scenes\SceneContents.cs" />
     <Compile Include="Scenes\SceneFactory.cs" />
     <Compile Include="Text\IWrapText.cs" />
-    <Compile Include="Text\EnumExtensions.cs" />
+    <Compile Include="Common\Enums.cs" />
     <Compile Include="Text\TextAlign.cs" />
     <Compile Include="Text\WrappingText.cs" />
     <Compile Include="Tiled\IntegersInText.cs" />

@@ -17,16 +17,21 @@ namespace Astrocell.Battles.Effects
         //TODO: This is the wrong way to solve this
         public static IBattleEffect Create(BattleCharacter source, CardEffect effect)
         {
+            var effects = new List<IBattleEffect>();
             var statAmount = source.GetStat(effect.Stat);
             var amount = Multiply(statAmount, effect.Factor);
 
             if (effect.Type == EffectType.Damage && effect.Stat == BattleStat.Attack)
-                return new PhysicalDamageEffect(amount);
+                effects.Add(new PhysicalDamageEffect(amount));
             if (effect.Type == EffectType.Damage && effect.Stat == BattleStat.Magic)
-                return new MagicDamageEffect(amount);
+                effects.Add(new MagicDamageEffect(amount));
             if (effect.Type == EffectType.Heal)
-                return new HealEffect(amount);
-            return WithLogging(x => "No/Unknown Effect", new NoEffect());
+                effects.Add(new HealEffect(amount));
+            if (effect.Status != CardStatusEffect.None)
+                effects.Add(new DurationStatusEffect(effect.Status.ToStatusEffect(), effect.Duration));
+            if (effects.None())
+                effects.Add(WithLogging(x => "No/Unknown Effect", new NoEffect()));
+            return new CompositeEffect(effects);
         }
 
         private static int Multiply(int statAmount, float factor)

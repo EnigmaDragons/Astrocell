@@ -28,7 +28,7 @@ namespace Astrocell.Battles.Decks
         public EffectTarget Target { get; set; }
         public EffectType Type { get; set; }
         public BattleStat Stat { get; set; }
-        public StatusEffect Status { get; set; }
+        public CardStatusEffect Status { get; set; }
         public int Duration { get; set; }
         public float Factor { get; set; }
     }
@@ -50,10 +50,10 @@ namespace Astrocell.Battles.Decks
         Status
     }
 
-    public enum StatusEffect
+    public enum CardStatusEffect
     {
         None,
-        Buff,
+        Enrage,
         Stun,
     }
 }

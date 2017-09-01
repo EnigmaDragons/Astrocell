@@ -6,6 +6,11 @@ namespace MonoDragons.Core.Common
 {
     public static class EnumerableExtensions
     {
+        public static bool None<T>(this IEnumerable<T> collection)
+        {
+            return !collection.Any();
+        }
+
         public static IEnumerable<T> Copy<T>(this IEnumerable<T> collection)
         {
             return collection.ToList();

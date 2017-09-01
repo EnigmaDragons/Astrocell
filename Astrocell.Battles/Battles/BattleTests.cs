@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Astrocell.Battles.Characters;
 using Astrocell.Battles.Decks;
 using Astrocell.Battles.Players;
@@ -78,7 +79,8 @@ namespace Astrocell.Battles.Battles
         [TestMethod]
         public void Battle_BruteVersusElectrician_CanResolveBattle()
         {
-            var result = new BattleSimulator().Resolve1V1(Samples.CreateElectrician(), Samples.CreateDumbBrute());
+            Enumerable.Range(0, 10)
+                .ForEach(x => new BattleSimulator().Resolve1V1(Samples.CreateElectrician(), Samples.CreateDumbBrute()));
         }
     }
 }
