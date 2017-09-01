@@ -80,7 +80,7 @@ namespace MonoDragons.Core.Entities
 
         internal void Dispose()
         {
-            _components.ForEach(x => x.Release());
+            _components.ForEach(x => x.Dispose());
             _components.Clear();
             _resources.Release(this);
         }

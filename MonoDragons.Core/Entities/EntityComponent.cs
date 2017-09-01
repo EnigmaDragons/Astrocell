@@ -21,7 +21,7 @@ namespace MonoDragons.Core.Entities
             _parent = parent;
         }
 
-        public void Release()
+        public void Dispose()
         {
             _parent = null;
         }

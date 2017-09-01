@@ -6,24 +6,23 @@ using MonoDragons.Core.Common;
 
 namespace Astrocell.Battles.Players
 {
-    public sealed class AiPlayer : IPlayer
+    public sealed class AIPlayer : IPlayer
     {
-        public CardAction SelectAction(BattleCharacter forCharacter, IList<Card> cards, BattleCharacters allCharacters)
+        public CardAction SelectAction(BattleCharacter src, IList<Card> cards, BattleCharacters allCharacters)
         {
-            var card = SelectCard(forCharacter, cards, allCharacters);
-            var targets = card.Effects.Any()
-                ? SelectTargets(forCharacter, card.Effects[0].Target, allCharacters)
-                : new List<BattleCharacter>();
-            return new CardAction { Source = forCharacter, Card = card, Targets = targets };
+            var card = SelectCard(src, cards, allCharacters);
+            var targettedEffects = card.Effects.Select(x => SelectTargets(x, src, allCharacters)).ToList();
+            return new CardAction { Source = src, Card = card, TargettedEffects = targettedEffects };
         }
 
-        private IList<BattleCharacter> SelectTargets(BattleCharacter src, EffectTarget target, BattleCharacters allCharacters)
+        private TargettedEffect SelectTargets(CardEffect effect, BattleCharacter src, BattleCharacters allCharacters)
         {
-            var possibleTargets = allCharacters.GetPossibleTargets(src, target);
+            var targetType = effect.Target;
+            var possibleTargets = allCharacters.GetPossibleTargets(src, targetType);
             // TODO: Make this selection smarter
-            if (target == EffectTarget.One)
-                return possibleTargets.First(x => x.Loyalty != src.Loyalty).AsList();
-            return possibleTargets;
+            if (targetType == EffectTarget.One)
+                return new TargettedEffect(effect, possibleTargets.First(x => x.Loyalty != src.Loyalty).AsList());
+            return new TargettedEffect(effect, possibleTargets);
         }
 
         private Card SelectCard(BattleCharacter forCharacter, IList<Card> cards, BattleCharacters allCharacters)

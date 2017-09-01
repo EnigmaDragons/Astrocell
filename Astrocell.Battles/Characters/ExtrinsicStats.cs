@@ -22,7 +22,7 @@ namespace Astrocell.Battles.Characters
     
     public struct ExtrinsicStatsFromBaseStats : ICharExtrinsicStats
     {
-        public int this[Extrinsic stat] => stat.Get(this);
+        public int this[Extrinsic stat] => this.GetStatValue(stat);
         
         private readonly ICharIntrinsicStats _char;
 
@@ -59,7 +59,7 @@ namespace Astrocell.Battles.Characters
 
     public struct ExtrinsicStatsMods : ICharExtrinsicStats
     {
-        public int this[Extrinsic stat] => stat.Get(this);
+        public int this[Extrinsic stat] => this.GetStatValue(stat);
 
         public int MaxHp { get; set; }
         public int Attack { get; set; }

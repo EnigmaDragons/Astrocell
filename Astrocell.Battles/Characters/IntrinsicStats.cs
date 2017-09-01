@@ -18,7 +18,7 @@ namespace Astrocell.Battles.Characters
 
     public struct StartingStats : ICharIntrinsicStats
     {
-        public int this[Intrinsic stat] => stat.Get(this);
+        public int this[Intrinsic stat] => this.GetStatValue(stat);
 
         public int Level { get; set; }
         public int Strength { get; set; }

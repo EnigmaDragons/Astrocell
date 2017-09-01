@@ -1,11 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using Astrocell.Battles.Battles;
 using Astrocell.Battles.Decks;
+using MonoDragons.Core.Common;
 
 namespace Astrocell.Battles.Effects
 {
     public static class BattleEffect
     {
+        public static void ApplyTo(this CardEffect cardEffect, BattleCharacter src, IList<BattleCharacter> targets)
+        {
+            var battleEffect = Create(src, cardEffect);
+            targets.ForEach(x => battleEffect.ApplyTo(x));
+        }
+
         //TODO: This is the wrong way to solve this
         public static IBattleEffect Create(BattleCharacter source, CardEffect effect)
         {
