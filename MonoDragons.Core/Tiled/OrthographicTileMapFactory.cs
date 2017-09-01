@@ -13,30 +13,29 @@ namespace MonoDragons.Core.Tiled
     {
         public List<GameObject> CreateMap(Tmx tmx)
         {
-            var tileFactory = new Dictionary<int, Func<Transform2, GameObject>>();
-            tmx.Tilesets.ForEach(
-                tileset => tileset.Tiles.ForEach(
-                    tile => tileFactory[tileset.FirstId + tile.Id] = transform => CreateTile(tileset, tile, transform)));
+            var tileIdToGameObject = CreateTileIdToGameObjectMap(tmx);
             return tmx.Layers.SelectMany(
                 layer => layer.Tiles.Select(
-                    tile => tileFactory[tile.TileId](
+                    tile => tileIdToGameObject[tile.TileId](
                         new Transform2(
                             new Rectangle(tile.Column * tmx.TileWidth, tile.Row * tmx.TileHeight, tmx.TileWidth, tmx.TileHeight), 
                             new ZIndex(layer.ZIndex))))).ToList();
+        }
+
+        private Dictionary<int, Func<Transform2, GameObject>> CreateTileIdToGameObjectMap(Tmx tmx)
+        {
+            var map = new Dictionary<int, Func<Transform2, GameObject>>();
+            tmx.Tilesets.ForEach(
+                tileset => tileset.Tiles.ForEach(
+                    tile => map[tileset.FirstId + tile.Id] = transform => CreateTile(tileset, tile, transform)));
+            return map;
         }
 
         private GameObject CreateTile(TmxTileset tileset, TmxTilesetTile tile, Transform2 transform)
         {
             var entity = Entity.Create(transform)
                 .Add((o, r) => new Texture(r.LoadTexture(tileset.TileSource, o), GetTileRectangle(tile.Id, tileset)));
-            //TODO: allow multiple boxes
-            if (!tile.CollisionBoxes.Any())
-                return entity;
-            var box = tile.CollisionBoxes.First();
-            return entity.Add(new BoxCollider(
-                new Transform2(
-                    transform.Location + box.Location.ToVector2(), 
-                    new Size2(box.Width, box.Height))));
+            return tile.CollisionBoxes.Any() ? WithBoxColliders(tile, entity) : entity;
         }
 
         private Rectangle GetTileRectangle(int tile, TmxTileset tileset)
@@ -46,6 +45,16 @@ namespace MonoDragons.Core.Tiled
             var x = column * tileset.TileWidth + (column + 1) * tileset.Spacing;
             var y = row * tileset.TileHeight + (row + 1) * tileset.Spacing;
             return new Rectangle(x, y, tileset.TileWidth, tileset.TileHeight);
+        }
+
+        private GameObject WithBoxColliders(TmxTilesetTile tile, GameObject entity)
+        {
+            //TODO: allow multiple boxes
+            var box = tile.CollisionBoxes.First();
+            return entity.Add(new BoxCollider(
+                new Transform2(
+                    entity.Transform.Location + box.Location.ToVector2(),
+                    new Size2(box.Width, box.Height))));
         }
     }
 }
