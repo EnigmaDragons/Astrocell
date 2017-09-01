@@ -25,11 +25,8 @@ namespace MonoDragons.Core.Tiled.TmxLoading
                 TileWidth = new XValue(map, "tilewidth").AsInt(),
                 TileHeight = new XValue(map, "tileheight").AsInt(),
                 Tilesets = map.Elements(XName.Get("tileset")).Select(x => TmxTileset.Create(x, tmxPath)).ToList(),
-                Layers = new List<TmxLayer>(),
+                Layers = map.Elements(XName.Get("layer")).Select((x, i) => TmxLayer.Create(i, x)).ToList(),
             };
-            var layers = map.Elements(XName.Get("layer")).ToList();
-            for (var i = 0; i < layers.Count; i++)
-                 result.Layers.Add(TmxLayer.Create(i, layers[i]));
             return result;
         }
     }

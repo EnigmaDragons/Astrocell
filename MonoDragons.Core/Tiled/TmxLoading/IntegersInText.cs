@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace MonoDragons.Core.Tiled
+namespace MonoDragons.Core.Tiled.TmxLoading
 {
     public class IntegersInText
     {
