@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Astrocell.Battles.Battles;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Astrocell.Battles.Decks
 {
@@ -13,7 +14,7 @@ namespace Astrocell.Battles.Decks
             Assert.AreEqual(2, card.ActionPointCost);
             Assert.AreEqual(1, card.Effects.Count);
             Assert.AreEqual(EffectTarget.One, card.Effects[0].Target);
-            Assert.AreEqual(EffectStat.Attack, card.Effects[0].Stat);
+            Assert.AreEqual(BattleStat.Attack, card.Effects[0].Stat);
         }
     }
 }

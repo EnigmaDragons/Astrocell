@@ -4,7 +4,7 @@ using MonoDragons.Core.Logs;
 
 namespace Astrocell.Battles.Effects
 {
-    public sealed class WithLogging : IBattleEffect
+    public struct WithLogging : IBattleEffect
     {
         private readonly ILog _log;
         private readonly Func<BattleCharacter, string> _description;

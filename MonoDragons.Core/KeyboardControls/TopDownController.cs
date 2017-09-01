@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework.Input;
-using MonoDragons.Core.Engine;
+using MonoDragons.Core.Common;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.Inputs;
 using MonoDragons.Core.PhysicsEngine;

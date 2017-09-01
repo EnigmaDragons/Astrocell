@@ -56,6 +56,7 @@
     <Compile Include="Audio\Ecs\SoundSystems.cs" />
     <Compile Include="Common\Condition.cs" />
     <Compile Include="Common\FancyMaths.cs" />
+    <Compile Include="Common\Reflection\PublicProperties.cs" />
     <Compile Include="Common\Store.cs" />
     <Compile Include="Engine\Automation.cs" />
     <Compile Include="Engine\UpdateComponent.cs" />
@@ -181,7 +182,7 @@
     <Compile Include="Scenes\SceneContents.cs" />
     <Compile Include="Scenes\SceneFactory.cs" />
     <Compile Include="Text\IWrapText.cs" />
-    <Compile Include="Text\EnumExtensions.cs" />
+    <Compile Include="Common\Enums.cs" />
     <Compile Include="Text\TextAlign.cs" />
     <Compile Include="Text\WrappingText.cs" />
     <Compile Include="Tiled\TmxLoading\IntegersInText.cs" />

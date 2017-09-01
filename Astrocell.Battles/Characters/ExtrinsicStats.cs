@@ -1,32 +1,41 @@
-﻿namespace Astrocell.Battles.Characters
+﻿
+namespace Astrocell.Battles.Characters
 {
+    public enum Extrinsic
+    {
+        MaxHp,
+        Attack,
+        Magic,
+        Resistance,
+        Defense,
+        Draw,
+        ActionPoints,
+        StartingCards,
+        StartingEnergy,
+        EnergyGain,
+    }
+
     public interface ICharExtrinsicStats
     {
-        int MaxHp { get; }
-        int Attack { get; }
-        int Magic { get; }
-        int Resistance { get; }
-        int Defense { get; }
-        int Draw { get; }
-        int ActionPoints { get; }
-        int StartingEnergy { get; }
-        int StartingCards { get; }
+        int this[Extrinsic stat] { get; }
     }
     
     public struct ExtrinsicStatsFromBaseStats : ICharExtrinsicStats
     {
+        public int this[Extrinsic stat] => this.GetStatValue(stat);
+        
         private readonly ICharIntrinsicStats _char;
 
-        public int MaxHp => _char.Toughness * 3 + _char.Strength;
+        public int MaxHp => _char[Intrinsic.Toughness] * 3 + _char[Intrinsic.Strength];
+        public int Attack => _char[Intrinsic.Strength];
+        public int Magic => _char[Intrinsic.Willpower];
+        public int Resistance => _char[Intrinsic.Toughness] / 6;
+        public int Defense => _char[Intrinsic.Toughness] / 6;
+        public int Draw => _char[Intrinsic.Intelligence] / 6;
+        public int ActionPoints => 1 + _char[Intrinsic.Agility] / 6;
         public int StartingCards => 2;
-        public int Draw => _char.Intelligence / 6;
-        public int Attack => _char.Strength;
-        public int Magic => _char.Willpower;
-        public int Defense => _char.Toughness / 6;
-        public int Resistance => _char.Toughness / 6;
-        public int ActionPoints => 1 + _char.Agility / 6;
-        public int StartingEnergy => _char.Willpower / 6;
-        public int EnergyGain => _char.Willpower / 6;
+        public int StartingEnergy => _char[Intrinsic.Willpower] / 6;
+        public int EnergyGain => _char[Intrinsic.Willpower] / 6;
 
         public ExtrinsicStatsFromBaseStats(ICharIntrinsicStats charStats)
         {
@@ -36,19 +45,11 @@
 
     public struct CombinedExtrinsicStats : ICharExtrinsicStats
     {
+        public int this[Extrinsic stat] => _stats1[stat] + _stats2[stat];
+
         private readonly ICharExtrinsicStats _stats1;
         private readonly ICharExtrinsicStats _stats2;
-
-        public int MaxHp => _stats1.MaxHp + _stats2.MaxHp;
-        public int Attack => _stats1.Attack + _stats2.Attack;
-        public int Magic => _stats1.Magic + _stats2.Magic;
-        public int Resistance => _stats1.Resistance + _stats2.Resistance;
-        public int Defense => _stats1.Defense + _stats2.Defense;
-        public int Draw => _stats1.Draw + _stats2.Draw;
-        public int ActionPoints => _stats1.ActionPoints + _stats2.ActionPoints;
-        public int StartingEnergy => _stats1.StartingEnergy + _stats2.StartingEnergy;
-        public int StartingCards => _stats1.StartingCards + _stats2.StartingCards;
-
+        
         public CombinedExtrinsicStats(ICharExtrinsicStats stats1, ICharExtrinsicStats stats2)
         {
             _stats1 = stats1;
@@ -58,6 +59,8 @@
 
     public struct ExtrinsicStatsMods : ICharExtrinsicStats
     {
+        public int this[Extrinsic stat] => this.GetStatValue(stat);
+
         public int MaxHp { get; set; }
         public int Attack { get; set; }
         public int Magic { get; set; }
@@ -67,5 +70,6 @@
         public int ActionPoints { get; set; }
         public int StartingEnergy { get; set; }
         public int StartingCards { get; set; }
+        public int EnergyGain { get; set; }
     }
 }

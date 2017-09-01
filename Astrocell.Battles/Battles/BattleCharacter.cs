@@ -2,6 +2,7 @@
 using System.Linq;
 using Astrocell.Battles.Characters;
 using Astrocell.Battles.Decks;
+using Astrocell.Battles.Effects;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Logs;
 
@@ -10,11 +11,12 @@ namespace Astrocell.Battles.Battles
     public sealed class BattleCharacter
     {
         private readonly ILog _log;
-        private readonly ICharStats _stats;
+        private readonly BattleCharacterStats _stats;
+        private readonly BattleCharacterStatusEffects _effects;
 
-        public int Initiative => _stats.Agility;
-        public bool IsConscious => CurrentHp > 0;
-        public bool CanAct => IsConscious;
+        public int Initiative => _stats[BattleStat.Initiative];
+        public bool IsConscious => _stats[BattleStat.CurrentHp] > 0;
+        public bool CanAct => IsConscious && _effects.CanAct;
         public bool CanPlayACard => CanAct && Hand.Cards.Any(CanAfford);
 
         public string Name { get; }
@@ -23,10 +25,10 @@ namespace Astrocell.Battles.Battles
         public BattleHand Hand { get; }
         public IList<Card> PlayableCards => Hand.Cards.Where(CanAfford).ToList();
 
-        public int MaxHp => _stats.MaxHp;
-        public int CurrentHp { get; set; }
-        public int CurrentEnergy { get; set; }
-        public int CurrentActionPoints { get; set; }
+        public int CurrentHp => _stats.CurrentHp;
+        public int CurrentEnergy => _stats.CurrentEnergy;
+        public int CurrentActionPoints => _stats.CurrentActionPoints;
+        public float MissingHpPercent => _stats[BattleStat.MaxHp] - CurrentHp / (float)_stats[BattleStat.MaxHp];
 
         public static BattleCharacter Init(BattleSide side, CharacterSheet charSheet)
         {
@@ -38,18 +40,17 @@ namespace Astrocell.Battles.Battles
             _log = log;
             Name = name;
             Hand = new BattleHand();
-            _stats = stats;
+            _stats = new BattleCharacterStats(stats);
+            _effects = new BattleCharacterStatusEffects();
             Loyalty = loyalty;
             Deck = deck;
-            CurrentHp = MaxHp;
-            CurrentEnergy = _stats.StartingEnergy;
-            DrawCards(_stats.StartingCards);
+            DrawCards(_stats[BattleStat.StartingCards]);
         }
 
         public void BeginTurn()
         {
-            CurrentActionPoints = _stats.ActionPoints;
-            DrawCards(_stats.Draw);
+            _stats.CurrentActionPoints = _stats[BattleStat.ActionPoints];
+            DrawCards(_stats[BattleStat.Draw]);
         }
 
         public void Play(Card card)
@@ -57,8 +58,8 @@ namespace Astrocell.Battles.Battles
             _log.Write($"{Name} plays {card.Name}.");
 
             Hand.Take(card);
-            CurrentEnergy -= card.EnergyCost;
-            CurrentActionPoints -= card.ActionPointCost;
+            _stats.CurrentEnergy -= card.EnergyCost;
+            _stats.CurrentActionPoints -= card.ActionPointCost;
 
             if (card.CardsDrawn > 0)
                 _log.Write($"{Name} draws {card.CardsDrawn} Cards.");
@@ -66,57 +67,61 @@ namespace Astrocell.Battles.Battles
 
             if (card.EnergyGain > 0)
                 _log.Write($"{Name} gains {card.EnergyGain} Energy.");
-            CurrentEnergy += card.EnergyGain;
+            _stats.CurrentEnergy += card.EnergyGain;
         }
-
-        // TODO: This design for applying effects can't be right.
+        
         public void TakePhysicalDamage(int amount)
         {
-            var dmgAmount = amount - _stats.Defense;
-            ChangeHp(-dmgAmount);
+            var dmgAmount = amount - _stats[BattleStat.Defense];
+            _stats.ChangeHp(-dmgAmount);
             _log.Write($"{Name} suffers {dmgAmount} physical damage.");
         }
 
         public void TakeMagicDamage(int amount)
         {
-            var dmgAmount = amount - _stats.Resistance;
-            ChangeHp(-dmgAmount);
+            var dmgAmount = amount - _stats[BattleStat.Resistance];
+            _stats.ChangeHp(-dmgAmount);
             _log.Write($"{Name} suffers {dmgAmount} magic damage.");
         }
 
         public void Heal(int amount)
         {
-            ChangeHp(amount);
+            _stats.ChangeHp(amount);
             _log.Write($"{Name} heals {amount} HP.");
+        }
+
+        public void ApplyBuff(BattleStat stat, float factor, int duration)
+        {
+            if (stat == BattleStat.None)
+                return;
+
+            _stats.ApplyBuff(stat, factor, duration);
+            _log.Write($"{Name} has {stat} increased by {factor:0.0}x for {duration} turns.");
+        }
+
+        public void ApplyStatusEffect(StatusEffect effect, int duration)
+        {
+            if (effect == StatusEffect.None)
+                return;
+
+            _effects.Apply(effect, duration);
+            _log.Write($"{Name} is {effect} for {duration} turns.");
         }
 
         public void EndTurn()
         {
+            _stats.EndTurn();
+            _effects.EndTurn();
         }
 
-        public int GetStat(EffectStat stat)
+        public int GetStat(BattleStat stat)
         {
-            if (stat == EffectStat.Attack)
-                return _stats.Attack;
-            if (stat == EffectStat.Magic)
-                return _stats.Magic;
-            if (stat == EffectStat.Toughness)
-                return _stats.Toughness;
-            throw new KeyNotFoundException($"Unknown EffectStat {stat}");
+            return _stats[stat];
         }
 
         private bool CanAfford(Card x)
         {
-            return x.ActionPointCost <= CurrentActionPoints && x.EnergyCost <= CurrentEnergy;
-        }
-
-        private void ChangeHp(int amount)
-        {
-            CurrentHp += amount;
-            if (CurrentHp > MaxHp)
-                CurrentHp = MaxHp;
-            if (CurrentHp < 0)
-                CurrentHp = 0;
+            return x.ActionPointCost <= _stats[BattleStat.CurrentActionPoints] && x.EnergyCost <= _stats[BattleStat.CurrentEnergy];
         }
 
         private void DrawCards(int n)

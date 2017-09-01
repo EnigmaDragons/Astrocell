@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Astrocell.Scenes;
 using Microsoft.Xna.Framework.Input;
+using MonoDragons.Core.Common;
 using MonoDragons.Core.Engine;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.Inputs;

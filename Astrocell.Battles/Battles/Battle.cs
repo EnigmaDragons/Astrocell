@@ -36,6 +36,7 @@ namespace Astrocell.Battles.Battles
 
         public BattleSide Resolve()
         {
+            _log.Write("");
             _log.Write($"Began Battle with {TurnOrder.Items.CommaSeparated(x => x.Name)}.");
 
             while (!IsOver)
@@ -58,6 +59,7 @@ namespace Astrocell.Battles.Battles
                 ResolveAction(chr);
 
             chr.EndTurn();
+            _log.Write("");
         }
 
         private void ResolveAction(BattleCharacter chr)

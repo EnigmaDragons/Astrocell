@@ -1,29 +1,37 @@
 ﻿using System;
+using System.Collections.Generic;
 using Astrocell.Battles.Battles;
 using Astrocell.Battles.Decks;
+using MonoDragons.Core.Common;
 
 namespace Astrocell.Battles.Effects
 {
     public static class BattleEffect
     {
-        //TODO: This is the wrong way to solve this
-        public static IBattleEffect Create(BattleCharacter source, CardEffect effect)
+        public static void ApplyTo(this CardEffect cardEffect, BattleCharacter src, IList<BattleCharacter> targets)
         {
-            var statAmount = source.GetStat(effect.Stat);
-            var amount = Multiply(statAmount, effect.Factor);
-
-            if (effect.Type == EffectType.Damage && effect.Stat == EffectStat.Attack)
-                return new PhysicalDamageEffect(amount);
-            if (effect.Type == EffectType.Damage && effect.Stat == EffectStat.Magic)
-                return new MagicDamageEffect(amount);
-            if (effect.Type == EffectType.Heal)
-                return new HealEffect(amount);
-            return WithLogging(x => "No/Unknown Effect", new NoEffect());
+            var battleEffect = Create(src, cardEffect);
+            targets.ForEach(x => battleEffect.ApplyTo(x));
         }
-
-        private static int Multiply(int statAmount, float factor)
+        
+        public static IBattleEffect Create(BattleCharacter src, CardEffect e)
         {
-            return Convert.ToInt32(Math.Ceiling(statAmount * factor));
+            var amount = src.GetStat(e.Stat).StatMultiplyBy(e.Factor);
+
+            var fx = new List<IBattleEffect>();
+            if (e.Type == EffectType.Damage && e.Stat == BattleStat.Attack)
+                fx.Add(new PhysicalDamageEffect(amount));
+            if (e.Type == EffectType.Damage && e.Stat == BattleStat.Magic)
+                fx.Add(new MagicDamageEffect(amount));
+            if (e.Type == EffectType.Heal)
+                fx.Add(new HealEffect(amount));
+            if (e.Status != CardStatusEffect.None)
+                fx.Add(new DurationStatusEffect(e.Status.ToStatusEffect(), e.Duration));
+            if (e.Type == EffectType.Buff)
+                fx.Add(new DurationBuffEffect(e.Stat, e.Factor, e.Duration));
+            if (fx.None())
+                fx.Add(WithLogging(x => "No/Unknown Effect", new NoEffect()));
+            return new CompositeEffect(fx);
         }
 
         private static IBattleEffect WithLogging(Func<BattleCharacter, string> description, IBattleEffect fx)

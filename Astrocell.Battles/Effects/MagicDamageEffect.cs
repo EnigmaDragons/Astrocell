@@ -2,7 +2,7 @@
 
 namespace Astrocell.Battles.Effects
 {
-    public sealed class MagicDamageEffect : IBattleEffect
+    public struct MagicDamageEffect : IBattleEffect
     {
         private readonly int _amount;
 

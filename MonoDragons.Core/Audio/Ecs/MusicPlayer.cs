@@ -11,7 +11,7 @@ namespace MonoDragons.Core.Audio.Ecs
             {
                 if (m.ShouldStopMusic)
                     Audio.StopMusic();
-                else if (m.Song.HasValue)
+                else if (m.Song.IsPresent)
                     Audio.PlayMusic(m.Song.Value);
                 m.Reset();
             });
