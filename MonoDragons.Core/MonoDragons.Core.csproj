@@ -123,6 +123,7 @@
     <Compile Include="Players\SimplePlayer.cs" />
     <Compile Include="Render\BorderRenderer.cs" />
     <Compile Include="Render\BorderTexture.cs" />
+    <Compile Include="Render\MultiTextDisplay.cs" />
     <Compile Include="Render\Texture.cs" />
     <Compile Include="Render\TextureRenderer.cs" />
     <Compile Include="Engine\IAutomaton.cs" />

@@ -7,7 +7,7 @@ namespace Astrocell.Battles.Decks
     public class Card
     {
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } = "Missing description";
 
         public int ActionPointCost { get; set; }
         public int EnergyCost { get; set; }

@@ -77,7 +77,7 @@ namespace MonoDragons.Core.Engine
             Input.SetController(_controller);
             _ecs.Register(new ControlHandler());
             _ecs.Register(new DirectionHandler());
-            _black = new RectangleTexture(new Rectangle(new Point(0, 0), new Point(1, 1)), Color.Black).Create();
+            _black = new RectangleTexture(Color.Black).Create();
             World.Init(this, this, _sprites, _display);
             UI.Init(this, _sprites, _display);
             base.Initialize();

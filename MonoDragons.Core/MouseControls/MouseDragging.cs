@@ -54,7 +54,7 @@ namespace MonoDragons.Core.MouseControls
             var possibleTargets = new List<GameObject>();
             entities.With<MouseDrag>((o, m) => o.Transform.If(t => t.Intersects(_mouse.LastPosition), t => possibleTargets.Add(o)));
             if (possibleTargets.Any())
-                _targets.Add(possibleTargets.OrderByDescending(x => x.Transform.ZIndex).First());
+                _targets.Add(possibleTargets.OrderByDescending(x => x.Transform.ZIndex.Value).First());
         }
     }
 }

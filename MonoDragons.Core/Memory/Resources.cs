@@ -32,7 +32,6 @@ namespace MonoDragons.Core.Memory
         public static void Unload()
         {
             _sceneContents.Dispose();
-            RectangleTexture.ClearCache();
             RectangleBorderTexture.ClearCache();
             LineTexture.ClearCache();
             ConeTexture.ClearCache();

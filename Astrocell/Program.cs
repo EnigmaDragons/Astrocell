@@ -21,7 +21,7 @@ namespace Astrocell
         {
             using (var game = new NeedlesslyComplexMainGame(
                 "Astrocell",
-                "Fire Cave", 
+                "CardDisplay", 
                 new Display(1600, 900, false, 1), 
                 CreateSceneFactory(), 
                 CreateController()))
@@ -44,7 +44,8 @@ namespace Astrocell
             return new SceneFactory(new Dictionary<string, Func<IScene>>
                 {
                     { "Fire Cave", () => new FireCave() },
-                    { "DisposeScene", () => new EcsDisposeScene() }
+                    { "DisposeScene", () => new EcsDisposeScene() },
+                    { "CardDisplay", () => new CardScene() },
                 });
         }
     }

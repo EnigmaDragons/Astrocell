@@ -21,7 +21,7 @@ namespace MonoDragons.Core.UserInterface
         {
             color = Color.Orange;
             transform = new Transform2(new Size2(400, 100));
-            _background = new RectangleTexture(transform.ToRectangle(), Color).Create();
+            _background = new RectangleTexture(Color).Create();
         }
 
         public void Draw(Transform2 parentTransform)
@@ -33,7 +33,7 @@ namespace MonoDragons.Core.UserInterface
         private void GenerateTexture()
         {
             Resources.Dispose(_background);
-            _background = new RectangleTexture(transform.ToRectangle(), Color).Create();
+            _background = new RectangleTexture(Color).Create();
         }
 
         public void Dispose()
