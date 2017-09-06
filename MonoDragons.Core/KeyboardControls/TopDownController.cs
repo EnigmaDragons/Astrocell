@@ -31,7 +31,9 @@ namespace MonoDragons.Core.KeyboardControls
                     motion => motion.Velocity = new Velocity2
                     {
                         Speed = direction.HDir != 0 || direction.VDir != 0 ? movement.Speed : 0,
-                        Direction = direction.ToRotation()
+                        Direction = direction.HDir == HorizontalDirection.None && direction.VDir == VerticalDirection.None 
+                            ? motion.Velocity.Direction
+                            : direction.ToRotation()
                     }));
         }
 

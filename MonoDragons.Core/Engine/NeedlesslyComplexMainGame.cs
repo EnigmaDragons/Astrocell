@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.MouseControls;
 using MonoDragons.Core.Navigation;
+using MonoDragons.Core.Render.Animations;
 using MonoDragons.Core.Scenes;
 
 namespace MonoDragons.Core.Engine
@@ -59,6 +60,7 @@ namespace MonoDragons.Core.Engine
             _ecs = Entity.System;
             Renderers.RegisterAll(_ecs);
             PhysicsSystems.RegisterAll(_ecs);
+            AnimationSystems.RegisterAll();
             MouseSystems.RegisterAll(_ecs);
 
             Window.Title = title;
