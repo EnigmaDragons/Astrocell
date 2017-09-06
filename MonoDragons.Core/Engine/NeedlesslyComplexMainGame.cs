@@ -11,6 +11,7 @@ using MonoDragons.Core.Entities;
 using MonoDragons.Core.KeyboardControls;
 using MonoDragons.Core.MouseControls;
 using MonoDragons.Core.Navigation;
+using MonoDragons.Core.Render.Animations;
 using MonoDragons.Core.Text;
 
 namespace MonoDragons.Core.Engine
@@ -54,6 +55,7 @@ namespace MonoDragons.Core.Engine
             _ecs = Entity.System;
             Renderers.RegisterAll(_ecs);
             PhysicsSystems.RegisterAll(_ecs);
+            AnimationSystems.RegisterAll(_ecs);
             MouseSystems.RegisterAll(_ecs);
             KeyboardSystems.RegisterAll(_ecs);
             Window.Title = title;

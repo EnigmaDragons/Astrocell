@@ -7,7 +7,6 @@ using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Scenes;
 using MonoDragons.Core.Tiled;
 using MonoDragons.Core.Tiled.TmxLoading;
-using Texture = MonoDragons.Core.Render.Texture;
 
 namespace Astrocell.Scenes
 {
@@ -16,8 +15,7 @@ namespace Astrocell.Scenes
         protected override IEnumerable<GameObject> CreateObjs()
         {
             var charTransform = new Transform2(new Rectangle(48 * 5, 48 * 8, 48, 48), new ZIndex(3));
-            yield return Entity.Create(charTransform)
-                .Add((o, r) => new Texture(r.LoadTexture("sprites/gareth-mapchar.png", o), new Rectangle(48, 0, 48, 48)))
+            yield return new OrthographicCharacterFactory().CreateCharacter(Tsx.Create(Path.Combine("Characters", "Gareth.tsx")), new Vector2(48 * 5, 48 * 8))
                 .Add(new Motion2(new Velocity2()))
                 .Add(new TopDownMovement { Speed = 0.2f })
                 .Add(new BoxCollider(charTransform));

@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 
 namespace MonoDragons.Core.Tiled.TmxLoading
 {
@@ -21,6 +22,11 @@ namespace MonoDragons.Core.Tiled.TmxLoading
         public string AsString()
         {
             return _element.Attribute(XName.Get(_key)).Value;
+        }
+
+        public bool AsBool()
+        {
+            return Convert.ToBoolean(AsString());
         }
     }
 }

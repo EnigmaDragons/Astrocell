@@ -128,6 +128,10 @@
     <Compile Include="PhysicsEngine\ZGravity.cs" />
     <Compile Include="PhysicsEngine\ZIndex.cs" />
     <Compile Include="Players\SimplePlayer.cs" />
+    <Compile Include="Render\Animations\AnimationSystems.cs" />
+    <Compile Include="Render\Animations\Animator.cs" />
+    <Compile Include="Render\Animations\MotionAnimationStates.cs" />
+    <Compile Include="Render\Animations\MotionAnimationStateSelector.cs" />
     <Compile Include="Render\BorderRenderer.cs" />
     <Compile Include="Render\BorderTexture.cs" />
     <Compile Include="Render\MultiTextDisplay.cs" />
@@ -175,6 +179,7 @@
     <Compile Include="PhysicsEngine\Size2.cs" />
     <Compile Include="PhysicsEngine\Transform2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Render\Animations\Animation.cs" />
     <Compile Include="Render\Camera.cs" />
     <Compile Include="Render\CurrentDisplay.cs" />
     <Compile Include="Render\TextDisplay.cs" />
@@ -187,6 +192,8 @@
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Text\TextAlign.cs" />
     <Compile Include="Text\WrappingText.cs" />
+    <Compile Include="Tiled\OrthographicCharacterFactory.cs" />
+    <Compile Include="Tiled\SpriteSheetRectangle.cs" />
     <Compile Include="Tiled\TmxLoading\IntegersInText.cs" />
     <Compile Include="Tiled\OrthographicTileMapFactory.cs" />
     <Compile Include="Tiled\TmxLoading\Tmx.cs" />
@@ -194,7 +201,10 @@
     <Compile Include="Tiled\TmxLoading\TmxLayerTile.cs" />
     <Compile Include="Tiled\TmxLoading\TmxTileset.cs" />
     <Compile Include="Tiled\TmxLoading\TmxTilesetTile.cs" />
+    <Compile Include="Tiled\TmxLoading\XProperty.cs" />
     <Compile Include="Tiled\TmxLoading\XValue.cs" />
+    <Compile Include="Tiled\TmxLoading\Tsx.cs" />
+    <Compile Include="Tiled\TmxLoading\TsxSprite.cs" />
     <Compile Include="UserInterface\Layouts\ConcreteDefinition.cs" />
     <Compile Include="UserInterface\Layouts\Definition.cs" />
     <Compile Include="UserInterface\Layouts\ShareDefintion.cs" />

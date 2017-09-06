@@ -22,6 +22,11 @@ namespace MonoDragons.Core.PhysicsEngine
             return new Vector2(GetXDirection() * distance, GetYDirection() * distance);
         }
 
+        public bool IsMoving()
+        {
+            return Speed > 0.01;
+        }
+
         private float GetXDirection()
         {
             switch (Direction.ToDirection().HDir)
