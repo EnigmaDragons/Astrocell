@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoDragons.Core.Memory;
+using MonoDragons.Core.Engine;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Text;
 using MonoDragons.Core.Render;
 
 namespace MonoDragons.Core.UserInterface
 {
+    // TODO: Kill This
     public static class UI
     {
         private static readonly Dictionary<TextAlign, Func<Rectangle, Vector2, Vector2>> _alignPositions =
@@ -52,13 +53,13 @@ namespace MonoDragons.Core.UserInterface
 
         public static void DrawCenteredWithOffset(string imageName, Vector2 offSet)
         {
-            var texture = Resources.Load<Texture2D>(imageName);
+            var texture = GameInstance.TheGame.Content.Load<Texture2D>(imageName);
             DrawCenteredWithOffset(imageName, new Vector2(texture.Width, texture.Height), offSet, Rotation2.Default);
         }
 
         public static void DrawCenteredWithOffset(string imageName, Vector2 widthHeight, Vector2 offSet, Rotation2 rotation)
         {
-            _spriteBatch.Draw(Resources.Load<Texture2D>(imageName), null,
+            _spriteBatch.Draw(GameInstance.TheGame.Content.Load<Texture2D>(imageName), null,
                 new Rectangle(ScalePoint(_display.GameWidth / 2 / _display.Scale - widthHeight.X / 2 + offSet.X,
                     _display.GameHeight / 2 / _display.Scale - widthHeight.Y / 2 + offSet.Y),
                     ScalePoint(widthHeight.X, widthHeight.Y)),
@@ -73,14 +74,14 @@ namespace MonoDragons.Core.UserInterface
 
         public static void DrawText(string text, Vector2 position, Color color, string font)
         {
-            var spriteFont = Resources.Load<SpriteFont>(font);
+            var spriteFont = GameInstance.TheGame.Content.Load<SpriteFont>(font);
             _spriteBatch.DrawString(spriteFont, text, ScalePoint(position.X, position.Y).ToVector2(), color,
                 0, Vector2.Zero, _display.Scale, SpriteEffects.None, 1);
         }
 
         public static void DrawText(string text, Vector2 position, Color color, string font, TextAlign alignment)
         {
-            var spriteFont = Resources.Load<SpriteFont>(font);
+            var spriteFont = GameInstance.TheGame.Content.Load<SpriteFont>(font);
             _spriteBatch.DrawString(spriteFont, text, ScalePoint(position.X, position.Y).ToVector2(), color,
                 0, Vector2.Zero, _display.Scale, SpriteEffects.None, 1);
         }
@@ -107,7 +108,7 @@ namespace MonoDragons.Core.UserInterface
 
         public static void DrawTextAligned(string text, Rectangle area, Color color, string font, TextAlign align)
         {
-            var spriteFont = Resources.Load<SpriteFont>(font);
+            var spriteFont = GameInstance.TheGame.Content.Load<SpriteFont>(font);
             var wrapped = new WrappingText(() => spriteFont, () => area.Width).Wrap(text);
             var size = spriteFont.MeasureString(wrapped);
             DrawText(wrapped, _alignPositions[align](area, size), color, font);

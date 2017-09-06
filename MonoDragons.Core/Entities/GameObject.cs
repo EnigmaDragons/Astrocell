@@ -32,6 +32,12 @@ namespace MonoDragons.Core.Entities
             return Id;
         }
 
+        public GameObject Disable()
+        {
+            IsEnabled = false;
+            return this;
+        }
+
         public GameObject Add(Func<GameObject, EntityResources, EntityComponent> componentBuilder)
         {
             Add(componentBuilder(this, _resources));

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using MonoDragons.Core.Engine;
 using MonoDragons.Core.Entities;
 
 namespace MonoDragons.Core.Render
@@ -9,7 +8,7 @@ namespace MonoDragons.Core.Render
         public void Draw(IEntities entities, SpriteBatch sprites)
         {
             entities.With<ScreenBackgroundColor>(
-                e => World.DrawBackgroundColor(e.Color));
+                e => sprites.GraphicsDevice.Clear(e.Color));
         }
     }
 }

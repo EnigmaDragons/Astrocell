@@ -6,10 +6,11 @@ namespace MonoDragons.Core.Render
     {
         public static void RegisterAll(EntitySystem system)
         {
-            system.Register(new ScreenBackgroundRenderer());
-            system.Register(new TextureRenderer());
-            system.Register(new BorderRenderer());
+            // Drawn in Front-To-Back Order
             system.Register(new TextRenderer());
+            system.Register(new BorderRenderer());
+            system.Register(new TextureRenderer());
+            system.Register(new ScreenBackgroundRenderer());
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using MonoDragons.Core.Engine;
 
 namespace MonoDragons.Core.EventSystem
 {
@@ -18,7 +17,7 @@ namespace MonoDragons.Core.EventSystem
 
         public void Dispose()
         {
-            World.Unsubscribe(Owner);
+            Event.Unsubscribe(Owner);
         }
 
         public static EventSubscription Create<T>(Action<T> onEvent, object owner)

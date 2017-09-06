@@ -11,7 +11,7 @@ namespace MonoDragons.Core.PhysicsEngine
         {
             var min = new MinHeight();
             entities.Collect<ZGravity>()
-                .OrderBy(x => x.Transform.ZIndex)
+                .OrderBy(x => x.Transform.ZIndex.Value)
                     .ForEach(x => Update(min, x));
         }
 

@@ -65,6 +65,7 @@
     <Compile Include="Components\Item.cs" />
     <Compile Include="Components\Items.cs" />
     <Compile Include="Entities\EntityResources.cs" />
+    <Compile Include="EventSystem\Event.cs" />
     <Compile Include="Graphics\CachingRules.cs" />
     <Compile Include="Graphics\RectangleBorderTexture.cs" />
     <Compile Include="Inputs\Controls.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="Common\Rng.cs" />
     <Compile Include="Common\Subject.cs" />
     <Compile Include="Common\SubscriptionAction.cs" />
-    <Compile Include="EngimaDragons\LogoScene.cs" />
     <Compile Include="Engine\GameInstance.cs" />
     <Compile Include="Engine\Metrics.cs" />
     <Compile Include="Engine\Timer.cs" />
@@ -96,7 +96,10 @@
     <Compile Include="IO\AppDataJsonIo.cs" />
     <Compile Include="IO\FileTexture2D.cs" />
     <Compile Include="IO\JsonIo.cs" />
+    <Compile Include="KeyboardControls\KeyboardCommandProcessing.cs" />
     <Compile Include="KeyboardControls\KeyboardInput.cs" />
+    <Compile Include="KeyboardControls\KeyboardCommand.cs" />
+    <Compile Include="KeyboardControls\KeyboardSystems.cs" />
     <Compile Include="KeyboardControls\TopDownController.cs" />
     <Compile Include="KeyboardControls\TopDownMovement.cs" />
     <Compile Include="KeyboardControls\TypingInput.cs" />
@@ -115,6 +118,7 @@
     <Compile Include="MouseControls\MouseStateActions.cs" />
     <Compile Include="MouseControls\MouseSystems.cs" />
     <Compile Include="Navigation\INavigation.cs" />
+    <Compile Include="Navigation\Navigate.cs" />
     <Compile Include="PhysicsEngine\DurationTravel.cs" />
     <Compile Include="PhysicsEngine\Travelling.cs" />
     <Compile Include="PhysicsEngine\ZGravitation.cs" />
@@ -140,7 +144,6 @@
     <Compile Include="Render\Renderers.cs" />
     <Compile Include="Render\ScreenBackgroundColor.cs" />
     <Compile Include="Render\Display.cs" />
-    <Compile Include="Engine\World.cs" />
     <Compile Include="EventSystem\Convenience\KeyDownEventSubscription.cs" />
     <Compile Include="EventSystem\Convenience\KeyUpEventSubscription.cs" />
     <Compile Include="EventSystem\Events.cs" />
@@ -162,7 +165,6 @@
     <Compile Include="Inputs\ControlChange.cs" />
     <Compile Include="Inputs\ControlState.cs" />
     <Compile Include="Inputs\VerticalDirection.cs" />
-    <Compile Include="Memory\Resources.cs" />
     <Compile Include="PhysicsEngine\BoxCollider.cs" />
     <Compile Include="PhysicsEngine\Physics.cs" />
     <Compile Include="PhysicsEngine\PhysicsInstance.cs" />
@@ -171,17 +173,14 @@
     <Compile Include="PhysicsEngine\Size2.cs" />
     <Compile Include="PhysicsEngine\Transform2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Render\Animation.cs" />
-    <Compile Include="Render\Animations.cs" />
     <Compile Include="Render\Camera.cs" />
-    <Compile Include="Navigation\FadingInScene.cs" />
     <Compile Include="Render\CurrentDisplay.cs" />
     <Compile Include="Render\TextDisplay.cs" />
     <Compile Include="Render\TextRenderer.cs" />
     <Compile Include="Scenes\EcsScene.cs" />
     <Compile Include="Scenes\IScene.cs" />
-    <Compile Include="Scenes\SceneContents.cs" />
-    <Compile Include="Scenes\SceneFactory.cs" />
+    <Compile Include="Navigation\SceneFactory.cs" />
+    <Compile Include="Navigation\SceneNavigatorConsole.cs" />
     <Compile Include="Text\IWrapText.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Text\TextAlign.cs" />
@@ -200,20 +199,13 @@
     <Compile Include="UserInterface\Layouts\SizeType.cs" />
     <Compile Include="UserInterface\Layouts\GridLayout.cs" />
     <Compile Include="UserInterface\HorizontalAlignment.cs" />
-    <Compile Include="UserInterface\AutoSizingLabel.cs" />
-    <Compile Include="UserInterface\Cone.cs" />
-    <Compile Include="UserInterface\ColoredRectangle.cs" />
     <Compile Include="Graphics\ConeTexture.cs" />
-    <Compile Include="UserInterface\ImageLabel.cs" />
-    <Compile Include="UserInterface\Label.cs" />
     <Compile Include="UserInterface\Layouts\Layout.cs" />
     <Compile Include="MouseControls\MouseDrag.cs" />
-    <Compile Include="UserInterface\MutableTextPage.cs" />
-    <Compile Include="UserInterface\ImageBox.cs" />
     <Compile Include="Text\DefaultFont.cs" />
+    <Compile Include="UserInterface\Textbox.cs" />
     <Compile Include="UserInterface\UI.cs" />
     <Compile Include="UserInterface\VerticalAlignment.cs" />
-    <Compile Include="UserInterface\WrapGrid.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NAudio, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">

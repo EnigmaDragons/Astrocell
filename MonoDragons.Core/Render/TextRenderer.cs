@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoDragons.Core.Entities;
-using MonoDragons.Core.Memory;
 using MonoDragons.Core.Text;
 using System;
 using System.Collections.Generic;
+using MonoDragons.Core.Engine;
 
 namespace MonoDragons.Core.Render
 {
@@ -18,7 +18,7 @@ namespace MonoDragons.Core.Render
 
         private static void RenderText(SpriteBatch sprites, TextDisplay t, GameObject o)
         {
-            var spriteFont = Resources.Load<SpriteFont>(t.Font);
+            var spriteFont = GameInstance.TheGame.Content.Load<SpriteFont>(t.Font);
             var wrapped = new WrappingText(() => spriteFont, () => o.Transform.WithPadding(t.Margin).ToRectangle().Width).Wrap(t.Text());
             var size = spriteFont.MeasureString(wrapped);
             sprites.DrawString(spriteFont, wrapped,

@@ -11,10 +11,14 @@ namespace Astrocell.Battles
 {
     public static class CardDisplay
     {
+        private static int _zIndex = 1;
+
         public static GameObject Create(Card card)
         {
-            return Entity.Create(new Transform2(new Size2(200, 300)))
+            _zIndex += 5;
+            return Entity.Create(new Transform2 { Size = new Size2(200, 300), ZIndex = new ZIndex(_zIndex) })
                 .Add(new MouseDrag())
+                .Add(new ZGravity())
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.Coral, o)))
                 .Add(new MultiTextDisplay { Displays = new List<TextDisplay> {
                         new TextDisplay {Align = TextAlign.TopCenter, Text = () => card.Name },

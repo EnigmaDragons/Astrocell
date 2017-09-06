@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using MonoDragons.Core.Engine;
+﻿using System.Collections.Generic;
 using MonoDragons.Core.Entities;
 
 namespace MonoDragons.Core.Scenes
@@ -11,34 +9,19 @@ namespace MonoDragons.Core.Scenes
 
         protected abstract IEnumerable<GameObject> CreateObjs();
 
-        protected void NavigateToScene(string sceneName)
-        {
-            Entity.Destroy(_objs);
-            World.NavigateToScene(sceneName);
-        }
-
-        protected void NavigateToScene(IScene scene)
-        {
-            Entity.Destroy(_objs);
-            World.NavigateToScene(scene);
-        }
-
         public void Init()
         {
             _objs.AddRange(CreateObjs());
         }
 
+        public void Dispose()
+        {
+            Entity.Destroy(_objs);
+        }
+
         protected void AddObj(GameObject obj)
         {
             _objs.Add(obj);
-        }
-
-        public void Update(TimeSpan delta)
-        {
-        }
-
-        public void Draw()
-        {
         }
     }
 }
