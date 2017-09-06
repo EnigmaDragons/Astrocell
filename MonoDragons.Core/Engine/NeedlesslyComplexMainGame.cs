@@ -4,9 +4,9 @@ using MonoDragons.Core.Graphics;
 using MonoDragons.Core.Inputs;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
-using MonoDragons.Core.UserInterface;
 using System;
 using Microsoft.Xna.Framework.Input;
+using MonoDragons.Core.Development;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.KeyboardControls;
 using MonoDragons.Core.MouseControls;
@@ -21,7 +21,6 @@ namespace MonoDragons.Core.Engine
         private readonly GraphicsDeviceManager _graphics;
         private readonly SceneFactory _sceneFactory;
         private readonly IController _controller;
-        private readonly Metrics _metrics;
         private readonly EntitySystem _ecs;
         private readonly bool _areScreenSettingsPreCalculated;
         
@@ -52,13 +51,15 @@ namespace MonoDragons.Core.Engine
             _startingViewName = startingViewName;
             _sceneFactory = sceneFactory;
             _controller = controller;
-            _metrics = new Metrics();
             _ecs = Entity.System;
             Renderers.RegisterAll(_ecs);
             PhysicsSystems.RegisterAll(_ecs);
             MouseSystems.RegisterAll(_ecs);
             KeyboardSystems.RegisterAll(_ecs);
             Window.Title = title;
+#if DEBUG
+            DevelopmentSystems.RegisterAll(_ecs);
+#endif
         }
 
         protected override void Initialize()
@@ -76,8 +77,10 @@ namespace MonoDragons.Core.Engine
             _black = new RectangleTexture(Color.Black).Create();
             Navigate.Init(_sceneFactory);
             DefaultFont.Load(Content);
-            UI.Init(this, _sprites, _display);
+#if DEBUG
             SceneNavigatorConsole.Enable();
+            Metrics.Enable();
+#endif
             base.Initialize();
         }
 
@@ -107,10 +110,8 @@ namespace MonoDragons.Core.Engine
         protected override void Update(GameTime gameTime)
         {
             CheckForEscape();
-            _metrics.Update(gameTime.ElapsedGameTime);
             _controller.Update(gameTime.ElapsedGameTime);
             _ecs.Update(gameTime.ElapsedGameTime);
-            new Physics().Resolve();
             base.Update(gameTime);
         }
 
@@ -119,7 +120,6 @@ namespace MonoDragons.Core.Engine
             _graphics.GraphicsDevice.Clear(Color.Black);
             _sprites.Begin(SpriteSortMode.FrontToBack, null, SamplerState.AnisotropicClamp);
             _ecs.Draw(_sprites);
-            _metrics.Draw(Transform2.Zero);
             HideExternals();
             _sprites.End();
             base.Draw(gameTime);
@@ -135,7 +135,7 @@ namespace MonoDragons.Core.Engine
         
         private void CheckForEscape()
         {
-#if DEBUG  
+#if DEBUG
             var state = Keyboard.GetState();
             if(state.IsKeyDown(Keys.Escape))
                 GameInstance.TheGame.Exit();

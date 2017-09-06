@@ -5,11 +5,12 @@ using Microsoft.Xna.Framework.Input;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.KeyboardControls;
+using MonoDragons.Core.Navigation;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
 using MonoDragons.Core.UserInterface;
 
-namespace MonoDragons.Core.Navigation
+namespace MonoDragons.Core.Development
 {
     public sealed class SceneNavigatorConsole
     {
