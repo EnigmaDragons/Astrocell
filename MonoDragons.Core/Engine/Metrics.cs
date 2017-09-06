@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using MonoDragons.Core.Memory;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.UserInterface;
 using System.Diagnostics;
 using MonoDragons.Core.Entities;
+using MonoDragons.Core.EventSystem;
 
 namespace MonoDragons.Core.Engine
 {
@@ -44,10 +44,9 @@ namespace MonoDragons.Core.Engine
             UI.DrawText($"FPS: {_framesPerSecond}", new Vector2(0, 0), color);
             UI.DrawText($"UPS: {_updatesPerSecond}", new Vector2(0, 40), color);
             UI.DrawText($"RAM: {memory}e{exponent}", new Vector2(0, 80), color);
-            UI.DrawText($"Sub: {World.CurrentEventSubscriptionCount}", new Vector2(0, 120), color);
-            UI.DrawText($"Scn: {Resources.CurrentSceneDisposableCount}", new Vector2(0, 160), color);
-            UI.DrawText($"Ent: {Entity.Count}", new Vector2(0, 200), color);
-            UI.DrawText($"Res: {Entity.ResourceCount}", new Vector2(0, 240), color);
+            UI.DrawText($"Sub: {Event.CurrentEventSubscriptionCount}", new Vector2(0, 120), color);
+            UI.DrawText($"Ent: {Entity.Count}", new Vector2(0, 160), color);
+            UI.DrawText($"Res: {Entity.ResourceCount}", new Vector2(0, 200), color);
             _framesThisSecond++;
 #endif
         }

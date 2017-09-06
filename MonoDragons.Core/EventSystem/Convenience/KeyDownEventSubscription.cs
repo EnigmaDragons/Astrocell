@@ -20,7 +20,7 @@ namespace MonoDragons.Core.EventSystem.Convenience
 
         public void Subscribe()
         {
-            World.Subscribe(EventSubscription.Create<KeyDownEvent>(TriggerActionOnProperKey, _owner));
+            Event.Subscribe(EventSubscription.Create<KeyDownEvent>(TriggerActionOnProperKey, _owner));
         }
 
         private void TriggerActionOnProperKey(KeyDownEvent eventt)

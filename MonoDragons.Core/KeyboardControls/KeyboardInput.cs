@@ -14,9 +14,10 @@ namespace MonoDragons.Core.KeyboardControls
         public void Update(IEntities entities, TimeSpan delta)
         {
             Update(delta);
-            var inputs = _newInputs.Copy();
-            _newInputs.Clear();
-            entities.With<TypingInput>((o, t) => t.If(t.IsActive, () => ProcessAllInputs(inputs, t)));
+            var inputText = _newInputText.Copy();
+            _newInputText.Clear();
+            entities.With<TypingInput>((o, t) => t.If(t.IsActive, () => ProcessAllInputs(inputText, t)));
+            entities.With<TypingInput>(t => t.Update(delta));
         }
 
         private static void ProcessAllInputs(IEnumerable<string> inputs, TypingInput t)
@@ -30,7 +31,7 @@ namespace MonoDragons.Core.KeyboardControls
             });
         }
 
-        private readonly List<string> _newInputs = new List<string>();
+        private readonly List<string> _newInputText = new List<string>();
 
         List<Keys> keys;
         bool[] IskeyUp;
@@ -66,21 +67,21 @@ namespace MonoDragons.Core.KeyboardControls
                     if (IskeyUp[i])
                     {
                         if (key == Keys.Space)
-                            _newInputs.Add(" ");
+                            _newInputText.Add(" ");
                         if (key == Keys.OemPeriod || key == Keys.Decimal)
-                            _newInputs.Add(".");
+                            _newInputText.Add(".");
                         if (key.ToString().StartsWith("NumPad"))
-                            _newInputs.Add(key.ToString().Substring(6));
+                            _newInputText.Add(key.ToString().Substring(6));
                         if (i >= 2 && i <= 11)
                         {
                             if (state.IsKeyUp(Keys.RightShift) || state.IsKeyUp(Keys.LeftShift))
-                                _newInputs.Add(key.ToString()[1].ToString());
+                                _newInputText.Add(key.ToString()[1].ToString());
                         }
                         if (i >= 12 && i <= 37)
                         {
                             if ((state.IsKeyDown(Keys.RightShift) || state.IsKeyDown(Keys.LeftShift)) != Console.CapsLock)
-                                _newInputs.Add(key.ToString());
-                            else _newInputs.Add(key.ToString().ToLower());
+                                _newInputText.Add(key.ToString());
+                            else _newInputText.Add(key.ToString().ToLower());
                         }
                     }
                     IskeyUp[i] = false; //make sure we know the key is pressed
@@ -104,7 +105,7 @@ namespace MonoDragons.Core.KeyboardControls
 
         private void AddBackspace()
         {
-            _newInputs.Add(Backspace);
+            _newInputText.Add(Backspace);
         }
     }
 }

@@ -59,8 +59,6 @@ namespace MonoDragons.Core.PhysicsEngine
             ZIndex = zIndex;
         }
 
-
-
         public Vector2 Center
         {
             get { return new Vector2(Location.X + (Size.Width / 2f), Location.Y + (Size.Height / 2f)); }

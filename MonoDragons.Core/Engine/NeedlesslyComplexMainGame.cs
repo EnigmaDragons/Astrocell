@@ -2,21 +2,21 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoDragons.Core.Graphics;
 using MonoDragons.Core.Inputs;
-using MonoDragons.Core.Memory;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
 using MonoDragons.Core.UserInterface;
 using System;
 using Microsoft.Xna.Framework.Input;
 using MonoDragons.Core.Entities;
+using MonoDragons.Core.KeyboardControls;
 using MonoDragons.Core.MouseControls;
 using MonoDragons.Core.Navigation;
 using MonoDragons.Core.Render.Animations;
-using MonoDragons.Core.Scenes;
+using MonoDragons.Core.Text;
 
 namespace MonoDragons.Core.Engine
 {
-    public class NeedlesslyComplexMainGame : Game, INavigation
+    public class NeedlesslyComplexMainGame : Game
     {
         private readonly string _startingViewName;
         private readonly GraphicsDeviceManager _graphics;
@@ -25,14 +25,11 @@ namespace MonoDragons.Core.Engine
         private readonly Metrics _metrics;
         private readonly EntitySystem _ecs;
         private readonly bool _areScreenSettingsPreCalculated;
-
-        private IScene _currentScene;
-
+        
         private SpriteBatch _sprites;
         private Display _display;
         private Size2 _defaultScreenSize;
         private Texture2D _black;
-
 
         // @todo #1 fix this so we config everything before the game
         public NeedlesslyComplexMainGame(string title, string startingViewName, Size2 defaultGameSize, SceneFactory sceneFactory, IController controller)
@@ -62,7 +59,7 @@ namespace MonoDragons.Core.Engine
             PhysicsSystems.RegisterAll(_ecs);
             AnimationSystems.RegisterAll();
             MouseSystems.RegisterAll(_ecs);
-
+            KeyboardSystems.RegisterAll(_ecs);
             Window.Title = title;
         }
 
@@ -74,14 +71,15 @@ namespace MonoDragons.Core.Engine
             Window.Position = new Point(0, 0); // Delete this once the above issue is fixed 
             IsMouseVisible = true;
             _sprites = new SpriteBatch(GraphicsDevice);
-            Resources.Init(this);
             GameInstance.Init(this);
             Input.SetController(_controller);
             _ecs.Register(new ControlHandler());
             _ecs.Register(new DirectionHandler());
-            _black = new RectangleTexture(new Rectangle(new Point(0, 0), new Point(1, 1)), Color.Black).Create();
-            World.Init(this, this, _sprites, _display);
+            _black = new RectangleTexture(Color.Black).Create();
+            Navigate.Init(_sceneFactory);
+            DefaultFont.Load(Content);
             UI.Init(this, _sprites, _display);
+            SceneNavigatorConsole.Enable();
             base.Initialize();
         }
 
@@ -100,7 +98,7 @@ namespace MonoDragons.Core.Engine
 
         protected override void LoadContent()
         {
-            NavigateTo(_startingViewName);
+            Navigate.To(_startingViewName);
         }
 
         protected override void UnloadContent()
@@ -114,16 +112,14 @@ namespace MonoDragons.Core.Engine
             _metrics.Update(gameTime.ElapsedGameTime);
             _controller.Update(gameTime.ElapsedGameTime);
             _ecs.Update(gameTime.ElapsedGameTime);
-            _currentScene?.Update(gameTime.ElapsedGameTime);
             new Physics().Resolve();
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
+            _graphics.GraphicsDevice.Clear(Color.Black);
             _sprites.Begin(SpriteSortMode.FrontToBack, null, SamplerState.AnisotropicClamp);
-            World.DrawBackgroundColor(Color.Black);
-            _currentScene?.Draw();
             _ecs.Draw(_sprites);
             _metrics.Draw(Transform2.Zero);
             HideExternals();
@@ -138,27 +134,13 @@ namespace MonoDragons.Core.Engine
             _sprites.Draw(_black, new Rectangle(new Point(0, _display.GameHeight),
                 new Point(_display.ProgramWidth, _display.ProgramHeight - _display.GameHeight)), Color.Black);
         }
-
-        public void NavigateTo(string sceneName)
-        {
-            var scene = _sceneFactory.Create(sceneName);
-            scene.Init();
-            _currentScene = scene;
-        }
-
-        public void NavigateTo(IScene scene)
-        {
-            scene.Init();
-            _currentScene = scene;
-        }
-
-        // TODO: This is only for development. Remove this when re're ready to release to production!!
+        
         private void CheckForEscape()
         {
 #if DEBUG  
             var state = Keyboard.GetState();
             if(state.IsKeyDown(Keys.Escape))
-                Engine.GameInstance.TheGame.Exit();
+                GameInstance.TheGame.Exit();
 #endif
         }
     }

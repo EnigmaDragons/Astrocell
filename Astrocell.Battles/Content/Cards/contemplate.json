@@ -1,5 +1,6 @@
 {
     "Name": "Contemplate",
+    "Description": "Gain 1 Energy.\n\nDraw 2 Cards.",
     "ActionPointCost": 3,
     "EnergyGain": 1,
     "CardsDrawn": 2

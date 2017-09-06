@@ -1,5 +1,4 @@
-﻿using MonoDragons.Core.Engine;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace MonoDragons.Core.EventSystem
@@ -11,7 +10,7 @@ namespace MonoDragons.Core.EventSystem
 
         public void Subscribe<T>(Action<T> act)
         {
-            World.Subscribe(EventSubscription.Create<T>((e) => _actions.Add(() => act(e)), this));
+            Event.Subscribe(EventSubscription.Create<T>((e) => _actions.Add(() => act(e)), this));
         }
 
         public void Dequeue()

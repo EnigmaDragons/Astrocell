@@ -1,7 +1,9 @@
 ﻿{
-    "Name":  "Strike",
+    "Name": "Strike",
+    "Description": "Strike a foe with your weapon (1x Atk)",
     "ActionPointCost": 2,
-    "Effects": [ {
+    "Effects": [
+        {
             "Target": "One",
             "Type": "Damage",
             "Stat": "Attack",

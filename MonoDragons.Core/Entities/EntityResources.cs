@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoDragons.Core.Common;
+using MonoDragons.Core.Graphics;
 using MonoDragons.Core.IO;
 
 namespace MonoDragons.Core.Entities
@@ -18,6 +20,15 @@ namespace MonoDragons.Core.Entities
         public EntityResources(string basePath = "./Content")
         {
             _basePath = basePath;
+        }
+
+        public Texture2D CreateRectangle(Color color, GameObject obj)
+        {
+            var asset = $"{color}RectangleTexture";
+            UpdateAssetHandles(obj, asset);
+            if (!_assets.ContainsKey(asset))
+                _assets[asset] = new RectangleTexture(color).Create();
+            return (Texture2D)_assets[asset];
         }
 
         public Texture2D LoadTexture(string filePath, GameObject obj)

@@ -39,8 +39,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Battles\CardDisplay.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenes\CardScene.cs" />
     <Compile Include="Scenes\EcsDisposeScene.cs" />
     <Compile Include="Scenes\FireCave.cs" />
   </ItemGroup>
@@ -94,6 +96,10 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Astrocell.Battles\Astrocell.Battles.csproj">
+      <Project>{4f2716eb-35cb-42ef-8d6a-58d8113798c1}</Project>
+      <Name>Astrocell.Battles</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MonoDragons.Core\MonoDragons.Core.csproj">
       <Project>{a33f8fe3-a35a-4ddf-b96c-0157224f602c}</Project>
       <Name>MonoDragons.Core</Name>
