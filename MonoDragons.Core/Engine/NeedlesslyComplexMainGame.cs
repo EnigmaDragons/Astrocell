@@ -8,6 +8,7 @@ using System;
 using MonoDragons.Core.Development;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.KeyboardControls;
+using MonoDragons.Core.Motion;
 using MonoDragons.Core.MouseControls;
 using MonoDragons.Core.Navigation;
 using MonoDragons.Core.Render.Animations;
@@ -52,6 +53,7 @@ namespace MonoDragons.Core.Engine
             _sceneFactory = sceneFactory;
             _controller = controller;
             _ecs = Entity.System;
+            _ecs.Register(new MotionStateSelector());
             Renderers.RegisterAll(_ecs);
             PhysicsSystems.RegisterAll(_ecs);
             AnimationSystems.RegisterAll(_ecs);

@@ -7,6 +7,7 @@ namespace MonoDragons.Core.PhysicsEngine
         public static void RegisterAll(EntitySystem system)
         {
             system.Register(new ZGravitation());
+            system.Register(new MotionBoxColliderStateSelector());
             system.Register(new BoxCollision());
             system.Register(new MotionSystem());
             system.Register(new Travelling());

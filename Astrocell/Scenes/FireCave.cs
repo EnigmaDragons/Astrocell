@@ -14,11 +14,9 @@ namespace Astrocell.Scenes
     {
         protected override IEnumerable<GameObject> CreateObjs()
         {
-            var charTransform = new Transform2(new Rectangle(48 * 5, 48 * 8, 48, 48), new ZIndex(3));
-            yield return new OrthographicCharacterFactory().CreateCharacter(Tsx.Create(Path.Combine("Characters", "Gareth.tsx")), new Vector2(48 * 5, 48 * 8))
-                .Add(new Motion2(new Velocity2()))
-                .Add(new TopDownMovement { Speed = 0.2f })
-                .Add(new BoxCollider(charTransform));
+            yield return new OrthographicMovingObjectFactory()
+                .CreateMovingObject(Tsx.Create(Path.Combine("Characters", "Gareth.tsx")), new Vector2(48 * 5, 48 * 8), new ZIndex(3))
+                .Add(new TopDownMovement {Speed = 0.2f});
             foreach (var tile in new OrthographicTileMapFactory().CreateMap(Tmx.Create(Path.Combine("Maps", "FireCave.tmx"))))
                 yield return tile;
         }

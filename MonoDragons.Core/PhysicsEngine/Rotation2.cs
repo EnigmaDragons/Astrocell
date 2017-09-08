@@ -64,6 +64,66 @@ namespace MonoDragons.Core.PhysicsEngine
             return new Direction(hDir, vDir);
         }
 
+        public Rotation2 ToOrthogonal()
+        {
+            var degrees = (int)Degrees;
+            if (338 <= Degrees || Degrees <= 22)
+                return Rotation2.Up;
+            if (23 <= Degrees && Degrees <= 67)
+                return Rotation2.UpRight;
+            if (68 <= Degrees && Degrees <= 112)
+                return Rotation2.Right;
+            if (113 <= Degrees && Degrees <= 157)
+                return Rotation2.DownRight;
+            if (158 <= Degrees && Degrees <= 202)
+                return Rotation2.Down;
+            if (203 <= Degrees && Degrees <= 247)
+                return Rotation2.DownLeft;
+            if (248 <= Degrees && Degrees <= 292)
+                return Rotation2.Left;
+            if (293 <= Degrees && Degrees <= 337)
+                return Rotation2.UpLeft;
+            throw new Exception("The developer made a horrible mistake!");
+        }
+
+        public Rotation2 ToCardinal()
+        {
+            if (315 <= Degrees || Degrees <= 22)
+                return Rotation2.Up;
+            if (45 < Degrees && Degrees < 135)
+                return Rotation2.Right;
+            if (135 <= Degrees && Degrees <= 225)
+                return Rotation2.Down;
+            if (225 < Degrees && Degrees < 315)
+                return Rotation2.Left;
+            throw new Exception("The developer made a horrible mistake!");
+        }
+
+        public Rotation2 ToCardinal(Rotation2 previousCardinalRotation)
+        {
+            var degrees = (int) Degrees;
+
+            if (315 < degrees || degrees < 45)
+                return Rotation2.Up;
+            if (45 < degrees && degrees < 135)
+                return Rotation2.Right;
+            if (135 < degrees && degrees < 225)
+                return Rotation2.Down;
+            if (225 < degrees && degrees < 315)
+                return Rotation2.Left;
+
+            if (degrees == 45)
+                return Math.Abs(previousCardinalRotation.Degrees) < 0.01 ? Rotation2.Right : Rotation2.Up;
+            if (degrees == 135)
+                return Math.Abs(previousCardinalRotation.Degrees - 180) < 0.01 ? Rotation2.Right : Rotation2.Down;
+            if (degrees == 225)
+                return Math.Abs(previousCardinalRotation.Degrees - 180) < 0.01 ? Rotation2.Left : Rotation2.Down;
+            if (degrees == 315)
+                return Math.Abs(previousCardinalRotation.Degrees) < 0.01 ? Rotation2.Left : Rotation2.Up;
+
+            throw new Exception("The developer made a horrible mistake if you see this!");
+        }
+
         public static float Difference(Rotation2 r1, Rotation2 r2)
         {
             var higher = Math.Max(r1.Degrees, r2.Degrees);
