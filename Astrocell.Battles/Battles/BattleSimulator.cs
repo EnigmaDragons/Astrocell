@@ -17,8 +17,8 @@ namespace Astrocell.Battles.Battles
         public BattleSide Resolve1V1(CharacterSheet hero, CharacterSheet villain)
         {
             return Battle.Create(new AIPlayer(), new AIPlayer(),
-                BattleCharacter.Init(BattleSide.Gamer, hero),
-                BattleCharacter.Init(BattleSide.Enemy, villain)).Resolve();
+                BattleCharacter.Create(BattleSide.Gamer, hero),
+                BattleCharacter.Create(BattleSide.Enemy, villain)).Resolve();
         }
     }
 }

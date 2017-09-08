@@ -16,6 +16,11 @@ namespace MonoDragons.Core.PhysicsEngine
             Height = height;
         }
 
+        public bool Equals(Size2 other)
+        {
+            return Width == other.Width && Height == other.Height;
+        }
+
         public override string ToString()
         {
             return $"{Width}, {Height}";

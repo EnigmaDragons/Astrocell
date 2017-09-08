@@ -34,7 +34,7 @@ namespace Astrocell.Battles.Battles
 
         private BattleCharacter Build(BattleSide loyalty, StartingStats stats)
         {
-            return BattleCharacter.Init(loyalty,
+            return BattleCharacter.Create(loyalty,
                 _builder.WithName(Guid.NewGuid().ToString().Substring(0, 7))
                        .WithStats(stats)
                        .Build());

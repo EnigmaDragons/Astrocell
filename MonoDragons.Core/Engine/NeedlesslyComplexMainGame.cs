@@ -118,7 +118,7 @@ namespace MonoDragons.Core.Engine
         protected override void Draw(GameTime gameTime)
         {
             _graphics.GraphicsDevice.Clear(Color.Black);
-            _sprites.Begin(SpriteSortMode.FrontToBack, null, SamplerState.AnisotropicClamp);
+            _sprites.Begin(SpriteSortMode.FrontToBack, null, SamplerState.AnisotropicClamp, DepthStencilState.DepthRead);
             _ecs.Draw(_sprites);
             HideExternals();
             _sprites.End();

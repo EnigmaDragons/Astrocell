@@ -3,8 +3,9 @@ using Microsoft.Xna.Framework;
 
 namespace MonoDragons.Core.PhysicsEngine
 {
-    public class Transform2
+    public sealed class Transform2
     {
+        private const float Epsilon = 0.001f;
         public static Transform2 Zero = new Transform2(Vector2.Zero, Size2.Zero);
 
         public Vector2 Location { get; set; } = Vector2.Zero;
@@ -13,9 +14,7 @@ namespace MonoDragons.Core.PhysicsEngine
         public Size2 Size { get; set; } = Size2.Zero;
         public ZIndex ZIndex { get; set; } = new ZIndex { Value = 1 };
 
-        public Transform2()
-        {
-        }
+        public Transform2() { }
 
         public Transform2(Rectangle rectangle)
             : this(rectangle, new ZIndex()) { }
@@ -65,6 +64,11 @@ namespace MonoDragons.Core.PhysicsEngine
             set { Location = new Vector2(value.X - (Size.Width / 2f), value.Y - (Size.Height / 2f)); }
         }
 
+        public Transform2 Copy()
+        {
+            return this + Zero;
+        }
+
         public void SetTo(Transform2 other)
         {
             Location = other.Location;
@@ -104,14 +108,28 @@ namespace MonoDragons.Core.PhysicsEngine
             return new Transform2(Location + paddingAmount.ToVector(), Rotation, Size - (paddingAmount * 2), Scale, ZIndex);
         }
 
+        public bool Equals(Transform2 other)
+        {
+            return Location.Equals(other.Location)
+                   && Size.Equals(other.Size)
+                   && Rotation.Equals(other.Rotation)
+                   && Scale - other.Scale < Epsilon
+                   && ZIndex.Equals(other.ZIndex);
+        }
+
         public override string ToString()
         {
             return $"{Location} {Size} {Rotation} {Scale} {ZIndex}";
         }
 
+        public static Transform2 operator -(Transform2 t1, Transform2 t2)
+        {
+            return new Transform2(t1.Location - t2.Location, t1.Rotation - t2.Rotation, t1.Size, t1.Scale / t2.Scale, t1.ZIndex - t2.ZIndex);
+        }
+
         public static Transform2 operator +(Transform2 t1, Transform2 t2)
         {
-            return new Transform2(t1.Location + t2.Location, t1.Rotation + t2.Rotation, t1.Size + t2.Size, t1.Scale * t2.Scale, t1.ZIndex);
+            return new Transform2(t1.Location + t2.Location, t1.Rotation + t2.Rotation, t1.Size, t1.Scale * t2.Scale, t1.ZIndex + t2.ZIndex);
         }
 
         public static Transform2 operator +(Transform2 t1, Vector2 by)

@@ -25,6 +25,10 @@ namespace Astrocell.Battles
                 .Add((o, r) => new BorderTexture(r.CreateRectangle(Color.AntiqueWhite, o)))
                 .Add(log)
                 .Add(new TextDisplay {Text = () => log.Lines.Last()});
+            yield return CharacterDisplay.Create(
+                BattleCharacter.Create(BattleSide.Gamer, Samples.CreateElectrician()),
+                "Sprites/gareth-face.png",
+                new Vector2(1200, 450));
             new BattleSimulator(log).Resolve1V1(Samples.CreateDumbBrute(), Samples.CreateDumbBrute());
         }
     }

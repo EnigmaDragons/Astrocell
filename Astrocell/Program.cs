@@ -22,7 +22,7 @@ namespace Astrocell
         {
             using (var game = new NeedlesslyComplexMainGame(
                 "Astrocell",
-                "Battle", 
+                "AnchorTest", 
                 new Display(1600, 900, false, 1), 
                 CreateSceneFactory(), 
                 CreateController()))
@@ -47,6 +47,7 @@ namespace Astrocell
                     { "Fire Cave", () => new FireCave() },
                     { "CardDisplay", () => new CardScene() },
                     { "Battle", () => new BattleScene() },
+                    { "AnchorTest", () => new AnchorTest() },
                 });
         }
     }

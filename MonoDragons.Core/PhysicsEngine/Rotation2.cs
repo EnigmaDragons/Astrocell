@@ -43,10 +43,12 @@ namespace MonoDragons.Core.PhysicsEngine
 
         public static Rotation2 operator +(Rotation2 r1, Rotation2 r2)
         {
-            var newValue = r1.Degrees + r2.Degrees;
-            while (newValue >= 360)
-                newValue -= 360;
-            return new Rotation2(newValue);
+            return new Rotation2(r1.Degrees + r2.Degrees);
+        }
+
+        public static Rotation2 operator -(Rotation2 r1, Rotation2 r2)
+        {
+            return new Rotation2(r1.Degrees - r2.Degrees);
         }
 
         public Direction ToDirection()

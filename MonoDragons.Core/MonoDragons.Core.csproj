@@ -84,6 +84,7 @@
     <Compile Include="Development\Metrics.cs" />
     <Compile Include="Development\FrameRate.cs" />
     <Compile Include="Logs\InMemoryLog.cs" />
+    <Compile Include="Render\MultiTexture.cs" />
     <Compile Include="Timing\TimerAction.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntitySystem.cs" />
