@@ -5,7 +5,6 @@ using MonoDragons.Core.Inputs;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
 using System;
-using Microsoft.Xna.Framework.Input;
 using MonoDragons.Core.Development;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.KeyboardControls;
@@ -111,7 +110,6 @@ namespace MonoDragons.Core.Engine
 
         protected override void Update(GameTime gameTime)
         {
-            CheckForEscape();
             _controller.Update(gameTime.ElapsedGameTime);
             _ecs.Update(gameTime.ElapsedGameTime);
             base.Update(gameTime);
@@ -133,15 +131,6 @@ namespace MonoDragons.Core.Engine
                 new Point(_display.ProgramWidth - _display.GameWidth, _display.ProgramHeight)), Color.Black);
             _sprites.Draw(_black, new Rectangle(new Point(0, _display.GameHeight),
                 new Point(_display.ProgramWidth, _display.ProgramHeight - _display.GameHeight)), Color.Black);
-        }
-        
-        private void CheckForEscape()
-        {
-#if DEBUG
-            var state = Keyboard.GetState();
-            if(state.IsKeyDown(Keys.Escape))
-                GameInstance.TheGame.Exit();
-#endif
         }
     }
 }

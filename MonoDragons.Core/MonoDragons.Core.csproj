@@ -59,6 +59,7 @@
     <Compile Include="Common\Reflection\PublicProperties.cs" />
     <Compile Include="Common\Store.cs" />
     <Compile Include="Development\DevelopmentSystems.cs" />
+    <Compile Include="Development\PressEscapeToQuit.cs" />
     <Compile Include="Development\UpdateRate.cs" />
     <Compile Include="Engine\Automation.cs" />
     <Compile Include="Engine\UpdateComponent.cs" />

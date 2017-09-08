@@ -9,6 +9,7 @@ namespace MonoDragons.Core.Development
             system.Register((IRenderer)new FrameRateMonitoring());
             system.Register((ISystem)new FrameRateMonitoring());
             system.Register(new UpdateRateMonitoring());
+            system.Register(new PressEscapeToQuit());
         }
     }
 }
