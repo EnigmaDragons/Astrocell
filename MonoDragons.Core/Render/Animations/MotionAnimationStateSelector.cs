@@ -1,5 +1,6 @@
 ﻿using System;
 using MonoDragons.Core.Entities;
+using MonoDragons.Core.Motion;
 using MonoDragons.Core.PhysicsEngine;
 
 namespace MonoDragons.Core.Render.Animations
@@ -8,46 +9,29 @@ namespace MonoDragons.Core.Render.Animations
     {
         public void Update(IEntities entities, TimeSpan delta)
         {
-            entities.With<MotionAnimationStates>((obj, character) =>
-            {
-                obj.With<Motion2>(motion =>
-                {
-                    obj.With<Animation>(animation =>
-                    {
-                        var isStanding = !motion.Velocity.IsMoving();
-                        var facing = motion.Velocity.Direction;
-                        if (character.WasStanding == isStanding && character.LastFacing.Equals(facing))
-                            return;
-                        var animationFacing = GetAnimationRotation(character.LastFacing, facing);
-                        var currentAnimation = CalculateCurrentAnimation(character, animationFacing, isStanding);
-                        ReplaceAnimation(animation, currentAnimation);
-                        character.WasStanding = isStanding;
-                        character.LastFacing = facing;
-                    });
-                });
-            });
+            entities.With<MotionAnimationStates>(
+                (obj, motionStates) => obj.With<MotionState>(
+                    motionState => obj.With<Motion2>(
+                        motion => obj.With<Animation>(
+                            animation => EnsureCorrectAnimation(motionStates, motion, motionState, animation)))));
         }
 
-        private Animation CalculateCurrentAnimation(MotionAnimationStates character, Rotation2 animationFacing, bool isStanding)
+        private void EnsureCorrectAnimation(MotionAnimationStates motionStates, Motion2 motion, MotionState motionState, Animation animation)
         {
-            var currentAnimation = isStanding
-                ? character.StandingAnimations[animationFacing]
-                : character.MovingAnimations[animationFacing];
-            return currentAnimation;
+            var newKey = GetAnimationKey(motion, motionState);
+            if (newKey == motionStates.CurrentAnimationKey)
+                return;
+            motionStates.CurrentAnimationKey = newKey;
+            ReplaceAnimation(animation, motionStates.Animations[newKey]);
         }
 
-        private Rotation2 GetAnimationRotation(Rotation2 previousRotation, Rotation2 currentRotation2)
+        private int GetAnimationKey(Motion2 motion, MotionState motionState)
         {
-            if (currentRotation2.Equals(Rotation2.UpRight))
-                return previousRotation.Equals(Rotation2.Up) ? Rotation2.Right : Rotation2.Up;
-            if (currentRotation2.Equals(Rotation2.UpLeft))
-                return previousRotation.Equals(Rotation2.Up) ? Rotation2.Left : Rotation2.Up;
-            if (currentRotation2.Equals(Rotation2.DownRight))
-                return previousRotation.Equals(Rotation2.Down) ? Rotation2.Right : Rotation2.Down;
-            if (currentRotation2.Equals(Rotation2.DownLeft))
-                return previousRotation.Equals(Rotation2.Down) ? Rotation2.Left : Rotation2.Down;
-            return currentRotation2;
-        }
+            return (int) motionState.PreviousCardinalRotation.Degrees
+                   + (motion.Velocity.IsMoving()
+                       ? (int) Moving.Yes
+                       : (int) Moving.No);
+        } 
 
         private void ReplaceAnimation(Animation oldAnimation, Animation newAnimation)
         {

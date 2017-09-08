@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.Motion;
-using MonoDragons.Core.PhysicsEngine;
+using MonoDragons.Core.Render.Animations;
 
-namespace MonoDragons.Core.Render.Animations
+namespace MonoDragons.Core.PhysicsEngine
 {
-    public class MotionAnimationStates : EntityComponent
+    public class MotionBoxColliderStates : EntityComponent
     {
-        public Dictionary<int, Animation> Animations { get; set; }
-        public int CurrentAnimationKey { get; set; }
+        public Dictionary<int, BoxCollider> Colliders { get; set; }
 
-        public MotionAnimationStates(Animation idleUp, Animation idleRight, Animation idleDown, Animation idleLeft, 
-            Animation movingUp, Animation movingRight, Animation movingDown, Animation movingLeft)
+        public MotionBoxColliderStates(BoxCollider idleUp, BoxCollider idleRight, BoxCollider idleDown, BoxCollider idleLeft,
+            BoxCollider movingUp, BoxCollider movingRight, BoxCollider movingDown, BoxCollider movingLeft)
         {
-            Animations = new Dictionary<int, Animation>
+            Colliders = new Dictionary<int, BoxCollider>
             {
                 { (int)Rotation2.Up.Degrees + (int)Moving.No, idleUp },
                 { (int)Rotation2.Right.Degrees + (int)Moving.No, idleRight },

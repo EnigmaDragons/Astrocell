@@ -28,7 +28,7 @@ namespace MonoDragons.Core.Tiled.TmxLoading
                 Spacing = new XValue(spriteSheet, "spacing").AsInt(),
                 Columns = new XValue(spriteSheet, "columns").AsInt(),
                 ImageSource = GetSourcePath(spriteSheet.Element(XName.Get("image")), tsxPath),
-                MsPerFrame = new XProperty(spriteSheet, "FrameLength").AsInt(),
+                MsPerFrame = new XProperty(spriteSheet, "MsPerFrame").AsInt(),
                 Sprites = spriteSheet.Elements("tile").Select(x => TsxSprite.Create(x)).ToList(),
             };
         }

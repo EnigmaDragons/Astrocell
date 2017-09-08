@@ -15,13 +15,7 @@ namespace MonoDragons.Core.Tiled.TmxLoading
             return new TmxTilesetTile
             {
                 Id = new XValue(tile, "id").AsInt(),
-                CollisionBoxes = tile.Element(XName.Get("objectgroup"))
-                                     .Elements(XName.Get("object"))
-                                     .Select(x => new Rectangle(
-                                         new XValue(x, "x").AsInt(), 
-                                         new XValue(x, "y").AsInt(), 
-                                         new XValue(x, "width").AsInt(), 
-                                         new XValue(x, "height").AsInt())).ToList()
+                CollisionBoxes = new XBoxCollisions(tile).Get()
             };
         }
 

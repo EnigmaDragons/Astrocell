@@ -83,6 +83,12 @@
     <Compile Include="Engine\GameInstance.cs" />
     <Compile Include="Development\Metrics.cs" />
     <Compile Include="Development\FrameRate.cs" />
+    <Compile Include="Motion\MotionState.cs" />
+    <Compile Include="Motion\MotionStateSelector.cs" />
+    <Compile Include="Motion\Moving.cs" />
+    <Compile Include="PhysicsEngine\MotionBoxColliderStates.cs" />
+    <Compile Include="PhysicsEngine\MotionBoxColliderStateSelector.cs" />
+    <Compile Include="Tiled\TmxLoading\XBoxCollisions.cs" />
     <Compile Include="Logs\InMemoryLog.cs" />
     <Compile Include="Render\MultiTexture.cs" />
     <Compile Include="Timing\TimerAction.cs" />
@@ -195,7 +201,7 @@
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Text\TextAlign.cs" />
     <Compile Include="Text\WrappingText.cs" />
-    <Compile Include="Tiled\OrthographicCharacterFactory.cs" />
+    <Compile Include="Tiled\OrthographicMovingObjectFactory.cs" />
     <Compile Include="Tiled\SpriteSheetRectangle.cs" />
     <Compile Include="Tiled\TmxLoading\IntegersInText.cs" />
     <Compile Include="Tiled\OrthographicTileMapFactory.cs" />
