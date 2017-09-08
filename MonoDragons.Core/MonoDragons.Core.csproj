@@ -89,6 +89,7 @@
     <Compile Include="PhysicsEngine\MotionBoxColliderStates.cs" />
     <Compile Include="PhysicsEngine\MotionBoxColliderStateSelector.cs" />
     <Compile Include="Tiled\TmxLoading\XBoxCollisions.cs" />
+    <Compile Include="Logs\InMemoryLog.cs" />
     <Compile Include="Timing\TimerAction.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntitySystem.cs" />

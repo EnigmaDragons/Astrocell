@@ -13,7 +13,7 @@ namespace MonoDragons.Core.UserInterface
         {
             return Entity.Create(transform)
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.White, o)))
-                .Add((o, r) => new BorderTexture(r.CreateRectangle(Color.Orange, o)))
+                .Add((o, r) => new BorderTexture { Value = r.CreateRectangle(Color.Orange, o) })
                 .Add(new TypingInput { IsActive = true } )
                 .Add(o => new TextDisplay { Color = Color.Black, Text = () => o.Get<TypingInput>().DisplayValue, Align = TextAlign.Left });
         }

@@ -142,5 +142,10 @@ namespace MonoDragons.Core.PhysicsEngine
         {
             return this + new Transform2(Vector2.Zero, Rotation2.Default, Size2.Zero, Scale / scale, ZIndex);
         }
+
+        public Transform2 Expanded(Size2 size)
+        {
+            return new Transform2(Location - size.ToVector(), Rotation, Size + size * 2, Scale, ZIndex);
+        }
     }
 }
