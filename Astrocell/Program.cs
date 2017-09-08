@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Astrocell.Battles;
+using Astrocell.Plugins;
 using Astrocell.Scenes;
 using Microsoft.Xna.Framework.Input;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Engine;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.Inputs;
-using MonoDragons.Core.KeyboardControls;
 using MonoDragons.Core.Navigation;
-using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
 using MonoDragons.Core.Scenes;
-using MonoDragons.Core.Tiled;
 
 namespace Astrocell
 {
@@ -28,7 +27,7 @@ namespace Astrocell
                 CreateSceneFactory(), 
                 CreateController()))
             {
-                Entity.Register(new TopDownController());
+                AstrocellSystems.RegisterAll(Entity.System);
                 game.Run();
             }
         }
@@ -46,7 +45,6 @@ namespace Astrocell
             return new SceneFactory(new Dictionary<string, Func<IScene>>
                 {
                     { "Fire Cave", () => new FireCave() },
-                    { "DisposeScene", () => new EcsDisposeScene() },
                     { "CardDisplay", () => new CardScene() },
                     { "Battle", () => new BattleScene() },
                 });
