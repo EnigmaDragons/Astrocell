@@ -6,9 +6,12 @@ namespace Astrocell.Battles.Battles
 {
     public class BattleSimulator
     {
-        static BattleSimulator()
+        public BattleSimulator()
+            : this(new DebugLog()) { }
+
+        public BattleSimulator(ILog log)
         {
-            BattleLog.Instance = new DebugLog();
+            BattleLog.Instance = log;
         }
 
         public BattleSide Resolve1V1(CharacterSheet hero, CharacterSheet villain)

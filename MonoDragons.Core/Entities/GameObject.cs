@@ -1,6 +1,5 @@
 ﻿using System;
 using MonoDragons.Core.Common;
-using MonoDragons.Core.Engine;
 using MonoDragons.Core.PhysicsEngine;
 
 namespace MonoDragons.Core.Entities

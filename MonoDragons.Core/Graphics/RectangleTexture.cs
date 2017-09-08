@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoDragons.Core.Engine;
 
@@ -6,6 +7,10 @@ namespace MonoDragons.Core.Graphics
 {
     public class RectangleTexture
     {
+        private static readonly Lazy<Texture2D> _white = new Lazy<Texture2D>(() => new RectangleTexture(Color.White).Create());
+
+        public static Texture2D White => _white.Value;
+
         private readonly Color _color;
 
         public RectangleTexture(Color color)

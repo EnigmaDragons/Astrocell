@@ -20,6 +20,7 @@ namespace Astrocell.Battles
                 .Add(new MouseDrag())
                 .Add(new ZGravity())
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.Coral, o)))
+                .Add(new BorderTexture())
                 .Add(new MultiTextDisplay { Displays = new List<TextDisplay> {
                         new TextDisplay {Align = TextAlign.TopCenter, Text = () => card.Name },
                         new TextDisplay {Align = TextAlign.TopLeft, Text = () => $"{card.ActionPointCost} AP"},
