@@ -23,6 +23,7 @@ namespace MonoDragons.Core.MouseControls
         public bool ButtonJustPressed => LeftButtonJustPressed || RightButtonJustPressed;
         public bool ButtonJustReleased => LeftButtonJustReleased || RightButtonJustReleased;
         public bool IsOnGameScreen => GameInstance.TheGame.IsActive;
+        public int MouseWheelDelta => _current.ScrollWheelValue - _last.ScrollWheelValue;
 
         public MouseSnapshot()
             : this(new Microsoft.Xna.Framework.Input.MouseState()) { }

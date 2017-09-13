@@ -9,6 +9,7 @@ namespace MonoDragons.Core.MouseControls
             system.Register(new MouseStateProcessing());
             system.Register(new MouseDragging());
             system.Register(new MouseClicking());
+            system.Register(new MouseWheelScaling());
         }
     }
 }

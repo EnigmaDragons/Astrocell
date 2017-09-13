@@ -86,6 +86,8 @@
     <Compile Include="Motion\MotionState.cs" />
     <Compile Include="Motion\MotionStateSelector.cs" />
     <Compile Include="Motion\Moving.cs" />
+    <Compile Include="MouseControls\MouseWheelScale.cs" />
+    <Compile Include="MouseControls\MouseWheelScaling.cs" />
     <Compile Include="PhysicsEngine\MotionBoxColliderStates.cs" />
     <Compile Include="PhysicsEngine\MotionBoxColliderStateSelector.cs" />
     <Compile Include="Tiled\TmxLoading\XBoxCollisions.cs" />
