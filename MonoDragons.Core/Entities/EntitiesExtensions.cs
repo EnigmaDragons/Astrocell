@@ -17,7 +17,7 @@ namespace MonoDragons.Core.Entities
         public static void WithIntersecting<T>(this IEntities entities, Point point, Action<T> action) 
             where T : EntityComponent
         {
-            Where(entities, o => o.Transform.Intersects(point), action);
+            Where(entities, o => o.World.Intersects(point), action);
         }
 
         public static void WithTopMost<T>(this IEntities entities, Point point, Action<T> action) 
@@ -30,8 +30,8 @@ namespace MonoDragons.Core.Entities
             where T : EntityComponent
         {
             Collect<T>(entities)
-                .Where(o => o.Transform.Intersects(point))
-                .OrderByDescending(o => o.Transform.ZIndex)
+                .Where(o => o.World.Intersects(point))
+                .OrderByDescending(o => o.World.ZIndex)
                 .FirstAsOptional()
                 .IfPresent(o => o.With<T>(x => action(o, x)));
         }
@@ -41,8 +41,8 @@ namespace MonoDragons.Core.Entities
                 where T : EntityComponent
         {
             IEnumerable<GameObject> objs = Collect<T>(entities)
-                .OrderByDescending(o => o.Transform.ZIndex);
-            objs.Where(o => o.Transform.Intersects(point))
+                .OrderByDescending(o => o.World.ZIndex);
+            objs.Where(o => o.World.Intersects(point))
                 .FirstAsOptional()
                 .IfPresent(o =>
                 {

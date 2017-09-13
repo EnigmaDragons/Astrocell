@@ -44,7 +44,7 @@ namespace MonoDragons.Core.MouseControls
                 t =>  t.With<MouseDrag>(m => m.If(m.IsEnabled(), 
                     () => {
                         m.UpdateDragPoint(_mouse.Position);
-                        t.Transform.Location += _mouse.MovedBy.ToVector2();
+                        t.World.Location += _mouse.MovedBy.ToVector2();
                     }))
                 );
         }
@@ -52,9 +52,9 @@ namespace MonoDragons.Core.MouseControls
         private void SelectTarget(IEntities entities)
         {
             var possibleTargets = new List<GameObject>();
-            entities.With<MouseDrag>((o, m) => o.Transform.If(t => t.Intersects(_mouse.LastPosition), t => possibleTargets.Add(o)));
+            entities.With<MouseDrag>((o, m) => o.World.If(t => t.Intersects(_mouse.LastPosition), t => possibleTargets.Add(o)));
             if (possibleTargets.Any())
-                _targets.Add(possibleTargets.OrderByDescending(x => x.Transform.ZIndex.Value).First());
+                _targets.Add(possibleTargets.OrderByDescending(x => x.World.ZIndex.Value).First());
         }
     }
 }

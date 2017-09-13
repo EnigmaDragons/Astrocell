@@ -11,8 +11,8 @@ namespace MonoDragons.Core.Render
         {
             entities.With<BorderTexture>((o, b) =>
             {
-                sprites.Draw(b.Value, o.Transform.Expanded(new Size2(b.Width, b.Width)).ToRectangle(), null, Color.White,
-                    o.Transform.Rotation.Radians, Vector2.Zero, SpriteEffects.None, o.Transform.ZIndex.AsDepth());
+                sprites.Draw(b.Value, o.World.Expanded(new Size2(b.Width, b.Width)).ToRectangle(), null, Color.White,
+                    o.World.Rotation.Radians, Vector2.Zero, SpriteEffects.None, o.World.ZIndex.AsDepth());
             });
         }
     }

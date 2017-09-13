@@ -8,7 +8,7 @@ namespace MonoDragons.Core.PhysicsEngine
         public void Update(IEntities entities, TimeSpan delta)
         {
             entities.With<DurationTravel>(
-                (o, x) => o.Transform.SetTo(x.GetNewTransform(o.Transform, delta)));
+                (o, x) => o.Local.SetTo(x.GetNewTransform(o.Local, delta)));
         }
     }
 }

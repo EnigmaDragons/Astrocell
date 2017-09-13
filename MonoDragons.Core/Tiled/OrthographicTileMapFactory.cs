@@ -44,7 +44,7 @@ namespace MonoDragons.Core.Tiled
             var box = tile.CollisionBoxes.First();
             return entity.Add(new BoxCollider(
                 new Transform2(
-                    entity.Transform.Location + box.Location.ToVector2(),
+                    entity.World.Location + box.Location.ToVector2(),
                     new Size2(box.Width, box.Height))));
         }
     }

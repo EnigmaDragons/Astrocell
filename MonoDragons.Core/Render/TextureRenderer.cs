@@ -14,8 +14,8 @@ namespace MonoDragons.Core.Render
 
         private static void Draw(SpriteBatch sprites, Texture t, GameObject o)
         {
-            sprites.Draw(t.Value, o.Transform.ToRectangle(), t.SourceRect, Color.White, 
-                o.Transform.Rotation.Radians, Vector2.Zero, SpriteEffects.None, o.Transform.ZIndex.AsDepth());
+            sprites.Draw(t.Value, o.World.ToRectangle(), t.SourceRect, Color.White, 
+                o.World.Rotation.Radians, Vector2.Zero, SpriteEffects.None, o.World.ZIndex.AsDepth());
         }
     }
 }

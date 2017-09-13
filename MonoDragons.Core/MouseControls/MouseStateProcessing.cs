@@ -17,9 +17,9 @@ namespace MonoDragons.Core.MouseControls
             entities.WithTopMost<MouseStateActions>(_mouse.Position, 
                 (o, m) =>
                 {
-                    if (!o.Transform.Intersects(_mouse.Position))
+                    if (!o.World.Intersects(_mouse.Position))
                         m.Exit();
-                    else if (!o.Transform.Intersects(_mouse.LastPosition))
+                    else if (!o.World.Intersects(_mouse.LastPosition))
                         m.Hover();
                     else if (_mouse.ButtonJustPressed)
                         m.Click();

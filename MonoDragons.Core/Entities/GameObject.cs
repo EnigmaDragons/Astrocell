@@ -8,33 +8,25 @@ namespace MonoDragons.Core.Entities
     {
         private readonly EntityResources _resources;
         private readonly Map<Type, EntityComponent> _components = new Map<Type, EntityComponent>();
-
-        private readonly Transform2 _localTransform;
-        private Optional<Tuple<Transform2, Transform2>> _anchor = new Optional<Tuple<Transform2, Transform2>>();
+        private readonly Position _position;
 
         public int Id { get; }
         public bool IsEnabled { get; set; }
 
-        public Transform2 Transform => _anchor.IsPresent
-            ? _localTransform + _anchor.Value.Item1 + _anchor.Value.Item2
-            : _localTransform;
+        public Transform2 Local
+        {
+            get => _position.Local;
+            set => _position.Local = value;
+        }
+
+        public Transform2 World => _position.World;
 
         internal GameObject(int id, Transform2 transform, EntityResources resources)
         {
             _resources = resources;
             Id = id;
             IsEnabled = true;
-            _localTransform = transform;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is GameObject && obj.GetHashCode().Equals(GetHashCode());
-        }
-
-        public override int GetHashCode()
-        {
-            return Id;
+            _position = new Position(transform);
         }
 
         public GameObject Disable()
@@ -43,9 +35,15 @@ namespace MonoDragons.Core.Entities
             return this;
         }
 
-        public GameObject AnchorTo(Transform2 parent, Transform2 offset)
+        public GameObject AttachTo(Transform2 transform)
         {
-            _anchor = new Optional<Tuple<Transform2, Transform2>>(new Tuple<Transform2, Transform2>(parent, offset));
+            _position.AttachTo(transform);
+            return this;
+        }
+
+        public GameObject Detach()
+        {
+            _position.Detach();
             return this;
         }
 
@@ -93,6 +91,16 @@ namespace MonoDragons.Core.Entities
             var type = typeof(T);
             if (IsEnabled && _components.ContainsKey(type))
                 action((T)_components[type]);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is GameObject && obj.GetHashCode().Equals(GetHashCode());
+        }
+
+        public override int GetHashCode()
+        {
+            return Id;
         }
 
         internal void Dispose()

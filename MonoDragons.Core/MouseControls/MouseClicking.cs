@@ -17,7 +17,7 @@ namespace MonoDragons.Core.MouseControls
 
             entities.With<MouseClickListener>(m => m.OnClick(_mouse.Position));
             entities.WithTopMost<MouseClickTarget>(_mouse.Position, 
-                (o, m) => o.Transform.If(x => x.Intersects(_mouse.Position), () => m.OnHit()), 
+                (o, m) => o.World.If(x => x.Intersects(_mouse.Position), () => m.OnHit()), 
                 (o, m) => m.OnMiss());
         }
     }

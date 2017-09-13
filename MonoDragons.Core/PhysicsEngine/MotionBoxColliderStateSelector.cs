@@ -16,7 +16,7 @@ namespace MonoDragons.Core.PhysicsEngine
                             boxCollider => ReplaceCollider(
                                 boxCollider,
                                 GetCurrentCollider(motionStates, motion, motionState),
-                                obj.Transform)))));
+                                obj.World)))));
         }
 
         private void ReplaceCollider(BoxCollider oldCollider, BoxCollider newCollider, Transform2 transform)
