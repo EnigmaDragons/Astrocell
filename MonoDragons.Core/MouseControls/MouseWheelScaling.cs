@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using MonoDragons.Core.Entities;
 
 namespace MonoDragons.Core.MouseControls
@@ -17,12 +16,7 @@ namespace MonoDragons.Core.MouseControls
                 return;
             
             entities.With<MouseWheelScale>((o, x) =>
-            {
-                var newValue = o.Transform.Scale + x.ScaleAmount * (_mouse.MouseWheelDelta / 120f);
-                Debug.WriteLine(newValue);
-                o.Transform.Scale = newValue;
-                int i = 0;
-            });
+                o.Local.Scale = o.Local.Scale + x.ScaleAmount * (_mouse.MouseWheelDelta / 120f));
         }
     }
 }

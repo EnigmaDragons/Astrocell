@@ -16,7 +16,7 @@ namespace Astrocell.Battles
                 .Add(new MouseWheelScale());
             var face = Entity.Create(new Transform2 {Location = location, Size = new Size2(180, 180), ZIndex = 8 })
                 .Add((o, r) => new Texture(r.LoadTexture(charImg, o)));
-            face.AnchorTo(display.Transform, new Transform2(new Vector2(10, 110), new Size2(500, 500)));
+            face.AttachTo(display.World);
             return display;
         }
     }
