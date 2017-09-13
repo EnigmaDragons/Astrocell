@@ -5,25 +5,27 @@ using MonoDragons.Core.Text;
 using System;
 using System.Collections.Generic;
 using MonoDragons.Core.Engine;
+using MonoDragons.Core.Render.Viewports;
 
 namespace MonoDragons.Core.Render
 {
     public sealed class TextRenderer : IRenderer
     {
-        public void Draw(IEntities entities, SpriteBatch sprites)
+        public void Draw(IEntities entities, SpriteBatch sprites, IViewport viewport)
         {
-            entities.With<TextDisplay>((o, t) => RenderText(sprites, t, o));
-            entities.With<MultiTextDisplay>((o, m) => m.Displays.ForEach(t => RenderText(sprites, t, o)));
+            entities.With<TextDisplay>((o, t) => RenderText(sprites, t, o, viewport));
+            entities.With<MultiTextDisplay>((o, m) => m.Displays.ForEach(t => RenderText(sprites, t, o, viewport)));
         }
 
-        private static void RenderText(SpriteBatch sprites, TextDisplay t, GameObject o)
+        private static void RenderText(SpriteBatch sprites, TextDisplay t, GameObject o, IViewport viewport)
         {
             var spriteFont = GameInstance.TheGame.Content.Load<SpriteFont>(t.Font);
             var wrapped = new WrappingText(() => spriteFont, () => o.World.WithPadding(t.Margin).ToRectangle().Width).Wrap(t.Text());
             var size = spriteFont.MeasureString(wrapped);
+            var screenPosition = viewport.GetScreenPosition(o.World.WithPadding(t.Margin));
             sprites.DrawString(spriteFont, wrapped,
-                AlignPositions[t.Align](o.World.WithPadding(t.Margin).ToRectangle(), size), t.Color,
-                    o.World.Rotation.Radians, Vector2.Zero, 1, SpriteEffects.None, 1);
+                AlignPositions[t.Align](screenPosition.ToRectangle(), size), t.Color,
+                    screenPosition.Rotation.Radians, Vector2.Zero, 1, SpriteEffects.None, 1);
         }
 
         private static readonly Dictionary<TextAlign, Func<Rectangle, Vector2, Vector2>> AlignPositions =

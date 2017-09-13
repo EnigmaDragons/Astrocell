@@ -22,7 +22,7 @@ namespace Astrocell
         {
             using (var game = new NeedlesslyComplexMainGame(
                 "Astrocell",
-                "carddisplay", 
+                "Large", 
                 new Display(1600, 900, false, 1), 
                 CreateSceneFactory(), 
                 CreateController()))

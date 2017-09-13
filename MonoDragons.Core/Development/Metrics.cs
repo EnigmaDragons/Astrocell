@@ -3,6 +3,7 @@ using MonoDragons.Core.Engine;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
+using MonoDragons.Core.Render.Viewports;
 using MonoDragons.Core.Text;
 
 namespace MonoDragons.Core.Development
@@ -22,7 +23,8 @@ namespace MonoDragons.Core.Development
                                 $"UPS: {UpdateRate.PerSecond:00} " +
                                 $"Ent: {Entity.Count:0000} " +
                                 $"Res: {Entity.ResourceCount:0000}"
-                });
+                })
+                .AttachTo(CurrentViewport.Instance.Position);
         }
     }
 }

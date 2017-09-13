@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using MonoDragons.Core.Common;
 using Microsoft.Xna.Framework.Graphics;
+using MonoDragons.Core.Render;
+using MonoDragons.Core.Render.Viewports;
 
 namespace MonoDragons.Core.Entities
 {
@@ -31,9 +33,9 @@ namespace MonoDragons.Core.Entities
             _systems.ForEach(x => x.Update(_entities, delta));
         }
 
-        public void Draw(SpriteBatch sprites)
+        public void Draw(SpriteBatch sprites, IViewport viewport)
         {
-            _renderers.ForEach(x => x.Draw(_entities, sprites));
+            _renderers.ForEach(x => x.Draw(_entities, sprites, viewport));
         }
     }
 }

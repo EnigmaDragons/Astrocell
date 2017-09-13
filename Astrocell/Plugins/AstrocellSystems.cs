@@ -1,4 +1,5 @@
-﻿using MonoDragons.Core.Entities;
+﻿using Microsoft.Xna.Framework;
+using MonoDragons.Core.Entities;
 using MonoDragons.Core.KeyboardControls;
 
 namespace Astrocell.Plugins
@@ -7,8 +8,9 @@ namespace Astrocell.Plugins
     {
         public static void RegisterAll(EntitySystem system)
         {
-            Entity.Register(new TopDownController());
+            system.Register(new TopDownController());
             system.Register(new BufferedLogAdvancement());
+            system.Register(new MakeCameraFollowPlayer(new Vector2(800, 450)));
         }
     }
 }

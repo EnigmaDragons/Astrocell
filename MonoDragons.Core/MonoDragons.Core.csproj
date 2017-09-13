@@ -91,6 +91,10 @@
     <Compile Include="PhysicsEngine\MotionBoxColliderStates.cs" />
     <Compile Include="PhysicsEngine\MotionBoxColliderStateSelector.cs" />
     <Compile Include="PhysicsEngine\Position.cs" />
+    <Compile Include="Render\Viewports\Camera.cs" />
+    <Compile Include="Render\Viewports\CurrentViewport.cs" />
+    <Compile Include="Render\Viewports\IViewPort.cs" />
+    <Compile Include="Render\Viewports\NoViewport.cs" />
     <Compile Include="Tiled\TmxLoading\XBoxCollisions.cs" />
     <Compile Include="Logs\InMemoryLog.cs" />
     <Compile Include="Render\MultiTexture.cs" />
@@ -192,7 +196,6 @@
     <Compile Include="PhysicsEngine\Transform2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Render\Animations\Animation.cs" />
-    <Compile Include="Render\Camera.cs" />
     <Compile Include="Render\CurrentDisplay.cs" />
     <Compile Include="Render\TextDisplay.cs" />
     <Compile Include="Render\TextRenderer.cs" />

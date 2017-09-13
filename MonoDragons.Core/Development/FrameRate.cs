@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
 using MonoDragons.Core.Entities;
+using MonoDragons.Core.Render;
+using MonoDragons.Core.Render.Viewports;
 using MonoDragons.Core.Timing;
 
 namespace MonoDragons.Core.Development
@@ -12,7 +14,7 @@ namespace MonoDragons.Core.Development
             FrameRate.Update(delta);
         }
 
-        public void Draw(IEntities entities, SpriteBatch sprites)
+        public void Draw(IEntities entities, SpriteBatch sprites, IViewport viewport)
         {
             FrameRate.OnFrameDrawn();
         }
