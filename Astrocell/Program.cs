@@ -48,6 +48,7 @@ namespace Astrocell
                     { "CardDisplay", () => new CardScene() },
                     { "Battle", () => new BattleScene() },
                     { "AnchorTest", () => new AnchorTest() },
+                    { "Large", () => new Large() },
                 });
         }
     }
