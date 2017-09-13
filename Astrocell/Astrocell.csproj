@@ -47,7 +47,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Battles\BattleScene.cs" />
-    <Compile Include="Scenes\AnchorTest.cs" />
     <Compile Include="Scenes\CardScene.cs" />
     <Compile Include="Scenes\FireCave.cs" />
     <Compile Include="Scenes\Large.cs" />

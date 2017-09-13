@@ -98,7 +98,7 @@ namespace MonoDragons.Core.PhysicsEngine
 
         public Rectangle ToRectangle()
         {
-            return new Rectangle((Location * Scale).ToPoint(), (Size * Scale).ToPoint());
+            return new Rectangle(Location.ToPoint(), (Size * Scale).ToPoint());
         }
 
         public Transform2 WithPadding(int x, int y)
