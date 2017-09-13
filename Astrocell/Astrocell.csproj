@@ -49,6 +49,7 @@
     <Compile Include="Battles\BattleScene.cs" />
     <Compile Include="Scenes\CardScene.cs" />
     <Compile Include="Scenes\FireCave.cs" />
+    <Compile Include="Scenes\Large.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -118,6 +119,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <Content Include="Content\Maps\FireCave.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\Large.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
