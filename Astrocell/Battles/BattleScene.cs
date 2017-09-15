@@ -28,10 +28,16 @@ namespace Astrocell.Battles
             var char1Battle = BattleCharacter.Create(BattleSide.Gamer, Samples.CreateElectrician());
             var char1 = CharacterDisplay.Create(
                 char1Battle,
-                "Sprites/gareth-face.png",
+                "Heroes/gareth.png",
                 new Vector2(1200, 450));
             foreach(var obj in char1)
                 yield return obj;
+
+            var enemy1Battle = BattleCharacter.Create(BattleSide.Enemy, Samples.CreateDumbBrute());
+            var enemy1 = CharacterDisplay.Create(enemy1Battle, "Enemies/drone1.png", new Vector2(200, 450));
+            foreach (var obj in enemy1)
+                yield return obj;
+
 
             //new BattleSimulator(log).Resolve1V1(char1Battle, BattleCharacter.Create(BattleSide.Enemy, Samples.CreateDumbBrute()));
         }
