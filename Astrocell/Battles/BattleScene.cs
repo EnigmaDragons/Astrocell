@@ -7,6 +7,9 @@ using MonoDragons.Core.Entities;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
 using MonoDragons.Core.Scenes;
+using Astrocell.Battles.Players;
+using System;
+using System.Threading.Tasks;
 
 namespace Astrocell.Battles
 {
@@ -17,7 +20,8 @@ namespace Astrocell.Battles
 
         protected override IEnumerable<GameObject> CreateObjs()
         {
-            var log = new BufferedLog();
+            var delay = TimeSpan.FromMilliseconds(800);
+            var log = new BufferedLog { BufferDuration = delay };
             yield return Entity.Create(new Transform2 { Location = new Vector2(0, -100), Size = new Size2(1600, 1228), ZIndex = BackgroundLayer })
                 .Add((o, r) => new Texture(r.LoadTexture("Battle/tek-orange-room.jpg", o)));
             yield return Entity.Create(new Transform2 { Location = new Vector2(150, 50), Size = new Size2(1300, 50), ZIndex = CombatLogLayer })
@@ -38,8 +42,10 @@ namespace Astrocell.Battles
             foreach (var obj in enemy1)
                 yield return obj;
 
-
-            //new BattleSimulator(log).Resolve1V1(char1Battle, BattleCharacter.Create(BattleSide.Enemy, Samples.CreateDumbBrute()));
+            BattleLog.Instance = log;
+            var aiPlayer = new WithDelay(delay, new AIPlayer());
+            var battle = Battle.Create(aiPlayer, aiPlayer, char1Battle, enemy1Battle);
+            Task.Run(() => battle.Resolve());
         }
     }
 }
