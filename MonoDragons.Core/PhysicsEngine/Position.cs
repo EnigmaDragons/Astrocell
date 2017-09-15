@@ -8,11 +8,7 @@ namespace MonoDragons.Core.PhysicsEngine
 
         public Transform2 Local { get; set; }
 
-        public Transform2 World
-        {
-            get => _parent.IsPresent ? Local + _parent.Value : Local;
-            //set => Local = _parent.IsPresent ? value - _parent.Value : value;
-        }
+        public Transform2 World => _parent.IsPresent ? Local + _parent.Value : Local;
 
         public Position(Transform2 transform)
         {

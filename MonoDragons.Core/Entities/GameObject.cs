@@ -35,6 +35,12 @@ namespace MonoDragons.Core.Entities
             return this;
         }
 
+        public GameObject AttachTo(GameObject obj)
+        {
+            AttachTo(obj.World);
+            return this;
+        }
+
         public GameObject AttachTo(Transform2 transform)
         {
             _position.AttachTo(transform);

@@ -25,6 +25,7 @@ namespace Astrocell.Battles.Battles
         public BattleHand Hand { get; }
         public IList<Card> PlayableCards => Hand.Cards.Where(CanAfford).ToList();
 
+        public int MaxHp => _stats[BattleStat.MaxHp];
         public int CurrentHp => _stats.CurrentHp;
         public int CurrentEnergy => _stats.CurrentEnergy;
         public int CurrentActionPoints => _stats.CurrentActionPoints;

@@ -14,7 +14,7 @@ namespace MonoDragons.Core.Render
             {
                 var screenPosition = viewport.GetScreenPosition(o.World.Expanded(new Size2(b.Width, b.Width)));
                 sprites.Draw(b.Value, screenPosition.ToRectangle(), null, Color.White,
-                    screenPosition.Rotation.Radians, Vector2.Zero, SpriteEffects.None, screenPosition.ZIndex.AsDepth());
+                    screenPosition.Rotation.Radians, Vector2.Zero, SpriteEffects.None, (screenPosition.ZIndex - 1).AsDepth());
             });
         }
     }

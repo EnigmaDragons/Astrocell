@@ -24,7 +24,7 @@ namespace MonoDragons.Core.Render
             var size = spriteFont.MeasureString(wrapped);
             var screenPosition = viewport.GetScreenPosition(o.World.WithPadding(t.Margin));
             sprites.DrawString(spriteFont, wrapped,
-                AlignPositions[t.Align](screenPosition.ToRectangle(), size), t.Color,
+                AlignPositions[t.Align](screenPosition.ToRectangle(), size).ToPoint().ToVector2(), t.Color,
                     screenPosition.Rotation.Radians, Vector2.Zero, 1, SpriteEffects.None, 1);
         }
 

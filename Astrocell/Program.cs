@@ -22,7 +22,7 @@ namespace Astrocell
         {
             using (var game = new NeedlesslyComplexMainGame(
                 "Astrocell",
-                "Large", 
+                "Battle", 
                 new Display(1600, 900, false, 1), 
                 CreateSceneFactory(), 
                 CreateController()))
@@ -43,12 +43,12 @@ namespace Astrocell
         private static SceneFactory CreateSceneFactory()
         {
             return new SceneFactory(new Dictionary<string, Func<IScene>>
-                {
-                    { "Fire Cave", () => new FireCave() },
-                    { "CardDisplay", () => new CardScene() },
-                    { "Battle", () => new BattleScene() },
-                    { "Large", () => new Large() },
-                });
+            {
+                { "Fire Cave", () => new FireCave() },
+                { "CardDisplay", () => new CardScene() },
+                { "Battle", () => new BattleScene() },
+                { "Large", () => new Large() },
+            });
         }
     }
 #endif
