@@ -11,6 +11,7 @@ namespace Astrocell.Plugins
             system.Register(new TopDownController());
             system.Register(new BufferedLogAdvancement());
             system.Register(new MakeCameraFollowPlayer(new Vector2(800, 450)));
+            system.Register(new PercentBarUpdates());
         }
     }
 }

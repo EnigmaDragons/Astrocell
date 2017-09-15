@@ -7,29 +7,45 @@ using MonoDragons.Core.Entities;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
 using MonoDragons.Core.Scenes;
+using Astrocell.Battles.Players;
+using System;
+using System.Threading.Tasks;
 
 namespace Astrocell.Battles
 {
     public sealed class BattleScene : EcsScene
     {
         private const int BackgroundLayer = 0;
-        private const int CombatLogLayer = 1;
+        private const int CombatLogLayer = 3;
 
         protected override IEnumerable<GameObject> CreateObjs()
         {
-            var log = new BufferedLog();
-            yield return Entity.Create(new Transform2 {Location = new Vector2(0, -100), Size = new Size2(1600, 1228), ZIndex = BackgroundLayer})
+            var delay = TimeSpan.FromMilliseconds(800);
+            var log = new BufferedLog { BufferDuration = delay };
+            yield return Entity.Create(new Transform2 { Location = new Vector2(0, -100), Size = new Size2(1600, 1228), ZIndex = BackgroundLayer })
                 .Add((o, r) => new Texture(r.LoadTexture("Battle/tek-orange-room.jpg", o)));
-            yield return Entity.Create(new Transform2 {Location = new Vector2(150, 50), Size = new Size2(1300, 50), ZIndex = CombatLogLayer})
+            yield return Entity.Create(new Transform2 { Location = new Vector2(150, 50), Size = new Size2(1300, 50), ZIndex = CombatLogLayer })
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.DarkBlue, o)))
                 .Add((o, r) => new BorderTexture(r.CreateRectangle(Color.AntiqueWhite, o)))
                 .Add(log)
-                .Add(new TextDisplay {Text = () => log.Lines.Last()});
-            yield return CharacterDisplay.Create(
-                BattleCharacter.Create(BattleSide.Gamer, Samples.CreateElectrician()),
-                "Sprites/gareth-face.png",
+                .Add(new TextDisplay { Text = () => log.Lines.Last() });
+            var char1Battle = BattleCharacter.Create(BattleSide.Gamer, Samples.CreateElectrician());
+            var char1 = CharacterDisplay.Create(
+                char1Battle,
+                "Heroes/gareth.png",
                 new Vector2(1200, 450));
-            new BattleSimulator(log).Resolve1V1(Samples.CreateDumbBrute(), Samples.CreateDumbBrute());
+            foreach(var obj in char1)
+                yield return obj;
+
+            var enemy1Battle = BattleCharacter.Create(BattleSide.Enemy, Samples.CreateDumbBrute());
+            var enemy1 = CharacterDisplay.Create(enemy1Battle, "Enemies/drone1.png", new Vector2(200, 450));
+            foreach (var obj in enemy1)
+                yield return obj;
+
+            BattleLog.Instance = log;
+            var aiPlayer = new WithDelay(delay, new AIPlayer());
+            var battle = Battle.Create(aiPlayer, aiPlayer, char1Battle, enemy1Battle);
+            Task.Run(() => battle.Resolve());
         }
     }
 }

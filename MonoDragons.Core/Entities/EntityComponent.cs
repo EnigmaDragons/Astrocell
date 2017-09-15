@@ -1,10 +1,14 @@
-﻿using System;
+﻿using MonoDragons.Core.PhysicsEngine;
+using System;
 
 namespace MonoDragons.Core.Entities
 {
     public abstract class EntityComponent
     {
         private GameObject _parent;
+
+        public Transform2 Local => GameObject.Local;
+        public Transform2 World => GameObject.World;
 
         public GameObject GameObject
         {

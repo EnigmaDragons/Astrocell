@@ -60,14 +60,6 @@ namespace MonoDragons.Core.Entities
             targets.ForEach(o => o.With(action));
         }
 
-        public static void Where<T>(this IEntities entities, Predicate<T> condition, Action<T> action) 
-            where T : EntityComponent
-        {
-            var targets = new List<GameObject>();
-            entities.With<T>((o, x) => x.If(condition(x), () => targets.Add(o)));
-            targets.ForEach(o => o.With(action));
-        }
-
         public static List<GameObject> Collect<T>(this IEntities entities) 
             where T : EntityComponent
         {
