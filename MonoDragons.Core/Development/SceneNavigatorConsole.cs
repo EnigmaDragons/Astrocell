@@ -9,6 +9,7 @@ using MonoDragons.Core.Navigation;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
 using MonoDragons.Core.UserInterface;
+using MonoDragons.Core.Render.Viewports;
 
 namespace MonoDragons.Core.Development
 {
@@ -30,16 +31,21 @@ namespace MonoDragons.Core.Development
 
         public static void Enable()
         {
-            var panel = Entity.Create(new Transform2 {Size = new Size2(1920, 100), ZIndex=ZIndex.Max.Plus(-1)})
+            var panel = Entity.Create(new Transform2 {Size = new Size2(1920, 100), ZIndex = ZIndex.Max - 10})
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.DarkGray, o)))
+                .AttachTo(CurrentViewport.Instance.Position)
                 .Disable();
-            var textbox = Textbox.Create(new Transform2 {Location = new Vector2(400, 25), Size = new Size2(300, 50), ZIndex = ZIndex.Max})
+            var textbox = Textbox.Create(new Transform2 { Location = new Vector2(400, 25), Size = new Size2(300, 50), ZIndex = ZIndex.Max - 8 })
+                .AttachTo(panel)
                 .Disable();
             var navigateCommand = new KeyboardCommand {Key = Keys.Enter};
             var enterAction = Entity.Create(Transform2.Zero)
                 .Add(navigateCommand)
                 .Disable();
-            var sceneNavigator = new SceneNavigatorConsole(textbox, panel, enterAction);
+            var escAction = Entity.Create(Transform2.Zero)
+                .Add(new KeyboardCommand { Key = Keys.Back, Command = () => textbox.With<TypingInput>(x => x.Clear()) })
+                .Disable();
+            var sceneNavigator = new SceneNavigatorConsole(textbox, panel, enterAction, escAction);
 
             navigateCommand.Command = () => textbox.With<TypingInput>(
                 t => t.Value.If(v => !string.IsNullOrEmpty(v), () =>
@@ -54,6 +60,7 @@ namespace MonoDragons.Core.Development
                         else
                             t.Value = "Scene Not Found";
                     }));
+
 
             Entity.Create(Transform2.Zero)
                 .Add(new KeyboardCommand {Key = Keys.OemTilde, Command = () => sceneNavigator.Toggle()});
