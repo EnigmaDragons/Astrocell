@@ -126,7 +126,7 @@ namespace MonoDragons.Core.Engine
         {
             _graphics.GraphicsDevice.Clear(Color.Black);
             _sprites.Begin(SpriteSortMode.FrontToBack, null, SamplerState.AnisotropicClamp, DepthStencilState.DepthRead);
-            _ecs.Draw(_sprites, _viewPort);
+            _ecs.Draw(_sprites, new SnapshotViewport(_viewPort));
             HideExternals();
             _sprites.End();
             base.Draw(gameTime);
