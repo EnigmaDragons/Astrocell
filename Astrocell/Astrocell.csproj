@@ -116,6 +116,10 @@
       <Project>{a33f8fe3-a35a-4ddf-b96c-0157224f602c}</Project>
       <Name>MonoDragons.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="MonoDragons.TiledEditor\MonoDragons.TiledEditor.csproj">
+      <Project>{be82517b-5b98-4294-930b-2db2a69ae7a7}</Project>
+      <Name>MonoDragons.TiledEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
