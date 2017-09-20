@@ -1,0 +1,9 @@
+{
+  "Name": "Laser Drone",
+  "CardCounts": {
+    "electrolasershot": 15,
+    "lockon": 10,
+    "tracingbolt":15,
+    "electrolaserplasmabolt": 5
+  }
+}

@@ -55,5 +55,6 @@ namespace Astrocell.Battles.Decks
     {
         None,
         Stun,
+        LockedOn,
     }
 }

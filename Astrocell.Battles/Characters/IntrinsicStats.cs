@@ -34,6 +34,18 @@ namespace Astrocell.Battles.Characters
         }
     }
 
+    public struct EnemyStartingStats : ICharIntrinsicStats
+    {
+        public int this[Intrinsic stat] => this.GetStatValue(stat);
+
+        public int Level { get; set; }
+        public int Strength { get; set; }
+        public int Agility { get; set; }
+        public int Toughness { get; set; }
+        public int Willpower { get; set; }
+        public int Intelligence { get; set; }
+    }
+
     public class CombinedIntrinsicStats : ICharIntrinsicStats
     {
         public int this[Intrinsic stat] => _stats1[stat] + _stats2[stat];

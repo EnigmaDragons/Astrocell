@@ -92,6 +92,7 @@
     <Compile Include="Effects\PhysicalDamageEffect.cs" />
     <Compile Include="Effects\IBattleEffect.cs" />
     <Compile Include="Effects\NoEffect.cs" />
+    <Compile Include="Enemies\Enemy.cs" />
     <Compile Include="Equipments\Equipment.cs" />
     <Compile Include="Equipments\IEquipment.cs" />
     <Compile Include="LoopingSequence.cs" />
@@ -160,6 +161,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Decks\electrician.deck">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\Enemy\electrolaserplasmabolt.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\Enemy\electrolasershot.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\Enemy\lockon.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Cards\Enemy\tracingbolt.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Decks\laserdrone.deck">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Content\Equipment\knife.json" />

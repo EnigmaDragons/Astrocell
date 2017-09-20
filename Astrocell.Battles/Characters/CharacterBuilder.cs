@@ -7,7 +7,7 @@ namespace Astrocell.Battles.Characters
     public sealed class CharacterBuilder
     {
         private readonly Store<string> _name = new Store<string>(Rng.Int().ToString());
-        private readonly Store<StartingStats> _stats = new Store<StartingStats>();
+        private readonly Store<ICharIntrinsicStats> _stats = new Store<ICharIntrinsicStats>();
         private readonly Store<EquipmentSheet> _equip = new Store<EquipmentSheet>();
         private readonly Store<EquippedDeck> _deck = new Store<EquippedDeck>();
 
@@ -21,6 +21,12 @@ namespace Astrocell.Battles.Characters
         {
             if (!stats.IsValid())
                 throw new ArgumentException("Starting stats are invalid");
+            _stats.Put(stats);
+            return this;
+        }
+
+        public CharacterBuilder WithStats(EnemyStartingStats stats)
+        {
             _stats.Put(stats);
             return this;
         }

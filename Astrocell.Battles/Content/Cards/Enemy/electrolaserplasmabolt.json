@@ -1,0 +1,13 @@
+{
+    "Name": "Electrolaser Plasma Bolt",
+    "Description": "Fires a highly-focused plasma bolt",
+    "ActionPointCost": 2,
+    "EnergyCost": 2,
+    "Effects": [ {
+            "Target": "One",
+            "Type": "Damage",
+            "Stat": "Attack",
+            "Factor": 2.3
+        }
+    ]
+}

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Astrocell.Battles.Enemies;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Astrocell.Battles
 {
@@ -10,6 +11,7 @@ namespace Astrocell.Battles
         {
             Samples.CreateDumbBrute();
             Samples.CreateElectrician();
+            Enemy.CreateLaserDrone();
         }
     }
 }
