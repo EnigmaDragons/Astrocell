@@ -2,7 +2,7 @@
 
 namespace MonoDragons.Core.PhysicsEngine
 {
-    public sealed class ZIndex
+    public sealed class ZIndex : IComparable
     {
         public static ZIndex Max = new ZIndex(255);
 
@@ -48,6 +48,11 @@ namespace MonoDragons.Core.PhysicsEngine
         private static int Normalize(int val)
         {
             return Math.Min(val, 255);
+        }
+
+        public int CompareTo(object obj)
+        {
+            return Value.CompareTo(((ZIndex) obj).Value);
         }
     }
 }
