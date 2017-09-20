@@ -23,28 +23,46 @@ namespace MonoDragons.TiledEditor.Scenes
 
         protected override IEnumerable<GameObject> CreateObjs()
         {
+            GameObject selectedTile;
             var textbox = Textbox.Create(new Transform2 { Size = new Size2(300, 50), ZIndex = ZIndex.Max });
             var enterAction = Entity.Create(Transform2.Zero)
-                .Add(new KeyboardCommand
+                .Add(obj => new KeyboardCommand
                 {
                     Key = Keys.Enter, Command = () =>
                     {
                         textbox.With<TypingInput>(
-                            t => t.Value.If(v => !string.IsNullOrEmpty(v), () =>
+                            input => input.Value.If(value => !string.IsNullOrEmpty(value), () =>
                             {
                                 _map.ForEach(Entity.Destroy);
                                 _map.Clear();
-                                new OrthographicTileMapFactory().CreateMap(Tmx.Create(Path.Combine("maps", t.Value))).ForEach(x =>
+                                new OrthographicTileMapFactory().CreateMap(Tmx.Create(Path.Combine("maps", input.Value))).ForEach(tile =>
                                 {
-                                    x.Add(new MouseStateActions
+                                    selectedTile = tile;
+                                    tile.Add(new MouseStateActions
                                     {
-                                        OnHover = () => x.With<Texture>(texture => texture.Tint = Color.LightBlue),
-                                        OnExit = () => x.With<Texture>(texture => texture.Tint = Color.White),
+                                        OnHover = () => tile.With<Texture>(texture =>
+                                        {
+                                            if (texture.Tint == Color.White)
+                                                texture.Tint = Color.LightBlue;
+                                        }),
+                                        OnExit = () => tile.With<Texture>(texture =>
+                                        {
+                                            if (texture.Tint == Color.LightBlue)
+                                                texture.Tint = Color.White;
+                                        }),
+                                        OnPressed = () => tile.With<Texture>(texture =>
+                                        {
+                                            selectedTile.With<Texture>(selectedTexture => selectedTexture.Tint = Color.White);
+                                            texture.Tint = Color.Purple;
+                                            selectedTile = tile;
+                                        }),
                                     });
-                                    _map.Add(x);
-                                    AddObj(x);
+                                    _map.Add(tile);
+                                    AddObj(tile);
                                 });
                             }));
+                        textbox.Disable();
+                        obj.Disable();
                     }
                 });
             return new List<GameObject> { textbox, enterAction };
