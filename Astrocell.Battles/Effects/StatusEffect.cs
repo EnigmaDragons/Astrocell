@@ -7,7 +7,8 @@ namespace Astrocell.Battles.Effects
     public enum StatusEffect
     {
         None,
-        Stunned
+        Stunned,
+        LockedOn,
     }
 
     public static class CardStatusEffectConverter
@@ -19,6 +20,8 @@ namespace Astrocell.Battles.Effects
 
         public static StatusEffect ToStatusEffect(this CardStatusEffect effect)
         {
+            if (effect == CardStatusEffect.LockedOn)
+                return StatusEffect.LockedOn;
             if (effect == CardStatusEffect.Stun)
                 return StatusEffect.Stunned;
             if (effect == CardStatusEffect.None)

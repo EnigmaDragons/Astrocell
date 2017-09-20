@@ -1,0 +1,11 @@
+{
+    "Name": "Lock On",
+    "Description": "Locks onto target, empowering the next attack",
+    "ActionPointCost": 2,
+    "Effects": [ {
+            "Target": "One",
+            "Type": "Status",
+            "Status": "LockedOn"
+        }
+    ]
+}

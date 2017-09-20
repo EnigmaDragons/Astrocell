@@ -1,0 +1,12 @@
+{
+    "Name": "Electrolaser Shot",
+    "Description": "Fires an electrolaser beam",
+    "ActionPointCost": 2,
+    "Effects": [ {
+            "Target": "One",
+            "Type": "Damage",
+            "Stat": "Attack",
+            "Factor": 1.0
+        }
+    ]
+}

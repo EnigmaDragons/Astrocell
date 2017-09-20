@@ -1,0 +1,13 @@
+{
+    "Name": "Tracing Bolt",
+    "Description": "Fires a tracing bolt, charging energy for stronger attacks",
+    "ActionPointCost": 2,
+    "EnergyGain": 1,
+    "Effects": [ {
+            "Target": "One",
+            "Type": "Damage",
+            "Stat": "Attack",
+            "Factor": 0.5
+        }
+    ]
+}

@@ -84,5 +84,14 @@ namespace MonoDragons.Core.Common
                     results.Add(item.Key);
             return results;
         }
+
+        public static Map<TKey, TElement> ToMap<TSource, TKey, TElement>(this IEnumerable<TSource> items,
+            Func<TSource, TKey> getKey, Func<TSource, TElement> getElement)
+        {
+            var map = new Map<TKey, TElement>();
+            foreach(var item in items)
+                map.Add(getKey(item), getElement(item));
+            return map;
+        }
     }
 }
