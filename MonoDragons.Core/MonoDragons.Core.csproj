@@ -88,8 +88,10 @@
     <Compile Include="Motion\Moving.cs" />
     <Compile Include="MouseControls\MouseWheelScale.cs" />
     <Compile Include="MouseControls\MouseWheelScaling.cs" />
+    <Compile Include="PhysicsEngine\CollisionTriggers.cs" />
     <Compile Include="PhysicsEngine\MotionBoxColliderStates.cs" />
     <Compile Include="PhysicsEngine\MotionBoxColliderStateSelector.cs" />
+    <Compile Include="PhysicsEngine\OnCollision.cs" />
     <Compile Include="PhysicsEngine\Position.cs" />
     <Compile Include="Render\Viewports\Camera.cs" />
     <Compile Include="Render\Viewports\CurrentViewport.cs" />
