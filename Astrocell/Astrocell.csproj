@@ -41,7 +41,9 @@
   <ItemGroup>
     <Compile Include="Battles\CardDisplay.cs" />
     <Compile Include="Battles\CharacterDisplay.cs" />
+    <Compile Include="Battles\UIBattlePresenter.cs" />
     <Compile Include="Plugins\AstrocellSystems.cs" />
+    <Compile Include="Plugins\BattleAdvancement.cs" />
     <Compile Include="Plugins\BufferedLog.cs" />
     <Compile Include="Plugins\BufferedLogAdvancement.cs" />
     <Compile Include="Plugins\MakeCameraFollowPlayer.cs" />

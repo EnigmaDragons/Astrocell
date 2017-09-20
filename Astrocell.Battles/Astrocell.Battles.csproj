@@ -55,6 +55,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BattlePresentation\BattlePresenter.cs" />
+    <Compile Include="BattlePresentation\IBattlePresenter.cs" />
+    <Compile Include="BattlePresentation\NoPresenter.cs" />
     <Compile Include="Battles\Battle.cs" />
     <Compile Include="Battles\BattleCharacter.cs" />
     <Compile Include="Battles\BattleCharacters.cs" />

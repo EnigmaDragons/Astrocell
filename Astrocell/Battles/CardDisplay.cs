@@ -11,7 +11,7 @@ namespace Astrocell.Battles
 {
     public static class CardDisplay
     {
-        private static int _zIndex = 1;
+        private static int _zIndex = 400;
 
         public static GameObject Create(Card card)
         {

@@ -15,7 +15,6 @@ namespace MonoDragons.Core.Common.Reflection
 
         public static Optional<T> GetPropertyValue<T>(this object obj, string property)
         {
-            var props = obj.GetType().GetProperties();
             return (T)obj.GetType().GetProperty(property, typeof(T)).GetValue(obj);
         }
     }
