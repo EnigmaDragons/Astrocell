@@ -8,6 +8,7 @@ namespace MonoDragons.Core.Render
     {
         public Texture2D Value { get; set; }
         public Rectangle SourceRect { get; set; }
+        public Color Tint { get; set; }
 
         public Texture(Texture2D value)
             : this(value, value.Bounds) {}
@@ -16,6 +17,7 @@ namespace MonoDragons.Core.Render
         {
             Value = value;
             SourceRect = sourceRect;
+            Tint = Color.White;
         }
     }
 }

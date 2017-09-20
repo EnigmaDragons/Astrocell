@@ -11,6 +11,7 @@ using MonoDragons.Core.Inputs;
 using MonoDragons.Core.Navigation;
 using MonoDragons.Core.Render;
 using MonoDragons.Core.Scenes;
+using MonoDragons.TiledEditor.Scenes;
 
 namespace Astrocell
 {
@@ -48,6 +49,7 @@ namespace Astrocell
                 { "CardDisplay", () => new CardScene() },
                 { "Battle", () => new BattleScene() },
                 { "Large", () => new Large() },
+                { "MapEditor", () => new MapEditor() },
             });
         }
     }

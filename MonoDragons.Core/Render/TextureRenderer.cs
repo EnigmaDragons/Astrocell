@@ -16,7 +16,7 @@ namespace MonoDragons.Core.Render
         private static void Draw(SpriteBatch sprites, Texture t, GameObject o, IViewport viewport)
         {
             var screenPosition = viewport.GetScreenPosition(o.World);
-            sprites.Draw(t.Value, screenPosition.ToRectangle(), t.SourceRect, Color.White, 
+            sprites.Draw(t.Value, screenPosition.ToRectangle(), t.SourceRect, t.Tint, 
                 screenPosition.Rotation.Radians, Vector2.Zero, SpriteEffects.None, screenPosition.ZIndex.AsDepth());
         }
     }
