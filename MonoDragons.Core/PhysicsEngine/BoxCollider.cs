@@ -1,11 +1,9 @@
-﻿
-using MonoDragons.Core.Entities;
+﻿using MonoDragons.Core.Entities;
 
 namespace MonoDragons.Core.PhysicsEngine
 {
     public sealed class BoxCollider : EntityComponent
     {
-        public bool IsBlocking { get; set; } = true;
         public Transform2 Transform { get; set; }
 
         public BoxCollider(Transform2 transform)

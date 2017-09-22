@@ -8,8 +8,10 @@ namespace MonoDragons.Core.PhysicsEngine
         {
             system.Register(new ZGravitation());
             system.Register(new MotionBoxColliderStateSelector());
+            system.Register(new ClearCollisions());
             system.Register(new BoxCollision());
-            system.Register(new CollisionTriggers());
+            system.Register(new RigidBodyCollision());
+            system.Register(new StepTriggerCollision());
             system.Register(new MotionSystem());
             system.Register(new Travelling());
         }

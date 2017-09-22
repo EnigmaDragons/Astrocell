@@ -23,7 +23,8 @@ namespace Astrocell.Scenes
                 yield return tile;
             var exit1 = new Transform2(new Vector2(48 * 7, 48 * 16), new Size2(48 * 3, 10));
             yield return Entity.Create(exit1)
-                .Add(new BoxCollider(exit1) {IsBlocking = false})
+                .Add(new Collision() { IsBlocking = false })
+                .Add(new BoxCollider(exit1))
                 .Add(new OnCollision
                 {
                     Action = x =>
@@ -31,7 +32,8 @@ namespace Astrocell.Scenes
                         if (x.Equals(player))
                             Navigate.To("Large");
                     }
-                });
+                })
+                .Add(new StepTrigger());
         }
     }
 }

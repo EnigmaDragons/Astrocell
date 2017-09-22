@@ -21,6 +21,7 @@ namespace MonoDragons.Core.Tiled
                 .Add(o => new Animation(0, o.Get<Texture>()))
                 .Add(o => CreateMotionAnimationStates(tsx, o.Get<Texture>().Value))
                 .Add(new Motion2(new Velocity2()))
+                .Add(new Collision())
                 .Add(new BoxCollider(Transform2.Zero))
                 .Add(new MotionState())
                 .Add(CreateBoxColliderStates(tsx));

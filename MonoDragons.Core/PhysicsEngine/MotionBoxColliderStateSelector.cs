@@ -21,7 +21,6 @@ namespace MonoDragons.Core.PhysicsEngine
 
         private void ReplaceCollider(BoxCollider oldCollider, BoxCollider newCollider, Transform2 transform)
         {
-            oldCollider.IsBlocking = newCollider.IsBlocking;
             oldCollider.Transform = new Transform2(
                 new Vector2(newCollider.Transform.Location.X + transform.Location.X, newCollider.Transform.Location.Y + transform.Location.Y), 
                 newCollider.Transform.Size);
