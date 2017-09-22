@@ -117,6 +117,9 @@ namespace Astrocell.Battles.Battles
 
         public int GetStat(BattleStat stat)
         {
+            if (stat == BattleStat.None)
+                return 0;
+
             return _stats[stat];
         }
 

@@ -10,6 +10,8 @@ using MonoDragons.Core.Scenes;
 using Astrocell.Battles.Players;
 using System;
 using System.Threading.Tasks;
+using Astrocell.Battles.BattlePresentation;
+using Astrocell.Battles.Enemies;
 
 namespace Astrocell.Battles
 {
@@ -20,8 +22,11 @@ namespace Astrocell.Battles
 
         protected override IEnumerable<GameObject> CreateObjs()
         {
+            var presenter = new UIBattlePresenter();
             var delay = TimeSpan.FromMilliseconds(800);
             var log = new BufferedLog { BufferDuration = delay };
+            yield return Entity.Create()
+                .Add(presenter);
             yield return Entity.Create(new Transform2 { Location = new Vector2(0, -100), Size = new Size2(1600, 1228), ZIndex = BackgroundLayer })
                 .Add((o, r) => new Texture(r.LoadTexture("Battle/tek-orange-room.jpg", o)));
             yield return Entity.Create(new Transform2 { Location = new Vector2(150, 50), Size = new Size2(1300, 50), ZIndex = CombatLogLayer })
@@ -37,15 +42,17 @@ namespace Astrocell.Battles
             foreach(var obj in char1)
                 yield return obj;
 
-            var enemy1Battle = BattleCharacter.Create(BattleSide.Enemy, Samples.CreateDumbBrute());
+            var enemy1Battle = BattleCharacter.Create(BattleSide.Enemy, Enemy.CreateLaserDrone());
             var enemy1 = CharacterDisplay.Create(enemy1Battle, "Enemies/drone1.png", new Vector2(200, 450));
             foreach (var obj in enemy1)
                 yield return obj;
 
+            BattlePresenter.Instance = presenter;
             BattleLog.Instance = log;
             var aiPlayer = new WithDelay(delay, new AIPlayer());
             var battle = Battle.Create(aiPlayer, aiPlayer, char1Battle, enemy1Battle);
-            Task.Run(() => battle.Resolve());
+            yield return Entity.Create()
+                .Add(new CurrentBattle {Battle = battle});
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Astrocell.Battles
             _items = items;
         }
 
+        public T Current => _items[0];
+
         public T Next()
         {
             var oldFirst = _items[0];

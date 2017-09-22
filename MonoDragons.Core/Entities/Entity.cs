@@ -18,7 +18,12 @@ namespace MonoDragons.Core.Entities
         {
             System.Register(system);
         }
-        
+
+        public static GameObject Create()
+        {
+            return Create(Transform2.Zero);
+        }
+
         public static GameObject Create(Transform2 transform)
         {
             return Objs.Create(transform);

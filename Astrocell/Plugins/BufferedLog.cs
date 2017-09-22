@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.Logs;
@@ -27,6 +28,7 @@ namespace Astrocell.Plugins
 
         public void Write(string msg)
         {
+            Debug.WriteLine(msg);
             _newLines.Add(msg);
         }
     }
