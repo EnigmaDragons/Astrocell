@@ -83,6 +83,7 @@
     <Compile Include="Engine\GameInstance.cs" />
     <Compile Include="Development\Metrics.cs" />
     <Compile Include="Development\FrameRate.cs" />
+    <Compile Include="KeyboardControls\KeyboardCommands.cs" />
     <Compile Include="Motion\MotionState.cs" />
     <Compile Include="Motion\MotionStateSelector.cs" />
     <Compile Include="Motion\Moving.cs" />

@@ -25,7 +25,7 @@ namespace MonoDragons.TiledEditor.Scenes
         {
             GameObject selectedTile;
             var textbox = Textbox.Create(new Transform2 { Size = new Size2(300, 50), ZIndex = ZIndex.Max });
-            var enterAction = Entity.Create(Transform2.Zero)
+            var enterAction = Entity.Create("Map Editor Enter Command")
                 .Add(obj => new KeyboardCommand
                 {
                     Key = Keys.Enter, Command = () =>

@@ -12,7 +12,7 @@ namespace MonoDragons.Core.Development
     {
         public static GameObject Enable()
         {
-            return Entity.Create(new Transform2 {Size = new Size2(
+            return Entity.Create("Dev Metrics Display", new Transform2 {Size = new Size2(
                     GameInstance.GraphicsDevice.PresentationParameters.BackBufferWidth, 
                     GameInstance.GraphicsDevice.PresentationParameters.BackBufferHeight) })
                 .Add(new TextDisplay

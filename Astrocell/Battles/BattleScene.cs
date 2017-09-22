@@ -25,11 +25,11 @@ namespace Astrocell.Battles
             var presenter = new UIBattlePresenter();
             var delay = TimeSpan.FromMilliseconds(800);
             var log = new BufferedLog { BufferDuration = delay };
-            yield return Entity.Create()
+            yield return Entity.Create("Battle UI Presenter")
                 .Add(presenter);
-            yield return Entity.Create(new Transform2 { Location = new Vector2(0, -100), Size = new Size2(1600, 1228), ZIndex = BackgroundLayer })
+            yield return Entity.Create("Battle Background", new Transform2 { Location = new Vector2(0, -100), Size = new Size2(1600, 1228), ZIndex = BackgroundLayer })
                 .Add((o, r) => new Texture(r.LoadTexture("Battle/tek-orange-room.jpg", o)));
-            yield return Entity.Create(new Transform2 { Location = new Vector2(150, 50), Size = new Size2(1300, 50), ZIndex = CombatLogLayer })
+            yield return Entity.Create("Battle Log", new Transform2 { Location = new Vector2(150, 50), Size = new Size2(1300, 50), ZIndex = CombatLogLayer })
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.DarkBlue, o)))
                 .Add((o, r) => new BorderTexture(r.CreateRectangle(Color.AntiqueWhite, o)))
                 .Add(log)
@@ -49,9 +49,8 @@ namespace Astrocell.Battles
 
             BattlePresenter.Instance = presenter;
             BattleLog.Instance = log;
-            var aiPlayer = new WithDelay(delay, new AIPlayer());
-            var battle = Battle.Create(aiPlayer, aiPlayer, char1Battle, enemy1Battle);
-            yield return Entity.Create()
+            var battle = Battle.Create(new AIPlayer(), new AIPlayer(), char1Battle, enemy1Battle);
+            yield return Entity.Create("Current Battle")
                 .Add(new CurrentBattle {Battle = battle});
         }
     }

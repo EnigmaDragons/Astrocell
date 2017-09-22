@@ -11,6 +11,7 @@ namespace MonoDragons.Core.Entities
         private readonly Position _position;
 
         public int Id { get; }
+        public string Name { get; }
         public bool IsEnabled { get; set; }
 
         public Transform2 Local
@@ -21,10 +22,11 @@ namespace MonoDragons.Core.Entities
 
         public Transform2 World => _position.World;
 
-        internal GameObject(int id, Transform2 transform, EntityResources resources)
+        internal GameObject(int id, string name, Transform2 transform, EntityResources resources)
         {
             _resources = resources;
             Id = id;
+            Name = name;
             IsEnabled = true;
             _position = new Position(transform);
         }

@@ -84,7 +84,7 @@ namespace MonoDragons.Core.Engine
             _black = new RectangleTexture(Color.Black).Create();
             Navigate.Init(_sceneFactory);
             DefaultFont.Load(Content);
-            Entity.Create(new Transform2 { ZIndex = 0 }).Add(_viewPort);
+            Entity.Create("World Camera", new Transform2 { ZIndex = 0 }).Add(_viewPort);
 #if DEBUG
             SceneNavigatorConsole.Enable();
             Metrics.Enable();
