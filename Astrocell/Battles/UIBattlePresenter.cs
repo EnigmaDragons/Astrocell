@@ -42,7 +42,7 @@ namespace Astrocell.Battles
             objs.First().Add(o => new DurationTravel
             {
                 Duration = TimeSpan.FromMilliseconds(1000),
-                Target = new Transform2 {Size = o.Local.Size, Location = new Vector2(700, 350)}
+                Target = new Transform2 {Size = o.Local.Size, Location = new Vector2(700, 350), ZIndex = o.World.ZIndex}
             });
             return objs;
         }

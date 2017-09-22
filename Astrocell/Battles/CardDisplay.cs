@@ -19,7 +19,6 @@ namespace Astrocell.Battles
 
             var cardImage = Entity.Create($"Card: {card.Name}" ,new Transform2 { Size = new Size2(200, 300), ZIndex = new ZIndex(_zIndex) })
                 .Add(new MouseDrag())
-                .Add(new ZGravity())
                 .Add(new BorderTexture())
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.Coral, o)));
             var cardText = Entity.Create($"CardText", new Transform2 { Size = new Size2(200, 300), ZIndex = new ZIndex(_zIndex) })
