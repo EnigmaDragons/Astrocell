@@ -6,12 +6,16 @@ namespace MonoDragons.Core.MouseControls
 {
     public sealed class MouseSnapshot
     {
+        public static IMousePositionProvider MousePositionProvider { private get; set; }
+
         private Microsoft.Xna.Framework.Input.MouseState _last;
         private Microsoft.Xna.Framework.Input.MouseState _current;
 
-        public Point LastPosition => _last.Position;
-        public Point Position => _current.Position;
-        public Point MovedBy => Position - LastPosition;
+        public Point LastScreenPosition => _last.Position;
+        public Point LastWorldPosition => MousePositionProvider.WorldPosition(LastScreenPosition);
+        public Point ScreenPosition => _current.Position;
+        public Point WorldPosition => MousePositionProvider.WorldPosition(ScreenPosition);
+        public Point MovedBy => ScreenPosition - LastScreenPosition;
         public bool LeftIsPressed => _current.LeftButton == ButtonState.Pressed;
         public bool RightIsPressed => _current.RightButton == ButtonState.Pressed;
         public bool MiddleIsPressed => _current.MiddleButton == ButtonState.Pressed;

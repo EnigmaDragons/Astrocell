@@ -87,6 +87,7 @@
     <Compile Include="Motion\MotionState.cs" />
     <Compile Include="Motion\MotionStateSelector.cs" />
     <Compile Include="Motion\Moving.cs" />
+    <Compile Include="MouseControls\IMousePositionProvider.cs" />
     <Compile Include="MouseControls\MouseDrag.cs" />
     <Compile Include="MouseControls\MouseDragging.cs" />
     <Compile Include="MouseControls\MouseWheelScale.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Render\Viewports\CurrentViewport.cs" />
     <Compile Include="Render\Viewports\IViewPort.cs" />
     <Compile Include="Render\Viewports\SnapToPixelViewport.cs" />
+    <Compile Include="Render\Viewports\ViewportAdapterPositionProvider.cs" />
     <Compile Include="Tiled\TmxLoading\TmxExists.cs" />
     <Compile Include="Tiled\TmxLoading\XBoxCollisions.cs" />
     <Compile Include="Logs\InMemoryLog.cs" />
