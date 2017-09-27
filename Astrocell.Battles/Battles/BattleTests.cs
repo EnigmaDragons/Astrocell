@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Astrocell.Battles.BattlePresentation;
 using Astrocell.Battles.Characters;
 using Astrocell.Battles.Decks;
 using Astrocell.Battles.Players;
@@ -18,6 +19,7 @@ namespace Astrocell.Battles.Battles
         public void Init()
         {
             BattleLog.Instance = new DebugLog();
+            BattlePresenter.Instance = new LogPresenter(BattleLog.Instance); 
             _builder.WithEquipment(EquipmentSheet.Empty)
                 .WithDeck(EquippedDeckFactory.BuildWhackDeck());
         }
