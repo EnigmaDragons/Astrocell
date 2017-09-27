@@ -9,7 +9,6 @@ using MonoDragons.Core.Render;
 using MonoDragons.Core.Scenes;
 using Astrocell.Battles.Players;
 using System;
-using System.Threading.Tasks;
 using Astrocell.Battles.BattlePresentation;
 using Astrocell.Battles.Enemies;
 
@@ -22,9 +21,9 @@ namespace Astrocell.Battles
 
         protected override IEnumerable<GameObject> CreateObjs()
         {
-            var presenter = new UIBattlePresenter();
             var delay = TimeSpan.FromMilliseconds(800);
             var log = new BufferedLog { BufferDuration = delay };
+            var presenter = new UIBattlePresenter(log);
             yield return Entity.Create("Battle UI Presenter")
                 .Add(presenter);
             yield return Entity.Create("Battle Background", new Transform2 { Location = new Vector2(0, -100), Size = new Size2(1600, 1228), ZIndex = BackgroundLayer })

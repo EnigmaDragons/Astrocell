@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Diagnostics;
+using Microsoft.Xna.Framework;
 using MonoDragons.Core.Engine;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.PhysicsEngine;
@@ -10,6 +11,8 @@ namespace MonoDragons.Core.Development
 {
     public sealed class Metrics
     {
+        private static readonly Process Process = Process.GetCurrentProcess();
+
         public static GameObject Enable()
         {
             return Entity.Create("Dev Metrics Display", new Transform2 {Size = new Size2(
@@ -22,7 +25,8 @@ namespace MonoDragons.Core.Development
                     Text = () =>$"FPS: {FrameRate.PerSecond:00} " +
                                 $"UPS: {UpdateRate.PerSecond:00} " +
                                 $"Ent: {Entity.Count:0000} " +
-                                $"Res: {Entity.ResourceCount:0000}"
+                                $"Res: {Entity.ResourceCount:0000} " +
+                                $"Thr: {Process.Threads.Count:000}"
                 })
                 .AttachTo(CurrentViewport.Position);
         }

@@ -4,8 +4,6 @@ using System.Linq;
 using Astrocell.Battles.BattlePresentation;
 using Astrocell.Battles.Decks;
 using Astrocell.Battles.Players;
-using MonoDragons.Core.Common;
-using MonoDragons.Core.Logs;
 
 namespace Astrocell.Battles.Battles
 {
@@ -20,18 +18,18 @@ namespace Astrocell.Battles.Battles
             TurnFinished,
             BattleFinished
         }
-
-        // TODO: Replace Logging with Battle Presentation
-        private readonly ILog _log;
+        
         private readonly IBattlePresenter _presenter;
         private readonly Dictionary<BattleSide, IPlayer> _players;
 
         public LoopingSequence<BattleCharacter> TurnOrder { get; }
-        public bool IsOver => EnemyWon || PlayerWon;
+        public BattleSide Winner => IsOver ? (PlayerWon ? BattleSide.Gamer : BattleSide.Enemy) : BattleSide.Neutral;
+        public bool HasFinished => State == Phase.BattleFinished;
 
         private BattleCharacter CurrentChar => TurnOrder.Current;
         private bool EnemyWon => SideIsAllUnconscious(BattleSide.Gamer);
         private bool PlayerWon => SideIsAllUnconscious(BattleSide.Enemy);
+        private bool IsOver => EnemyWon || PlayerWon;
         private Phase State { get; set; }
 
         private bool SideIsAllUnconscious(BattleSide side)
@@ -41,23 +39,28 @@ namespace Astrocell.Battles.Battles
 
         public static Battle Create(IPlayer gamer, IPlayer enemy, params BattleCharacter[] characters)
         {
-            return new Battle(BattleLog.Instance, BattlePresenter.Instance, gamer, enemy, characters.OrderByDescending(x => x.Initiative).ToList());
+            return new Battle(BattlePresenter.Instance, gamer, enemy, characters.OrderByDescending(x => x.Initiative).ToList());
         }
 
-        private Battle(ILog log, IBattlePresenter presenter, IPlayer gamer, IPlayer enemy, IList<BattleCharacter> characters)
+        private Battle(IBattlePresenter presenter, IPlayer gamer, IPlayer enemy, IList<BattleCharacter> characters)
         {
             _presenter = presenter;
-            _log = log;
             _players = new Dictionary<BattleSide, IPlayer> {{ BattleSide.Gamer, gamer}, { BattleSide.Enemy, enemy} };
             TurnOrder = new LoopingSequence<BattleCharacter>(characters.ToList());
         }
 
+        public BattleSide Resolve()
+        {
+            while (State != Phase.BattleFinished)
+                Advance();
+            return Winner;
+        }
+
         public void Advance()
         {
-            if (State == Phase.Presenting)
+            if (State == Phase.BattleFinished)
                 return;
-
-            if (IsOver)
+            else if (IsOver)
                 FinishBattle();
             else if (State == Phase.NotStarted)
                 BeginBattle();
@@ -69,46 +72,28 @@ namespace Astrocell.Battles.Battles
                 EndTurn();
         }
 
-        private void EndTurn()
+        private void BeginBattle()
         {
-            TurnOrder.Current.EndTurn();
-            _log.Write("");
-            State = Phase.AwaitingTurn;
+            Present(x => x.ShowBattleBegan(this, () => State = Phase.AwaitingTurn));
         }
 
         private void FinishBattle()
         {
-            var winner = PlayerWon ? BattleSide.Gamer : BattleSide.Enemy;
-            _log.Write($"Winner: {winner}");
-            State = Phase.BattleFinished;
-        }
-
-        private void BeginBattle()
-        {
-            _log.Write("");
-            _log.Write($"Began Battle with {TurnOrder.Items.CommaSeparated(x => x.Name)}.");
-            State = Phase.AwaitingTurn;
-        }
-
-        public BattleSide Resolve()
-        {
-            while (State != Phase.BattleFinished)
-                Advance();
-            return PlayerWon ? BattleSide.Gamer : BattleSide.Enemy;
+            Present(x => x.ShowBattleEnded(this, () => State = Phase.BattleFinished));
         }
 
         private void BeginNextTurn()
         {
             TurnOrder.Next();
-            _log.Write($"Began turn for {CurrentChar.Loyalty} {CurrentChar.Name}.");
+            CurrentChar.BeginTurn();
 
-            if (CurrentChar.CanAct)
-            {
-                State = Phase.AwaitingAction;
-                CurrentChar.BeginTurn();
-            }
-            else
-                State = Phase.TurnFinished;
+            Present(x => x.ShowTurnBegan(CurrentChar, () => State = Phase.AwaitingAction));
+        }
+
+        private void EndTurn()
+        {
+            CurrentChar.EndTurn();
+            Present(x => x.ShowTurnEnded(CurrentChar, () => State = Phase.AwaitingTurn));
         }
 
         private void BeginNextAction()
@@ -124,8 +109,8 @@ namespace Astrocell.Battles.Battles
             var chr = CurrentChar;
             var player = _players[chr.Loyalty];
             var action = player.SelectAction(chr, chr.PlayableCards, new BattleCharacters(TurnOrder.Items));
-            State = Phase.Presenting;
-            _presenter.ShowSelectedCard(action.Card, ResolveCard(action));
+
+            Present(x => x.ShowPlayedCard(chr, action.Card, ResolveCard(action)));
         }
 
         private Action ResolveCard(CardAction action)
@@ -133,8 +118,14 @@ namespace Astrocell.Battles.Battles
             return () =>
             {
                 action.Apply(this);
-                State = CurrentChar.CanPlayACard ? Phase.AwaitingAction : Phase.TurnFinished;
+                State = Phase.AwaitingAction;
             };
+        }
+
+        private void Present(Action<IBattlePresenter> present)
+        {
+            State = Phase.Presenting;
+            present(_presenter);
         }
     }
 }

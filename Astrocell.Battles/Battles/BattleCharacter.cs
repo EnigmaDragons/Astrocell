@@ -50,14 +50,15 @@ namespace Astrocell.Battles.Battles
 
         public void BeginTurn()
         {
+            if (!CanAct)
+                return;
+
             _stats.CurrentActionPoints = _stats[BattleStat.ActionPoints];
             DrawCards(_stats[BattleStat.Draw]);
         }
 
         public void Play(Card card)
         {
-            _log.Write($"{Name} plays {card.Name}.");
-
             Hand.Take(card);
             _stats.CurrentEnergy -= card.EnergyCost;
             _stats.CurrentActionPoints -= card.ActionPointCost;

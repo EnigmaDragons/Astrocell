@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Astrocell.Battles.BattlePresentation;
+using Astrocell.Battles.Battles;
 using Astrocell.Battles.Decks;
 using Microsoft.Xna.Framework;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Entities;
+using MonoDragons.Core.Logs;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Timing;
 
@@ -14,6 +16,12 @@ namespace Astrocell.Battles
     public sealed class UIBattlePresenter : EntityComponent, IBattlePresenter
     {
         private readonly List<TimerAction> _presentations = new List<TimerAction>();
+        private readonly ILog _log;
+
+        public UIBattlePresenter(ILog log)
+        {
+            _log = log;
+        }
 
         public void Update(TimeSpan delta)
         {
@@ -22,18 +30,6 @@ namespace Astrocell.Battles
 
             _presentations.ForEach(x => x.Update(delta));
             _presentations.RemoveAll(x => x.IsDone);
-        }
-
-        public void ShowSelectedCard(Card card, Action continueWith)
-        {
-            var cardEntity = ShowCard(card);
-
-            _presentations.Add(new TimerAction
-            {
-                TimerMode = TimerAction.Mode.Once,
-                Action = () => { HideCard(cardEntity); continueWith(); },
-                Interval = TimeSpan.FromMilliseconds(3000)
-            });
         }
 
         private List<GameObject> ShowCard(Card card)
@@ -50,6 +46,42 @@ namespace Astrocell.Battles
         private void HideCard(List<GameObject> objs)
         {
             objs.ForEach(Entity.Destroy);
+        }
+
+        public void ShowBattleBegan(Battle battle, Action callback)
+        {
+            _log.Write($"Began Battle with {battle.TurnOrder.Items.CommaSeparated(x => x.Name)}.");
+            callback();
+        }
+
+        public void ShowTurnBegan(BattleCharacter character, Action callback)
+        {
+            _log.Write($"Began turn for {character.Loyalty} {character.Name}.");
+            callback();
+        }
+
+        public void ShowPlayedCard(BattleCharacter character, Card card, Action callback)
+        {
+            var cardEntity = ShowCard(card);
+
+            _presentations.Add(new TimerAction
+            {
+                TimerMode = TimerAction.Mode.Once,
+                Action = () => { HideCard(cardEntity); callback(); },
+                Interval = TimeSpan.FromMilliseconds(3000)
+            });
+        }
+
+        public void ShowTurnEnded(BattleCharacter character, Action callback)
+        {
+            _log.Write($"Ended turn for {character.Loyalty} {character.Name}.");
+            callback();
+        }
+
+        public void ShowBattleEnded(Battle battle, Action callback)
+        {
+            _log.Write($"Winner: {battle.Winner}");
+            callback();
         }
     }
 
