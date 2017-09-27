@@ -107,6 +107,7 @@
     <Compile Include="Render\Viewports\CurrentViewport.cs" />
     <Compile Include="Render\Viewports\IViewPort.cs" />
     <Compile Include="Render\Viewports\SnapToPixelViewport.cs" />
+    <Compile Include="Tiled\TmxLoading\TmxExists.cs" />
     <Compile Include="Tiled\TmxLoading\XBoxCollisions.cs" />
     <Compile Include="Logs\InMemoryLog.cs" />
     <Compile Include="Render\MultiTexture.cs" />

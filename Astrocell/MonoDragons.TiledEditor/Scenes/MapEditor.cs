@@ -25,18 +25,23 @@ namespace MonoDragons.TiledEditor.Scenes
         protected override IEnumerable<GameObject> CreateObjs()
         {
             GameObject selectedTile;
-            var textbox = Textbox.Create(new Transform2 { Size = new Size2(300, 50), ZIndex = ZIndex.Max });
-            var enterAction = Entity.Create("Map Editor Enter Command")
+            var textbox = Textbox.Create(new Transform2 { Size = new Size2(300, 50), ZIndex = ZIndex.Max })
                 .Add(obj => new KeyboardCommand
                 {
                     Key = Keys.Enter, Command = () =>
                     {
-                        textbox.With<TypingInput>(
+                        obj.With<TypingInput>(
                             input => input.Value.If(value => !string.IsNullOrEmpty(value), () =>
                             {
+                                var path = Path.Combine("maps", input.Value);
+                                if (!new TmxExists(path).Get())
+                                {
+                                    input.Value = "Map Not Found";
+                                    return;
+                                }
                                 _map.ForEach(Entity.Destroy);
                                 _map.Clear();
-                                new OrthographicTileMapFactory().CreateMap(Tmx.Create(Path.Combine("maps", input.Value))).ForEach(tile =>
+                                new OrthographicTileMapFactory().CreateMap(Tmx.Create(path)).ForEach(tile =>
                                 {
                                     selectedTile = tile;
                                     tile.Add(new MouseStateActions
@@ -61,13 +66,12 @@ namespace MonoDragons.TiledEditor.Scenes
                                     _map.Add(tile);
                                     AddObj(tile);
                                 });
+                                obj.Disable();
                             }));
-                        textbox.Disable();
-                        obj.Disable();
                     }
                 });
             var camera = Entity.Create("Map Editor Camera", Transform2.CameraZero).Add(new Camera()).Add(new MouseDrag { Button = MouseButton.Right });
-            return new List<GameObject> { textbox, enterAction, camera };
+            return new List<GameObject> { textbox, camera };
         }
     }
 }
