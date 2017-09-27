@@ -53,6 +53,7 @@ namespace MonoDragons.Core.Engine
             _startingViewName = startingViewName;
             _sceneFactory = sceneFactory;
             _controller = controller;
+            MouseSnapshot.MousePositionProvider = new ViewportAdapterPositionProvider();
             _ecs = Entity.System;
             _ecs.Register(new MotionStateSelector());
             Renderers.RegisterAll(_ecs);

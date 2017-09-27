@@ -32,7 +32,7 @@ namespace MonoDragons.Core.MouseControls
             _targets.ForEach(
                 t => t.With<MouseDragAndDrop>(m => m.If(m.IsEnabled(),
                     () => {
-                        m.Drop(_mouse.Position);
+                        m.Drop(_mouse.WorldPosition);
                         entities.WithTopMost<MouseDropTarget>(m.DropPoint.Value, dt => dt.OnDrop(t));
                     })));
             _targets.Clear();
@@ -43,7 +43,7 @@ namespace MonoDragons.Core.MouseControls
             _targets.ForEach(
                 t =>  t.With<MouseDragAndDrop>(m => m.If(m.IsEnabled(), 
                     () => {
-                        m.UpdateDragPoint(_mouse.Position);
+                        m.UpdateDragPoint(_mouse.WorldPosition);
                         t.World.Location += _mouse.MovedBy.ToVector2();
                     }))
                 );
@@ -52,7 +52,7 @@ namespace MonoDragons.Core.MouseControls
         private void SelectTarget(IEntities entities)
         {
             var possibleTargets = new List<GameObject>();
-            entities.With<MouseDragAndDrop>((o, m) => o.World.If(t => t.Intersects(_mouse.LastPosition), t => possibleTargets.Add(o)));
+            entities.With<MouseDragAndDrop>((o, m) => o.World.If(t => t.Intersects(_mouse.LastWorldPosition), t => possibleTargets.Add(o)));
             if (possibleTargets.Any())
                 _targets.Add(possibleTargets.OrderByDescending(x => x.World.ZIndex.Value).First());
         }

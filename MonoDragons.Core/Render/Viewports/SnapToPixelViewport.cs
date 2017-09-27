@@ -18,9 +18,14 @@ namespace MonoDragons.Core.Render.Viewports
             };
         }
 
-        public Transform2 GetScreenPosition(Transform2 transform)
+        public Transform2 GetScreenPosition(Transform2 worldTransform)
         {
-            return transform - _position;
+            return worldTransform - _position;
+        }
+
+        public Transform2 GetWorldPosition(Transform2 screenTransform)
+        {
+            return screenTransform + _position;
         }
     }
 }
