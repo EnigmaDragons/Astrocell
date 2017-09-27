@@ -4,6 +4,6 @@ namespace MonoDragons.Core.MouseControls
 {
     public interface IMousePositionProvider
     {
-        Point WorldPosition(Point mousePosition);
+        Point GetWorldPosition(Point mousePosition);
     }
 }

@@ -12,9 +12,9 @@ namespace MonoDragons.Core.MouseControls
         private Microsoft.Xna.Framework.Input.MouseState _current;
 
         public Point LastScreenPosition => _last.Position;
-        public Point LastWorldPosition => MousePositionProvider.WorldPosition(LastScreenPosition);
+        public Point LastWorldPosition => MousePositionProvider.GetWorldPosition(LastScreenPosition);
         public Point ScreenPosition => _current.Position;
-        public Point WorldPosition => MousePositionProvider.WorldPosition(ScreenPosition);
+        public Point WorldPosition => MousePositionProvider.GetWorldPosition(ScreenPosition);
         public Point MovedBy => ScreenPosition - LastScreenPosition;
         public bool LeftIsPressed => _current.LeftButton == ButtonState.Pressed;
         public bool RightIsPressed => _current.RightButton == ButtonState.Pressed;
