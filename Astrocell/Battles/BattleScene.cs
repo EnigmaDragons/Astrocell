@@ -23,7 +23,7 @@ namespace Astrocell.Battles
         {
             var delay = TimeSpan.FromMilliseconds(800);
             var log = new BufferedLog { BufferDuration = delay };
-            var presenter = new UIBattlePresenter(log);
+            var presenter = new UIBattlePresenter(log, AddObj);
             yield return Entity.Create("Battle UI Presenter")
                 .Add(presenter);
             yield return Entity.Create("Battle Background", new Transform2 { Location = new Vector2(0, -100), Size = new Size2(1600, 1228), ZIndex = BackgroundLayer })

@@ -17,10 +17,12 @@ namespace Astrocell.Battles
     {
         private readonly List<TimerAction> _presentations = new List<TimerAction>();
         private readonly ILog _log;
+        private readonly Action<GameObject> _registerObj;
 
-        public UIBattlePresenter(ILog log)
+        public UIBattlePresenter(ILog log, Action<GameObject> registerObj)
         {
             _log = log;
+            _registerObj = registerObj;
         }
 
         public void Update(TimeSpan delta)
@@ -40,6 +42,7 @@ namespace Astrocell.Battles
                 Duration = TimeSpan.FromMilliseconds(1000),
                 Target = new Transform2 {Size = o.Local.Size, Location = new Vector2(700, 350), ZIndex = o.World.ZIndex}
             });
+            objs.ForEach(x => _registerObj(x));
             return objs;
         }
 
