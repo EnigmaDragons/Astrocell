@@ -2,9 +2,9 @@
 
 namespace MonoDragons.Core.PhysicsEngine
 {
-    public sealed class Position
+    public sealed class Position : IPosition
     {
-        private Optional<Position> _parent = new Optional<Position>();
+        private Optional<IPosition> _parent = new Optional<IPosition>();
 
         public Transform2 Local { get; set; }
 
@@ -15,15 +15,15 @@ namespace MonoDragons.Core.PhysicsEngine
             Local = transform;
         }
         
-        public void AttachTo(Position parent)
+        public void AttachTo(IPosition parent)
         {
-            _parent = parent;
+            _parent = new Optional<IPosition>(parent);
             Local = Local - parent.World;
         }
 
         public void Detach()
         {
-            _parent = new Optional<Position>();
+            _parent = new Optional<IPosition>();
             Local = World;
         }
     }

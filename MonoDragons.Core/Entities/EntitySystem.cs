@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using MonoDragons.Core.Common;
 using Microsoft.Xna.Framework.Graphics;
-using MonoDragons.Core.Render;
 using MonoDragons.Core.Render.Viewports;
 
 namespace MonoDragons.Core.Entities

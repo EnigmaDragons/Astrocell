@@ -10,34 +10,29 @@ namespace MonoDragons.Core.PhysicsEngine
     {
         public void Update(IEntities entities, TimeSpan delta)
         {
-            var moving = GetMoving(entities);
-            if (!moving.Any())
-                return;
-            entities.With<BoxCollider>(
-                (o, collider) => moving.ForEach(x => x.If(!o.Equals(x), 
-                    () => StopIfWouldCollide(x, collider, delta))));
+            var colliderObjs = GetColliderObjects(entities);
+            colliderObjs.ForEachIndex((obj, i) =>
+            {
+                var transform = obj.Get<BoxCollider>().Transform;
+                obj.With<Motion2>(motion => transform = GetProposedMotion(delta, obj));
+                colliderObjs.Skip(i + 1).Where(other => transform.Intersects(other.Get<BoxCollider>().Transform)).ForEach(other => 
+                {
+                    obj.With<Collision>(x => x.CollidingWith.Add(other));
+                    other.With<Collision>(x => x.CollidingWith.Add(obj));
+                });
+            });
         }
 
-        private List<GameObject> GetMoving(IEntities entities)
+        private List<GameObject> GetColliderObjects(IEntities entities)
         {
-            var result = new List<GameObject>();
-            entities.With<BoxCollider>(
-                (o, solid) => o.With<Motion2>(
-                    motion => motion.If(motion.Velocity.Speed > 0,
-                        () => result.Add(o))));
-            return result;
+            var colliderObjs = new List<GameObject>();
+            entities.With<BoxCollider>((o, x) => colliderObjs.Add(o));
+            return colliderObjs;
         }
 
-        // @todo #1 Evolve this to teleport to last possible location
-        private void StopIfWouldCollide(GameObject o, BoxCollider c, TimeSpan time)
+        private Transform2 GetProposedMotion(TimeSpan delta, GameObject obj)
         {
-            if(c.IsBlocking && c.Transform.Intersects(GetProposedMotion(o, time)))
-                o.Get<Motion2>().Velocity.Speed = 0;
-        }
-
-        private Transform2 GetProposedMotion(GameObject o, TimeSpan time)
-        {
-            return o.Get<BoxCollider>().Transform + o.Get<Motion2>().Velocity.GetDelta(time);
+            return obj.Get<BoxCollider>().Transform + obj.Get<Motion2>().Velocity.GetDelta(delta);
         }
     }
 }

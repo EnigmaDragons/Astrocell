@@ -14,14 +14,18 @@ namespace MonoDragons.Core.MouseControls
         public Point MovedBy => Position - LastPosition;
         public bool LeftIsPressed => _current.LeftButton == ButtonState.Pressed;
         public bool RightIsPressed => _current.RightButton == ButtonState.Pressed;
+        public bool MiddleIsPressed => _current.MiddleButton == ButtonState.Pressed;
         public bool LeftStillPressed => LeftIsPressed && _last.LeftButton == ButtonState.Pressed;
-        public bool RightStillPressed => RightStillPressed && _last.RightButton == ButtonState.Pressed;
+        public bool RightStillPressed => RightIsPressed && _last.RightButton == ButtonState.Pressed;
+        public bool MiddleStillPressed => MiddleIsPressed && _last.MiddleButton == ButtonState.Pressed;
         public bool LeftButtonJustPressed => _last.LeftButton != ButtonState.Pressed && LeftIsPressed;
         public bool LeftButtonJustReleased => _last.LeftButton == ButtonState.Pressed && !LeftIsPressed;
         public bool RightButtonJustPressed => _last.RightButton != ButtonState.Pressed && RightIsPressed;
         public bool RightButtonJustReleased => _last.RightButton == ButtonState.Pressed && !RightIsPressed;
-        public bool ButtonJustPressed => LeftButtonJustPressed || RightButtonJustPressed;
-        public bool ButtonJustReleased => LeftButtonJustReleased || RightButtonJustReleased;
+        public bool MiddleButtonJustPressed => _last.MiddleButton != ButtonState.Pressed && MiddleIsPressed;
+        public bool MiddleButtonJustReleased => _last.MiddleButton == ButtonState.Pressed && !MiddleIsPressed;
+        public bool ButtonJustPressed => LeftButtonJustPressed || RightButtonJustPressed || MiddleButtonJustPressed;
+        public bool ButtonJustReleased => LeftButtonJustReleased || RightButtonJustReleased || RightButtonJustPressed;
         public bool IsOnGameScreen => GameInstance.TheGame.IsActive;
         public int MouseWheelDelta => _current.ScrollWheelValue - _last.ScrollWheelValue;
 

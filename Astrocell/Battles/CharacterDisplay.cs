@@ -17,7 +17,7 @@ namespace Astrocell.Battles
             string CharText(string x) => $"Char {character.Name}: {x}";
             var display = Entity.Create(CharText("Background"), new Transform2 {Location = location, Size = new Size2(300, 400)})
                 .Add((o, r) => new Texture(r.LoadTexture("Battle/char-portrait-back.png", o)))
-                .Add(new MouseDrag());
+                .Add(new MouseDragAndDrop());
             var face = Entity.Create(CharText("Image"), new Transform2 {Location = location + new Vector2(30, 80), Size = new Size2(240, 240), ZIndex = 8 })
                 .Add((o, r) => new Texture(r.LoadTexture(charImg, o)))
                 .AttachTo(display);

@@ -25,7 +25,6 @@ namespace MonoDragons.Core.Engine
         private readonly IController _controller;
         private readonly EntitySystem _ecs;
         private readonly bool _areScreenSettingsPreCalculated;
-        private readonly Camera _viewPort;
         
         private SpriteBatch _sprites;
         private Display _display;
@@ -49,7 +48,6 @@ namespace MonoDragons.Core.Engine
 
         private NeedlesslyComplexMainGame(string title, string startingViewName, SceneFactory sceneFactory, IController controller)
         {
-            _viewPort = new Camera();
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             _startingViewName = startingViewName;
@@ -62,7 +60,7 @@ namespace MonoDragons.Core.Engine
             AnimationSystems.RegisterAll(_ecs);
             MouseSystems.RegisterAll(_ecs);
             KeyboardSystems.RegisterAll(_ecs);
-            CurrentViewport.Instance = _viewPort;
+            _ecs.Register(new CameraDirector());
             Window.Title = title;
 #if DEBUG
             DevelopmentSystems.RegisterAll(_ecs);
@@ -84,7 +82,6 @@ namespace MonoDragons.Core.Engine
             _black = new RectangleTexture(Color.Black).Create();
             Navigate.Init(_sceneFactory);
             DefaultFont.Load(Content);
-            Entity.Create("World Camera", new Transform2 { ZIndex = 0 }).Add(_viewPort);
 #if DEBUG
             SceneNavigatorConsole.Enable();
             Metrics.Enable();
@@ -126,7 +123,7 @@ namespace MonoDragons.Core.Engine
         {
             _graphics.GraphicsDevice.Clear(Color.Black);
             _sprites.Begin(SpriteSortMode.FrontToBack, null, SamplerState.AnisotropicClamp, DepthStencilState.DepthRead);
-            _ecs.Draw(_sprites, new SnapshotViewport(_viewPort));
+            _ecs.Draw(_sprites, CurrentViewport.Snapshot);
             HideExternals();
             _sprites.End();
             base.Draw(gameTime);
