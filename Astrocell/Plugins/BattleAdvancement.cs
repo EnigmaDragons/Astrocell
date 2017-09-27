@@ -15,7 +15,7 @@ namespace Astrocell.Plugins
         {
             entities.With<CurrentBattle>(x =>
             {
-                if (!x.Battle.IsOver)
+                if (!x.Battle.HasFinished)
                     x.Battle.Advance();
             });
         }

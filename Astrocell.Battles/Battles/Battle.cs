@@ -24,11 +24,12 @@ namespace Astrocell.Battles.Battles
 
         public LoopingSequence<BattleCharacter> TurnOrder { get; }
         public BattleSide Winner => IsOver ? (PlayerWon ? BattleSide.Gamer : BattleSide.Enemy) : BattleSide.Neutral;
-        public bool IsOver => EnemyWon || PlayerWon;
+        public bool HasFinished => State == Phase.BattleFinished;
 
         private BattleCharacter CurrentChar => TurnOrder.Current;
         private bool EnemyWon => SideIsAllUnconscious(BattleSide.Gamer);
         private bool PlayerWon => SideIsAllUnconscious(BattleSide.Enemy);
+        private bool IsOver => EnemyWon || PlayerWon;
         private Phase State { get; set; }
 
         private bool SideIsAllUnconscious(BattleSide side)
@@ -57,7 +58,9 @@ namespace Astrocell.Battles.Battles
 
         public void Advance()
         {
-            if (IsOver)
+            if (State == Phase.BattleFinished)
+                return;
+            else if (IsOver)
                 FinishBattle();
             else if (State == Phase.NotStarted)
                 BeginBattle();
