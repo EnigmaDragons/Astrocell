@@ -33,7 +33,7 @@ namespace MonoDragons.Core.Tiled
 
         private GameObject CreateTile(TmxTileset tileset, TmxTilesetTile tile, Transform2 transform)
         {
-            var entity = Entity.Create(transform)
+            var entity = Entity.Create($"Tile {tile.Id}", transform)
                 .Add((o, r) => new Texture(r.LoadTexture(tileset.TileSource, o), new SpriteSheetRectangle(tile.Id, tileset.Columns, tileset.TileWidth, tileset.TileHeight, tileset.Spacing).Get()));
             return tile.CollisionBoxes.Any() ? WithBoxColliders(tile, entity) : entity;
         }

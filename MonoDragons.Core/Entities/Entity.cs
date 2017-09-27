@@ -19,14 +19,14 @@ namespace MonoDragons.Core.Entities
             System.Register(system);
         }
 
-        public static GameObject Create()
+        public static GameObject Create(string name)
         {
-            return Create(Transform2.Zero);
+            return Create(name, Transform2.Zero);
         }
 
-        public static GameObject Create(Transform2 transform)
+        public static GameObject Create(string name, Transform2 transform)
         {
-            return Objs.Create(transform);
+            return Objs.Create(name, transform);
         }
 
         public static void Destroy(GameObject obj)

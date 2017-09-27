@@ -11,7 +11,7 @@ namespace MonoDragons.Core.UserInterface
     {
         public static GameObject Create(Transform2 transform)
         {
-            return Entity.Create(transform)
+            return Entity.Create("Textbox", transform)
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.White, o)))
                 .Add((o, r) => new BorderTexture { Value = r.CreateRectangle(Color.Orange, o) })
                 .Add(new TypingInput { IsActive = true } )

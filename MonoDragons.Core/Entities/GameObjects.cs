@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using MonoDragons.Core.Common;
-using MonoDragons.Core.Engine;
 using MonoDragons.Core.PhysicsEngine;
 
 namespace MonoDragons.Core.Entities
@@ -22,9 +21,9 @@ namespace MonoDragons.Core.Entities
             _resources = resources;
         }
 
-        public GameObject Create(Transform2 transform)
+        public GameObject Create(string name, Transform2 transform)
         {
-            var obj = new GameObject(Interlocked.Increment(ref _nextId), transform, _resources);
+            var obj = new GameObject(Interlocked.Increment(ref _nextId), name, transform, _resources);
             _entities.Add(obj.Id, obj);
             return obj;
         }

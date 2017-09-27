@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,7 +15,7 @@ namespace MonoDragons.Core.Tiled
     {
         public GameObject CreateMovingObject(Tsx tsx, Vector2 location, ZIndex zIndex)
         {
-            return Entity.Create(new Transform2(location, new Size2(tsx.TileWidth, tsx.TileHeight), zIndex))
+            return Entity.Create("TsxMovingObject", new Transform2(location, new Size2(tsx.TileWidth, tsx.TileHeight), zIndex))
                 .Add((o, r) => new Texture(r.LoadTexture(tsx.ImageSource, o)))
                 .Add(o => new Animation(0, o.Get<Texture>()))
                 .Add(o => CreateMotionAnimationStates(tsx, o.Get<Texture>().Value))

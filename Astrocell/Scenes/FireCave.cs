@@ -23,13 +23,13 @@ namespace Astrocell.Scenes
             var cameraPosition = Transform2.CameraZero;
             cameraPosition.Center = player.World.Center - new Vector2(800, 450);
             yield return Entity
-                .Create(cameraPosition)
+                .Create("Player Camera", cameraPosition)
                 .Add(new Camera())
                 .AttachTo(player);
             foreach (var tile in new OrthographicTileMapFactory().CreateMap(Tmx.Create(Path.Combine("Maps", "FireCave.tmx"))))
                 yield return tile;
             var exit1 = new Transform2(new Vector2(48 * 7, 48 * 16), new Size2(48 * 3, 10));
-            yield return Entity.Create(exit1)
+            yield return Entity.Create("Fire Cave Entrance", exit1)
                 .Add(new Collision() { IsBlocking = false })
                 .Add(new BoxCollider(exit1))
                 .Add(new OnCollision

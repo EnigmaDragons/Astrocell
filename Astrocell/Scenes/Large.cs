@@ -22,7 +22,7 @@ namespace Astrocell.Scenes
             var cameraPosition = Transform2.CameraZero;
             cameraPosition.Center = player.World.Center - new Vector2(800, 450);
             yield return Entity
-                .Create(cameraPosition)
+                .Create("Player Camera", cameraPosition)
                 .Add(new Camera())
                 .AttachTo(player);
             foreach (var tile in new OrthographicTileMapFactory().CreateMap(Tmx.Create(Path.Combine("Maps", "Large.tmx"))))

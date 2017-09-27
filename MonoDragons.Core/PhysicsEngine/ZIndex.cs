@@ -15,6 +15,11 @@ namespace MonoDragons.Core.PhysicsEngine
             Value = Normalize(value);
         }
 
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+
         public bool Equals(ZIndex other)
         {
             return Value == other.Value;

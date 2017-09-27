@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Astrocell.Battles.BattlePresentation;
 using Astrocell.Battles.Decks;
 using Microsoft.Xna.Framework;
@@ -37,12 +38,13 @@ namespace Astrocell.Battles
 
         private List<GameObject> ShowCard(Card card)
         {
-            return CardDisplay.Create(card)
-                .Add(o => new DurationTravel
-                {
-                    Duration = TimeSpan.FromMilliseconds(1000),
-                    Target = new Transform2 {Size = o.Local.Size, Location = new Vector2(700, 350)} 
-                }).AsList();
+            var objs = CardDisplay.Create(card);
+            objs.First().Add(o => new DurationTravel
+            {
+                Duration = TimeSpan.FromMilliseconds(1000),
+                Target = new Transform2 {Size = o.Local.Size, Location = new Vector2(700, 350), ZIndex = o.World.ZIndex}
+            });
+            return objs;
         }
 
         private void HideCard(List<GameObject> objs)

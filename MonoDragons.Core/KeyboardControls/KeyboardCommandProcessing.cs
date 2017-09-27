@@ -16,8 +16,8 @@ namespace MonoDragons.Core.KeyboardControls
             var newDownKeys = Keyboard.GetState().GetPressedKeys().ToList();
             var newlyPressedKeys = newDownKeys.Where(x => !_keysDown.Contains(x));
 
-            entities.With<KeyboardCommand>(
-                x => newlyPressedKeys.ForEach(x.NotifyKeyPressed));
+            entities.With<KeyboardCommand>(x => newlyPressedKeys.ForEach(x.NotifyKeyPressed));
+            entities.With<KeyboardCommands>(x => newlyPressedKeys.ForEach(x.NotifyKeyPressed));
 
             _keysDown = newDownKeys;
         }

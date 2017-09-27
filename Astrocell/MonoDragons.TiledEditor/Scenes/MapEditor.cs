@@ -26,7 +26,7 @@ namespace MonoDragons.TiledEditor.Scenes
         {
             GameObject selectedTile;
             var textbox = Textbox.Create(new Transform2 { Size = new Size2(300, 50), ZIndex = ZIndex.Max });
-            var enterAction = Entity.Create(Transform2.Zero)
+            var enterAction = Entity.Create("Map Editor Enter Command")
                 .Add(obj => new KeyboardCommand
                 {
                     Key = Keys.Enter, Command = () =>
@@ -66,7 +66,7 @@ namespace MonoDragons.TiledEditor.Scenes
                         obj.Disable();
                     }
                 });
-            var camera = Entity.Create(Transform2.CameraZero).Add(new Camera()).Add(new MouseDrag { Button = MouseButton.Right });
+            var camera = Entity.Create("Map Editor Camera", Transform2.CameraZero).Add(new Camera()).Add(new MouseDrag { Button = MouseButton.Right });
             return new List<GameObject> { textbox, enterAction, camera };
         }
     }

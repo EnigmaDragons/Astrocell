@@ -6,7 +6,7 @@ namespace MonoDragons.Core.Render.Viewports
 {
     public static class CurrentViewport
     {
-        public static GameObject FocusedCamera { private get; set; } = Entity.Create(Transform2.CameraZero);
+        public static GameObject FocusedCamera { private get; set; } = Entity.Create("Default Camera", Transform2.CameraZero);
         public static IViewport Snapshot => new SnapToPixelViewport(Position.World);
 
         public static IPosition Position { get; } = new DelegatePosition(() =>
