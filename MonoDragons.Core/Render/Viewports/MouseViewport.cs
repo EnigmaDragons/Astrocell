@@ -4,9 +4,9 @@ using MonoDragons.Core.PhysicsEngine;
 
 namespace MonoDragons.Core.Render.Viewports
 {
-    public class ViewportAdapterPositionProvider : IMousePositionProvider
+    public class MouseViewport : IMousePositionProvider
     {
-        public Point WorldPosition(Point mousePosition)
+        public Point GetWorldPosition(Point mousePosition)
         {
             return CurrentViewport.Snapshot.GetWorldPosition(new Transform2(mousePosition.ToVector2())).Location.ToPoint();
         }

@@ -15,7 +15,7 @@ namespace MonoDragons.Core.MouseControls
             if (!_mouse.IsOnGameScreen || !_mouse.ButtonJustPressed)
                 return;
 
-            entities.With<MouseClickListener>(m => m.OnClick(_mouse.ScreenPosition));
+            entities.With<MouseClickListener>(m => m.OnClick(_mouse.WorldPosition));
             entities.WithTopMost<MouseClickTarget>(_mouse.WorldPosition, 
                 (o, m) => o.World.If(x => x.Intersects(_mouse.WorldPosition), () => m.OnHit()), 
                 (o, m) => m.OnMiss());
