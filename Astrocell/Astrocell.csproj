@@ -46,7 +46,6 @@
     <Compile Include="Plugins\BattleAdvancement.cs" />
     <Compile Include="Plugins\BufferedLog.cs" />
     <Compile Include="Plugins\BufferedLogAdvancement.cs" />
-    <Compile Include="Plugins\MakeCameraFollowPlayer.cs" />
     <Compile Include="Plugins\PercentBar.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

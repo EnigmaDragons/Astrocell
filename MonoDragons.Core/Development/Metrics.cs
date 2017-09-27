@@ -24,7 +24,7 @@ namespace MonoDragons.Core.Development
                                 $"Ent: {Entity.Count:0000} " +
                                 $"Res: {Entity.ResourceCount:0000}"
                 })
-                .AttachTo(CurrentViewport.Instance.Position);
+                .AttachTo(CurrentViewport.Position);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Astrocell.Battles
         {
             _zIndex += 5;
             return Entity.Create(new Transform2 { Size = new Size2(200, 300), ZIndex = new ZIndex(_zIndex) })
-                .Add(new MouseDrag())
+                .Add(new MouseDragAndDrop())
                 .Add(new ZGravity())
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.Coral, o)))
                 .Add(new BorderTexture())

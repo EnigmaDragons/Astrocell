@@ -10,6 +10,7 @@ using MonoDragons.Core.MouseControls;
 using MonoDragons.Core.Navigation;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
+using MonoDragons.Core.Render.Viewports;
 using MonoDragons.Core.Scenes;
 using MonoDragons.Core.Tiled;
 using MonoDragons.Core.Tiled.TmxLoading;
@@ -65,7 +66,8 @@ namespace MonoDragons.TiledEditor.Scenes
                         obj.Disable();
                     }
                 });
-            return new List<GameObject> { textbox, enterAction };
+            var camera = Entity.Create(Transform2.CameraZero).Add(new Camera()).Add(new MouseDrag { Button = MouseButton.Right });
+            return new List<GameObject> { textbox, enterAction, camera };
         }
     }
 }

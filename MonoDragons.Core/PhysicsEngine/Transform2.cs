@@ -6,7 +6,8 @@ namespace MonoDragons.Core.PhysicsEngine
     public sealed class Transform2
     {
         private const float Epsilon = 0.001f;
-        public static Transform2 Zero = new Transform2(Vector2.Zero, Size2.Zero);
+        public static Transform2 Zero => new Transform2(Vector2.Zero, Size2.Zero);
+        public static Transform2 CameraZero => new Transform2 { Location = Vector2.Zero, Size = Size2.Zero, ZIndex = new ZIndex(0) };
 
         public Vector2 Location { get; set; } = Vector2.Zero;
         public Rotation2 Rotation { get; set; } = Rotation2.None;

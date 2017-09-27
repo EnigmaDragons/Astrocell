@@ -47,7 +47,7 @@ namespace MonoDragons.Core.Entities
             return this;
         }
 
-        public GameObject AttachTo(Position other)
+        public GameObject AttachTo(IPosition other)
         {
             _position.AttachTo(other);
             return this;
