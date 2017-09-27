@@ -50,8 +50,8 @@ namespace Astrocell.Battles.Battles
 
             var battle = Battle.Create(new DeadPlayer(), new DeadPlayer(), slowChar, fastChar);
 
-            Assert.AreEqual(fastChar, battle.TurnOrder[0]);
-            Assert.AreEqual(slowChar, battle.TurnOrder[1]);
+            Assert.AreEqual(fastChar, battle.Characters[0]);
+            Assert.AreEqual(slowChar, battle.Characters[1]);
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace Astrocell.Battles.Battles
 
             var battle = Battle.Create(new DeadPlayer(), new DeadPlayer(), slowChar, fastChar);
 
-            battle.TurnOrder.Items.ForEach(x =>
+            battle.Characters.Snapshot.ForEach(x =>
                 Assert.AreNotEqual(0, x.Hand.Cards));
         }
 

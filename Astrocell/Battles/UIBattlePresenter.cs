@@ -53,7 +53,7 @@ namespace Astrocell.Battles
 
         public void ShowBattleBegan(Battle battle, Action callback)
         {
-            _log.Write($"Began Battle with {battle.TurnOrder.Items.CommaSeparated(x => x.Name)}.");
+            _log.Write($"Began Battle with {battle.Characters.Snapshot.CommaSeparated(x => x.Name)}.");
             callback();
         }
 

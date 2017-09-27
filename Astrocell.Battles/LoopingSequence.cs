@@ -6,7 +6,7 @@ namespace Astrocell.Battles
     {
         private readonly List<T> _items;
 
-        public IList<T> Items => _items.AsReadOnly();
+        public IList<T> Snapshot => _items.AsReadOnly();
 
         public T this[int index] => _items[index];
 

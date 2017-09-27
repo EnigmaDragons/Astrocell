@@ -39,9 +39,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Battles\BattleFactory.cs" />
     <Compile Include="Battles\CardDisplay.cs" />
     <Compile Include="Battles\CharacterDisplay.cs" />
     <Compile Include="Battles\UIBattlePresenter.cs" />
+    <Compile Include="Maps\TilePosition.cs" />
     <Compile Include="Plugins\AstrocellSystems.cs" />
     <Compile Include="Plugins\BattleAdvancement.cs" />
     <Compile Include="Plugins\BufferedLog.cs" />

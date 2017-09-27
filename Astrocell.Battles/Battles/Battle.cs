@@ -22,11 +22,11 @@ namespace Astrocell.Battles.Battles
         private readonly IBattlePresenter _presenter;
         private readonly Dictionary<BattleSide, IPlayer> _players;
 
-        public LoopingSequence<BattleCharacter> TurnOrder { get; }
+        public LoopingSequence<BattleCharacter> Characters { get; }
         public BattleSide Winner => IsOver ? (PlayerWon ? BattleSide.Gamer : BattleSide.Enemy) : BattleSide.Neutral;
         public bool HasFinished => State == Phase.BattleFinished;
 
-        private BattleCharacter CurrentChar => TurnOrder.Current;
+        private BattleCharacter CurrentChar => Characters.Current;
         private bool EnemyWon => SideIsAllUnconscious(BattleSide.Gamer);
         private bool PlayerWon => SideIsAllUnconscious(BattleSide.Enemy);
         private bool IsOver => EnemyWon || PlayerWon;
@@ -34,7 +34,7 @@ namespace Astrocell.Battles.Battles
 
         private bool SideIsAllUnconscious(BattleSide side)
         {
-            return TurnOrder.Items.Where(x => x.Loyalty.Equals(side)).All(x => !x.IsConscious);
+            return Characters.Snapshot.Where(x => x.Loyalty.Equals(side)).All(x => !x.IsConscious);
         }
 
         public static Battle Create(IPlayer gamer, IPlayer enemy, params BattleCharacter[] characters)
@@ -46,7 +46,7 @@ namespace Astrocell.Battles.Battles
         {
             _presenter = presenter;
             _players = new Dictionary<BattleSide, IPlayer> {{ BattleSide.Gamer, gamer}, { BattleSide.Enemy, enemy} };
-            TurnOrder = new LoopingSequence<BattleCharacter>(characters.ToList());
+            Characters = new LoopingSequence<BattleCharacter>(characters.ToList());
         }
 
         public BattleSide Resolve()
@@ -84,7 +84,7 @@ namespace Astrocell.Battles.Battles
 
         private void BeginNextTurn()
         {
-            TurnOrder.Next();
+            Characters.Next();
             CurrentChar.BeginTurn();
 
             Present(x => x.ShowTurnBegan(CurrentChar, () => State = Phase.AwaitingAction));
@@ -108,7 +108,7 @@ namespace Astrocell.Battles.Battles
         {
             var chr = CurrentChar;
             var player = _players[chr.Loyalty];
-            var action = player.SelectAction(chr, chr.PlayableCards, new BattleCharacters(TurnOrder.Items));
+            var action = player.SelectAction(chr, chr.PlayableCards, new BattleCharacters(Characters.Snapshot));
 
             Present(x => x.ShowPlayedCard(chr, action.Card, ResolveCard(action)));
         }
