@@ -37,7 +37,8 @@ namespace MonoDragons.Core.Development
                     _items.Add(
                         Entity.Create($"Entity[{num}] Text", 
                             new Transform2 { Size = new Size2(400, height), Location = new Vector2(viewportLoc.X, viewportLoc.Y + (i - 1) * height)})
-                            .Add(new TextDisplay {Align = TextAlign.Left, Text = () => $"{num}: {x.Name}"}));
+                            .Add(new TextDisplay {Align = TextAlign.Left, Text = () => $"{num}: {x.Name}"})
+                            .AttachTo(CurrentViewport.Position));
                 });
             }
         }
