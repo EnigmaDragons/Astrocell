@@ -26,7 +26,7 @@ namespace MonoDragons.Core.UserInterface
             return Entity.Create($"Picker Option: {option.Name}", itemTransform)
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.Purple, o)))
                 .Add(new TextDisplay { Text = () => option.Name })
-                .Add(new MouseClickTarget { OnHit = option.Action });
+                .Add(new MouseClickListener { OnClick = x => option.Action() });
         }
     }
 }
