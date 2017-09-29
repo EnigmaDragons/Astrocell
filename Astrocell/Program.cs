@@ -49,7 +49,7 @@ namespace Astrocell
                 { "CardDisplay", () => new CardScene() },
                 { "Battle", () => new BattleScene() },
                 { "Large", () => new Large() },
-                { "MapEditor", () => new MapEditor() },
+                { "mapping", () => new MapSelector() },
                 { "Picker", () => new PickerScene() }
             });
         }

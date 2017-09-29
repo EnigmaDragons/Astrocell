@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoDragons.Core.Common;
@@ -20,69 +21,73 @@ namespace MonoDragons.TiledEditor.Scenes
 {
     public class MapEditor : EcsScene
     {
-        private readonly List<GameObject> _map = new List<GameObject>(); 
+        private readonly string _path;
+
+        private GameObject _tilePanel;
+        private GameObject _editPanel;
+        private GameObject _selectedTile;
+
+        public MapEditor(string path)
+        {
+            _path = path;
+        }
 
         protected override IEnumerable<GameObject> CreateObjs()
         {
-            GameObject selectedTile;
-            var panel = Entity.Create("Tools",
+            InitTilePanel();
+            InitEditPanel();
+            var tiles = new OrthographicTileMapFactory().CreateMap(Tmx.Create(_path));
+            tiles.ForEach(tile => tile.Add(CreateTileMouseActions(tile)));
+            var camera = Entity.Create("Map Editor Camera", Transform2.CameraZero).Add(new Camera()).Add(new MouseDrag { Button = MouseButton.Right });
+            return new List<GameObject> { camera, _tilePanel, _editPanel }.Concat(tiles);
+        }
+
+        private void InitTilePanel()
+        {
+            _tilePanel = Entity.Create("Tile Panel", new Transform2 {Size = new Size2(200, 900), ZIndex = ZIndex.Max - 13})
+                .Add((o, r) => new Texture(r.CreateRectangle(Color.FromNonPremultiplied(70, 70, 70, 255), o)))
+                .AttachTo(CurrentViewport.Position);
+        }
+
+        private void InitEditPanel()
+        {
+            _editPanel = Entity.Create("Edit Panel",
                     new Transform2
                     {
                         Size = new Size2(200, 900),
-                        ZIndex = ZIndex.Max - 11,
+                        ZIndex = ZIndex.Max - 13,
                         Location = new Vector2(1400, 0)
                     })
-                .Add((o, r) => new Texture(r.CreateRectangle(Color.DarkGray, o)))
-                .AttachTo(CurrentViewport.Position)
-                .Disable();
-            var textbox = Textbox.Create(new Transform2 { Size = new Size2(300, 50), ZIndex = ZIndex.Max })
-                .Add(obj => new KeyboardCommand
-                {
-                    Key = Keys.Enter, Command = () =>
-                    {
-                        obj.With<TypingInput>(
-                            input => input.Value.If(value => !string.IsNullOrEmpty(value), () =>
-                            {
-                                var path = Path.Combine("maps", input.Value);
-                                if (!new TmxExists(path).Get())
-                                {
-                                    input.Value = "Map Not Found";
-                                    return;
-                                }
-                                _map.ForEach(Entity.Destroy);
-                                _map.Clear();
-                                new OrthographicTileMapFactory().CreateMap(Tmx.Create(path)).ForEach(tile =>
-                                {
-                                    selectedTile = tile;
-                                    tile.Add(new MouseStateActions
-                                    {
-                                        OnHover = () => tile.With<Texture>(texture =>
-                                        {
-                                            if (texture.Tint == Color.White)
-                                                texture.Tint = Color.LightBlue;
-                                        }),
-                                        OnExit = () => tile.With<Texture>(texture =>
-                                        {
-                                            if (texture.Tint == Color.LightBlue)
-                                                texture.Tint = Color.White;
-                                        }),
-                                        OnPressed = () => tile.With<Texture>(texture =>
-                                        {
-                                            selectedTile.With<Texture>(selectedTexture => selectedTexture.Tint = Color.White);
-                                            texture.Tint = Color.Purple;
-                                            selectedTile = tile;
-                                            panel.IsEnabled = true;
-                                        }),
-                                    });
-                                    _map.Add(tile);
-                                    AddObj(tile);
-                                });
-                                obj.Disable();
-                            }));
-                    }
-                });
-            var camera = Entity.Create("Map Editor Camera", Transform2.CameraZero).Add(new Camera()).Add(new MouseDrag { Button = MouseButton.Right });
-            return new List<GameObject> { textbox, camera, panel };
+                .Add((o, r) => new Texture(r.CreateRectangle(Color.FromNonPremultiplied(70, 70, 70, 255), o)));
+        }
+
+        private MouseStateActions CreateTileMouseActions(GameObject tile)
+        {
+            return new MouseStateActions
+            {
+                OnHover = () => tile.With<Texture>(HoverTile),
+                OnExit = () => tile.With<Texture>(LeaveTile),
+                OnPressed = () => tile.With<Texture>(texture => SelectTile(texture, tile)),
+            };
+        }
+
+        private void HoverTile(Texture texture)
+        {
+            if (texture.Tint == Color.White)
+                texture.Tint = Color.LightBlue;
+        }
+
+        private void LeaveTile(Texture texture)
+        {
+            if (texture.Tint == Color.LightBlue)
+                texture.Tint = Color.White;
+        }
+
+        private void SelectTile(Texture texture, GameObject tile)
+        {
+            _selectedTile.With<Texture>(selectedTexture => selectedTexture.Tint = Color.White);
+            texture.Tint = Color.Purple;
+            _selectedTile = tile;
         }
     }
 }

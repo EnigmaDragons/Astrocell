@@ -1,12 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using MonoDragons.Core.Common;
+using MonoDragons.Core.Entities;
+using MonoDragons.Core.Navigation;
+using MonoDragons.Core.PhysicsEngine;
+using MonoDragons.Core.Scenes;
+using MonoDragons.Core.UserInterface;
 
 namespace MonoDragons.TiledEditor.Scenes
 {
-    class MapSelector
+    public class MapSelector : EcsScene
     {
+        protected override IEnumerable<GameObject> CreateObjs()
+        {
+            yield return OptionPicker.Create("Pick Map", 
+                new Transform2
+                {
+                    Size = new Size2(120, 40),
+                    Center = new Vector2(800, 30)
+                }, 
+                Directory.GetFiles(Path.Combine("Content", "Maps"))
+                    .Where(fileName => Path.GetExtension(fileName).ToLower() == ".tmx")
+                    .Select(mapName => new Option(mapName, () => Navigate.To(new MapEditor(mapName)))).ToArray()); 
+        }
     }
 }
