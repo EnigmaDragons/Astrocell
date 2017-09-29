@@ -29,5 +29,17 @@ namespace MonoDragons.Core.Common
             if (condition(obj))
                 action(obj);
         }
+
+        public static void IfEquals<T>(this T obj, object other, Action action)
+        {
+            if (obj.Equals(other))
+                action();
+        }
+
+        public static void IfEquals<T>(this T obj, object other, Action<T> action)
+        {
+            if (obj.Equals(other))
+                action(obj);
+        }
     }
 }
