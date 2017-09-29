@@ -5,6 +5,7 @@ using MonoDragons.Core.Inputs;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
 using System;
+using Microsoft.Xna.Framework.Input;
 using MonoDragons.Core.Development;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.KeyboardControls;
@@ -86,6 +87,7 @@ namespace MonoDragons.Core.Engine
 #if DEBUG
             SceneNavigatorConsole.Enable();
             Metrics.Enable();
+            EntityList.Enable(Keys.F12);
 #endif
             base.Initialize();
         }
