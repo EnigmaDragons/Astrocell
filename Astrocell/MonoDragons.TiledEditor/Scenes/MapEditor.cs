@@ -25,6 +25,16 @@ namespace MonoDragons.TiledEditor.Scenes
         protected override IEnumerable<GameObject> CreateObjs()
         {
             GameObject selectedTile;
+            var panel = Entity.Create("Tools",
+                    new Transform2
+                    {
+                        Size = new Size2(200, 900),
+                        ZIndex = ZIndex.Max - 11,
+                        Location = new Vector2(1400, 0)
+                    })
+                .Add((o, r) => new Texture(r.CreateRectangle(Color.DarkGray, o)))
+                .AttachTo(CurrentViewport.Position)
+                .Disable();
             var textbox = Textbox.Create(new Transform2 { Size = new Size2(300, 50), ZIndex = ZIndex.Max })
                 .Add(obj => new KeyboardCommand
                 {
@@ -61,6 +71,7 @@ namespace MonoDragons.TiledEditor.Scenes
                                             selectedTile.With<Texture>(selectedTexture => selectedTexture.Tint = Color.White);
                                             texture.Tint = Color.Purple;
                                             selectedTile = tile;
+                                            panel.IsEnabled = true;
                                         }),
                                     });
                                     _map.Add(tile);
@@ -71,7 +82,7 @@ namespace MonoDragons.TiledEditor.Scenes
                     }
                 });
             var camera = Entity.Create("Map Editor Camera", Transform2.CameraZero).Add(new Camera()).Add(new MouseDrag { Button = MouseButton.Right });
-            return new List<GameObject> { textbox, camera };
+            return new List<GameObject> { textbox, camera, panel };
         }
     }
 }
