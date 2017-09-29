@@ -37,7 +37,8 @@ namespace MonoDragons.Core.Entities
         public void With<T>(Action<GameObject, T> action)
             where T : EntityComponent
         {
-            _entities.Values.ToList().ForEach(o => o.With<T>(c => action(o, c)));
+            _entities.Values.Where(x => x.IsEnabled)
+                .ForEach(o => o.With<T>(c => action(o, c)));
         }
 
         public void Destroy(GameObject gameObject)
