@@ -4,6 +4,7 @@ using System.Linq;
 using Astrocell.Battles.BattlePresentation;
 using Astrocell.Battles.Battles;
 using Astrocell.Battles.Decks;
+using Astrocell.Maps;
 using Microsoft.Xna.Framework;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Entities;
@@ -67,12 +68,7 @@ namespace Astrocell.Battles
         {
             var cardEntity = ShowCard(card);
 
-            _presentations.Add(new TimerAction
-            {
-                TimerMode = TimerAction.Mode.Once,
-                Action = () => { HideCard(cardEntity); callback(); },
-                Interval = TimeSpan.FromMilliseconds(3000)
-            });
+            PresentAfterDelay(3000, () => { HideCard(cardEntity); callback(); });
         }
 
         public void ShowTurnEnded(BattleCharacter character, Action callback)
@@ -84,8 +80,20 @@ namespace Astrocell.Battles
         public void ShowBattleEnded(Battle battle, Action callback)
         {
             _log.Write($"Winner: {battle.Winner}");
+            PresentAfterDelay(200, () => GameMap.NavigateTo(PlayerLocation.Current));
             callback();
         }
+
+        private void PresentAfterDelay(int millis, Action action)
+        {
+            _presentations.Add(new TimerAction
+            {
+                TimerMode = TimerAction.Mode.Once,
+                Action = action,
+                Interval = TimeSpan.FromMilliseconds(millis)
+            });
+        }
+
     }
 
     public sealed class UpdateBattlePresenter : ISystem

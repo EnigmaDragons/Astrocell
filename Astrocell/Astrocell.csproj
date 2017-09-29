@@ -43,6 +43,8 @@
     <Compile Include="Battles\CardDisplay.cs" />
     <Compile Include="Battles\CharacterDisplay.cs" />
     <Compile Include="Battles\UIBattlePresenter.cs" />
+    <Compile Include="Maps\GameMap.cs" />
+    <Compile Include="Maps\PlayerLocation.cs" />
     <Compile Include="Maps\TilePosition.cs" />
     <Compile Include="Plugins\AstrocellSystems.cs" />
     <Compile Include="Plugins\BattleAdvancement.cs" />
