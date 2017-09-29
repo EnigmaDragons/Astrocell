@@ -38,6 +38,7 @@ namespace MonoDragons.TiledEditor.Scenes
             InitEditPanel();
             var tiles = new OrthographicTileMapFactory().CreateMap(Tmx.Create(_path));
             tiles.ForEach(tile => tile.Add(CreateTileMouseActions(tile)));
+            _selectedTile = tiles.First();
             var camera = Entity.Create("Map Editor Camera", Transform2.CameraZero).Add(new Camera()).Add(new MouseDrag { Button = MouseButton.Right });
             return new List<GameObject> { camera, _tilePanel, _editPanel }.Concat(tiles);
         }

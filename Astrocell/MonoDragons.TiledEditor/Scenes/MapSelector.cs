@@ -23,7 +23,13 @@ namespace MonoDragons.TiledEditor.Scenes
                 }, 
                 Directory.GetFiles(Path.Combine("Content", "Maps"))
                     .Where(fileName => Path.GetExtension(fileName).ToLower() == ".tmx")
-                    .Select(mapName => new Option(mapName, () => Navigate.To(new MapEditor(mapName)))).ToArray()); 
+                    .Select(mapName => new Option(Path.GetFileName(mapName), () => Navigate.To(new MapEditor(GetRelativePathUpOneFolder(mapName))))).ToArray()); 
+        }
+
+        private string GetRelativePathUpOneFolder(string path)
+        {
+            var newPath = path.Substring(path.IndexOf('\\') + 1);
+            return newPath;
         }
     }
 }
