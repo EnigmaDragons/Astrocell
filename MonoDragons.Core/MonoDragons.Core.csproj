@@ -56,6 +56,7 @@
     <Compile Include="Audio\Ecs\SoundSystems.cs" />
     <Compile Include="Common\Condition.cs" />
     <Compile Include="Common\FancyMaths.cs" />
+    <Compile Include="Common\Option.cs" />
     <Compile Include="Common\Reflection\PublicProperties.cs" />
     <Compile Include="Common\Store.cs" />
     <Compile Include="Development\DevelopmentSystems.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="UserInterface\Layouts\Layout.cs" />
     <Compile Include="MouseControls\MouseDragAndDrop.cs" />
     <Compile Include="Text\DefaultFont.cs" />
+    <Compile Include="UserInterface\OptionPicker.cs" />
     <Compile Include="UserInterface\Textbox.cs" />
     <Compile Include="UserInterface\VerticalAlignment.cs" />
   </ItemGroup>

@@ -31,7 +31,7 @@ namespace MonoDragons.Core.Entities
 
         public static void Destroy(GameObject obj)
         {
-            Objs.Remove(obj);
+            Objs.Destroy(obj);
         }
 
         public static void Destroy(IEnumerable<GameObject> objs)

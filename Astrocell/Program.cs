@@ -50,6 +50,7 @@ namespace Astrocell
                 { "Battle", () => new BattleScene() },
                 { "Large", () => new Large() },
                 { "MapEditor", () => new MapEditor() },
+                { "Picker", () => new PickerScene() }
             });
         }
     }
