@@ -144,7 +144,7 @@ namespace MonoDragons.Core.Entities
             where T : EntityComponent
         {
             var type = typeof(T);
-            if (IsEnabled && _components.ContainsKey(type))
+            if (_components.ContainsKey(type))
                 action((T)_components[type]);
         }
 
