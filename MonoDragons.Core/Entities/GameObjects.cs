@@ -23,7 +23,8 @@ namespace MonoDragons.Core.Entities
 
         public GameObject Create(string name, Transform2 transform)
         {
-            var obj = new GameObject(Interlocked.Increment(ref _nextId), name, transform, _resources);
+            var id = Interlocked.Increment(ref _nextId);
+            var obj = new GameObject(id, name, transform, _resources, () => _entities.Remove(id));
             _entities.Add(obj.Id, obj);
             return obj;
         }
@@ -39,17 +40,17 @@ namespace MonoDragons.Core.Entities
             _entities.Values.ToList().ForEach(o => o.With<T>(c => action(o, c)));
         }
 
-        public void Remove(GameObject gameObject)
+        public void Destroy(GameObject gameObject)
         {
-            Remove(gameObject.Id);
+            Destroy(gameObject.Id);
         }
 
-        public void Remove(IEnumerable<GameObject> objs)
+        public void Destroy(IEnumerable<GameObject> objs)
         {
-            objs.ForEach(x => Remove(x.Id));
+            objs.ForEach(x => Destroy(x.Id));
         }
 
-        public void Remove(int id)
+        public void Destroy(int id)
         {
             if (_entities.ContainsKey(id))
                 _entities[id].Dispose();

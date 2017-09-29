@@ -27,7 +27,7 @@ namespace MonoDragons.Core.Development
         private void Toggle()
         {
             _isEnabled = !_isEnabled;
-            _objs.ForEach(x => x.IsEnabled = _isEnabled);
+            _objs.ForEach(x => x.Toggle());
         }
 
         public static void Enable()

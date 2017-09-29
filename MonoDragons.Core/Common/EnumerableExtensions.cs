@@ -28,6 +28,18 @@ namespace MonoDragons.Core.Common
                 indexAction(coll[i], i);
         }
 
+        public static void DequeueEach<T>(this ICollection<T> collection, Action<T> action)
+        {
+            collection.ForEach(action);
+            collection.Clear();
+        }
+
+        public static void DequeueEach<TKey, TValue>(this IDictionary<TKey, TValue> collection, Action<TValue> action)
+        {
+            collection.ForEach(action);
+            collection.Clear();
+        }
+
         public static List<T> AsList<T>(this T obj)
         {
             return new List<T> {obj};

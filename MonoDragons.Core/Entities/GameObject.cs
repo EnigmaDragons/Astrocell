@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.PhysicsEngine;
 
@@ -6,13 +7,15 @@ namespace MonoDragons.Core.Entities
 {
     public sealed class GameObject
     {
+        private readonly Action _cleanup;
         private readonly EntityResources _resources;
         private readonly Map<Type, EntityComponent> _components = new Map<Type, EntityComponent>();
+        private readonly HashSet<GameObject> _children = new HashSet<GameObject>();
         private readonly Position _position;
 
         public int Id { get; }
         public string Name { get; }
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled { get; private set; }
 
         public Transform2 Local
         {
@@ -22,18 +25,49 @@ namespace MonoDragons.Core.Entities
 
         public Transform2 World => _position.World;
 
-        internal GameObject(int id, string name, Transform2 transform, EntityResources resources)
+        internal GameObject(int id, string name, Transform2 transform, EntityResources resources, Action cleanup)
         {
             _resources = resources;
             Id = id;
             Name = name;
             IsEnabled = true;
             _position = new Position(transform);
+            _cleanup = cleanup;
+        }
+
+        public GameObject Enable()
+        {
+            IsEnabled = true;
+            return this;
         }
 
         public GameObject Disable()
         {
             IsEnabled = false;
+            return DisableChildren();
+        }
+
+        public GameObject Toggle()
+        {
+            IsEnabled = !IsEnabled;
+            return this;
+        }
+
+        public GameObject ToggleChildren()
+        {
+            _children.ForEach(x => x.Toggle());
+            return this;
+        }
+
+        public GameObject DisableChildren()
+        {
+            _children.ForEach(x => x.Disable());
+            return this;
+        }
+
+        public GameObject EnableChildren()
+        {
+            _children.ForEach(x => x.Enable());
             return this;
         }
 
@@ -93,6 +127,13 @@ namespace MonoDragons.Core.Entities
             return this;
         }
 
+        public GameObject Add(GameObject childObj)
+        {
+            _children.Add(childObj);
+            childObj.AttachTo(this);
+            return this;
+        }
+
         public T Get<T>() 
             where T : EntityComponent
         {
@@ -119,9 +160,10 @@ namespace MonoDragons.Core.Entities
 
         internal void Dispose()
         {
-            _components.ForEach(x => x.Dispose());
-            _components.Clear();
+            _components.DequeueEach(x => x.Dispose());
+            _children.DequeueEach(x => x.Dispose());
             _resources.Release(this);
+            _cleanup();
         }
     }
 }
