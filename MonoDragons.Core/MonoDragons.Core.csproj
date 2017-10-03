@@ -105,6 +105,8 @@
     <Compile Include="PhysicsEngine\MotionBoxColliderStateSelector.cs" />
     <Compile Include="PhysicsEngine\OnCollision.cs" />
     <Compile Include="PhysicsEngine\Position.cs" />
+    <Compile Include="Render\HighlightColor.cs" />
+    <Compile Include="Render\HighlightRenderer.cs" />
     <Compile Include="Render\Viewports\Camera.cs" />
     <Compile Include="Render\Viewports\CameraDirector.cs" />
     <Compile Include="Render\Viewports\CurrentViewport.cs" />

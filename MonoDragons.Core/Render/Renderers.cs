@@ -10,6 +10,7 @@ namespace MonoDragons.Core.Render
             system.Register(new TextRenderer());
             system.Register(new BorderRenderer());
             system.Register(new TextureRenderer());
+            system.Register(new HighlightRenderer());
             system.Register(new ScreenBackgroundRenderer());
         }
     }
