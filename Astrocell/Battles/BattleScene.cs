@@ -48,7 +48,7 @@ namespace Astrocell.Battles
 
             BattlePresenter.Instance = presenter;
             BattleLog.Instance = log;
-            var battle = Battle.Create(new AIPlayer(), new AIPlayer(), char1Battle, enemy1Battle);
+            var battle = Battle.Create(new BattleCardSelectionPresenter(AddObj), new AIPlayer(), char1Battle, enemy1Battle);
             yield return Entity.Create("Current Battle")
                 .Add(new CurrentBattle {Battle = battle});
         }

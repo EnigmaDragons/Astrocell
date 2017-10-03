@@ -3,16 +3,17 @@ using System.Linq;
 using Astrocell.Battles.Battles;
 using Astrocell.Battles.Decks;
 using MonoDragons.Core.Common;
+using System;
 
 namespace Astrocell.Battles.Players
 {
     public sealed class AIPlayer : IPlayer
     {
-        public CardAction SelectAction(BattleCharacter src, IList<Card> cards, BattleCharacters allCharacters)
+        public void SelectAction(BattleCharacter src, IList<Card> cards, BattleCharacters allCharacters, Action<CardAction> onCardSelected)
         {
             var card = SelectCard(src, cards, allCharacters);
             var targettedEffects = card.Effects.Select(x => SelectTargets(x, src, allCharacters)).ToList();
-            return new CardAction { Source = src, Card = card, TargettedEffects = targettedEffects };
+            onCardSelected(new CardAction { Source = src, Card = card, TargettedEffects = targettedEffects });
         }
 
         private TargettedEffect SelectTargets(CardEffect effect, BattleCharacter src, BattleCharacters allCharacters)
