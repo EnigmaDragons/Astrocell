@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Astrocell", "Astrocell.csproj", "{4AE4094D-2C18-4814-84B8-1A34980677F0}"
 EndProject
@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Astrocell.Battles", "..\Ast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDragons.Core", "..\MonoDragons.Core\MonoDragons.Core.csproj", "{A33F8FE3-A35A-4DDF-B96C-0157224F602C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDragons.TiledEditor", "MonoDragons.TiledEditor\MonoDragons.TiledEditor.csproj", "{BE82517B-5B98-4294-930B-2DB2A69AE7A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDragons.TiledEditor", "..\MonoDragons.TiledEditor\MonoDragons.TiledEditor.csproj", "{BE82517B-5B98-4294-930B-2DB2A69AE7A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
