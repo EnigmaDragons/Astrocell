@@ -12,13 +12,13 @@ namespace Astrocell.Battles
 {
     public static class CardDisplay
     {
-        private static int _zIndex = 400;
+        private static int _zIndex = 100;
 
         public const int Width = 200;
 
         public static GameObject Create(Card card, Vector2 position)
         {
-            _zIndex += 5;
+            _zIndex += 3;
             return Entity.Create($"Card: {card.Name}" ,new Transform2 { Location = position, Size = new Size2(Width, 300), ZIndex = new ZIndex(_zIndex) })
                 .Add(new CardDataComponent { Card = card })
                 .Add(new MouseDragAndDrop())
