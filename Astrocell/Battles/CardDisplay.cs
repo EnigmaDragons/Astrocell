@@ -20,7 +20,12 @@ namespace Astrocell.Battles
         {
             _zIndex += 3;
             return Entity.Create($"Card: {card.Name}" ,new Transform2 { Location = position, Size = new Size2(Width, 300), ZIndex = new ZIndex(_zIndex) })
-                .Add(new HighlightColor { Offset = -2, Width = 8, CornerRadius = 3 })
+                .Add(new HighlightColor { Offset = -2, Width = 12, CornerRadius = 5, Color = Color.Transparent })
+                .Add(o => new MouseStateActions
+                {
+                    OnPressed = () => o.With<HighlightColor>(h => h.Color = Color.Red),
+                    OnReleased = () => o.With<HighlightColor>(h => h.Color = Color.Transparent)
+                })
                 .Add(new CardDataComponent { Card = card })
                 .Add(new MouseDragAndDrop())
                 .Add(new BorderTexture())

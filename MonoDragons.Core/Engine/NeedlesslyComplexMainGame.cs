@@ -50,6 +50,7 @@ namespace MonoDragons.Core.Engine
         private NeedlesslyComplexMainGame(string title, string startingViewName, SceneFactory sceneFactory, IController controller)
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.GraphicsProfile = GraphicsProfile.HiDef;
             Content.RootDirectory = "Content";
             _startingViewName = startingViewName;
             _sceneFactory = sceneFactory;
@@ -125,7 +126,7 @@ namespace MonoDragons.Core.Engine
         protected override void Draw(GameTime gameTime)
         {
             _graphics.GraphicsDevice.Clear(Color.Black);
-            _sprites.Begin(SpriteSortMode.FrontToBack, null, SamplerState.AnisotropicClamp, DepthStencilState.DepthRead);
+            _sprites.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.DepthRead);
             _ecs.Draw(_sprites, CurrentViewport.Snapshot);
             HideExternals();
             _sprites.End();
