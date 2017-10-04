@@ -22,6 +22,11 @@ namespace MonoDragons.TiledEditor.Scenes
 {
     public class MapEditor : EcsScene
     {
+        private readonly Color NoTint = Color.Transparent;
+        private readonly Color Hover = Color.FromNonPremultiplied(130, 177, 255, 100);
+        private readonly Color Selected = Color.FromNonPremultiplied(253, 150, 33, 150);
+        private readonly Color Event = Color.FromNonPremultiplied(137, 194, 84, 100);
+
         private readonly string _path;
         private readonly MapEvents _events;
 
