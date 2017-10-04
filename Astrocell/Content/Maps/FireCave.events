@@ -1,0 +1,28 @@
+[
+  {
+    "TypeName": "Teleport",
+    "Details": {
+      "map name": "Large",
+      "x": "48",
+      "y": "48"
+    },
+    "Position": {
+      "X": 7,
+      "Y": 15,
+      "TileWidth": 48
+    }
+  },
+  {
+    "TypeName": "Teleport",
+    "Details": {
+      "map name": "Large",
+      "x": "48",
+      "y": "48"
+    },
+    "Position": {
+      "X": 8,
+      "Y": 15,
+      "TileWidth": 48
+    }
+  }
+]

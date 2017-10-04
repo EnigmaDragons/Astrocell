@@ -73,7 +73,7 @@
     <Compile Include="Entities\EntityResources.cs" />
     <Compile Include="EventSystem\Event.cs" />
     <Compile Include="Graphics\CachingRules.cs" />
-    <Compile Include="Graphics\RectangleBorderTexture.cs" />
+    <Compile Include="Graphics\RoundedRectangleTexture.cs" />
     <Compile Include="Inputs\Controls.cs" />
     <Compile Include="Common\EnumerableExtensions.cs" />
     <Compile Include="Common\ISubscription.cs" />

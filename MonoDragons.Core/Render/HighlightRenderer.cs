@@ -16,7 +16,7 @@ namespace MonoDragons.Core.Render
             entities.With<HighlightColor>((o, h) =>
             {
                 var screenPosition = viewport.GetScreenPosition(o.World.Expanded(new Size2(h.Width, h.Width)));
-                var texture = new RectangleBorderTexture(screenPosition.Size,h.Width, h.CornerRadius, 
+                var texture = new RoundedRectangleTexture(screenPosition.Size,h.Width, h.CornerRadius, 
                     new List<Color> {
                         Color.FromNonPremultiplied(h.Color.R, h.Color.G, h.Color.B, Math.Min(h.MaxOpacity, h.Color.A)),
                         Color.FromNonPremultiplied(h.Color.R, h.Color.G, h.Color.B, h.MinOpacity) }).Create(); 

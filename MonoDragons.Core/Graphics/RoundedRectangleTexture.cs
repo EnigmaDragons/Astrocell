@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace MonoDragons.Core.Graphics
 {
-    public class RectangleBorderTexture
+    public class RoundedRectangleTexture
     {
-        private static Dictionary<RectangleBorderTexture, Texture2D> CachedTextures = new Dictionary<RectangleBorderTexture, Texture2D>();
+        private static Dictionary<RoundedRectangleTexture, Texture2D> CachedTextures = new Dictionary<RoundedRectangleTexture, Texture2D>();
 
         private readonly int _width;
         private readonly int _height;
@@ -18,10 +18,10 @@ namespace MonoDragons.Core.Graphics
         private readonly int _borderRadius;
         private readonly List<Color> _borderColors;
 
-        public RectangleBorderTexture(Size2 size, int borderThickness, int borderRadius, Color borderColor)
+        public RoundedRectangleTexture(Size2 size, int borderThickness, int borderRadius, Color borderColor)
             : this(size, borderThickness, borderRadius, new List<Color> { borderColor }) { }       
 
-        public RectangleBorderTexture(Size2 size, int borderThickness, int borderRadius, List<Color> borderColors)
+        public RoundedRectangleTexture(Size2 size, int borderThickness, int borderRadius, List<Color> borderColors)
         {
             _width = size.Width;
             _height = size.Height;
@@ -43,23 +43,23 @@ namespace MonoDragons.Core.Graphics
             if (_borderThickness + _borderRadius > _height / 2 || _borderThickness + _borderRadius > _width / 2) throw new ArgumentException("Border will be too thick and/or rounded to fit on the texture.");
 
             Texture2D texture = new Texture2D(GameInstance.TheGame.GraphicsDevice, _width, _height, false, SurfaceFormat.Color);
-            var color = new Color[texture.Width * texture.Height];
+            var data = new Color[texture.Width * texture.Height];
             for (var x = 0; x < texture.Width; x++)
                 for (var y = 0; y < _height; y++)
-                    color[x + _width * y] = ColorBorder(x, y, _width, _height, _borderThickness, _borderRadius, _borderColors);
+                    data[x + _width * y] = GetPixelColor(x, y, _width, _height, _borderThickness, _borderRadius, _borderColors);
 
-            texture.SetData(color);
+            texture.SetData(data);
             if (CachingRules.CacheTextures)
                 CachedTextures.Add(this, texture);
             return texture;
         }
 
-        private Color ColorBorder(int x, int y, int width, int height, int borderThickness, int borderRadius, List<Color> borderColors)
+        private Color GetPixelColor(int x, int y, int width, int height, int borderThickness, int borderRadius, List<Color> borderColors)
         {
             var internalRectangle = new Rectangle((borderThickness + borderRadius), (borderThickness + borderRadius),
                 width - 2 * (borderThickness + borderRadius), height - 2 * (borderThickness + borderRadius));
             if (internalRectangle.Contains(x, y))
-                return Color.Transparent;
+                return borderColors[0];
 
             var origin = Vector2.Zero;
             var point = new Vector2(x, y);
@@ -123,10 +123,10 @@ namespace MonoDragons.Core.Graphics
 
         public override bool Equals(object obj)
         {
-            return (obj is RectangleBorderTexture) ? ((RectangleBorderTexture)obj).Equals(this) : false;
+            return (obj is RoundedRectangleTexture) ? ((RoundedRectangleTexture)obj).Equals(this) : false;
         }
 
-        public bool Equals(RectangleBorderTexture other)
+        public bool Equals(RoundedRectangleTexture other)
         {
             return _borderColors.Select((c) => c.PackedValue).SequenceEqual(other._borderColors.Select((c) => c.PackedValue))
                 && _width == other._width && _height == other._height && _borderRadius == other._borderRadius

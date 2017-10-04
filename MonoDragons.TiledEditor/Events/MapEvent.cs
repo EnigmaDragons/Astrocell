@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using MonoDragons.Core.PhysicsEngine;
+using MonoDragons.TiledEditor.Maps;
 
 namespace MonoDragons.TiledEditor.Events
 {
@@ -7,6 +7,6 @@ namespace MonoDragons.TiledEditor.Events
     {
         public string TypeName { get; set; }
         public Dictionary<string, string> Details { get; set; }
-        public Transform2 Position { get; set; }
+        public TilePosition Position { get; set; }
     }
 }

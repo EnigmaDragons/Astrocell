@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Astrocell.Battles;
-using Astrocell.Maps;
 using Microsoft.Xna.Framework;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Entities;
@@ -12,6 +11,8 @@ using MonoDragons.Core.Render.Viewports;
 using MonoDragons.Core.Scenes;
 using MonoDragons.Core.Tiled;
 using MonoDragons.Core.Tiled.TmxLoading;
+using MonoDragons.TiledEditor.Events;
+using MonoDragons.TiledEditor.Maps;
 
 namespace Astrocell.Scenes
 {
@@ -40,17 +41,15 @@ namespace Astrocell.Scenes
                 .AttachTo(player);
             foreach (var tile in new OrthographicTileMapFactory().CreateMap(Tmx.Create(Path.Combine("Maps", "FireCave.tmx"))))
                 yield return tile;
-            yield return Entity.Create("Fire Cave Entrance", new Transform2(new TilePosition(7, 16), new Size2(48 * 3, 10)))
-                .Add(new Collision { IsBlocking = false })
-                .Add(x => new BoxCollider(x.World))
-                .Add(new StepTrigger())
-                .Add(new OnCollision { Action = x => x.IfEquals(player, () => Navigate.To("Large")) });
 
-            yield return Entity.Create("Start Battle", new Transform2(new TilePosition(3, 5), new Size2(48 * 3, 10)))
+            yield return Entity.Create("Start Battle", new Transform2(new TilePosition(3, 5, 48), new Size2(48 * 3, 10)))
                 .Add(new Collision { IsBlocking = false })
                 .Add(x => new BoxCollider(x.World))
                 .Add(new StepTrigger())
                 .Add(new OnCollision { Action = x => x.IfEquals(player, () => Navigate.To(BattleFactory.Create())) });
+
+            foreach (var mapEvent in MapEventsFactory.Create(Path.Combine("Content", "Maps", "FireCave.events")).InstantiateEvents())
+                yield return mapEvent;
         }
     }
 }

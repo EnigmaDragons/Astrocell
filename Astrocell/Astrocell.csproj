@@ -44,9 +44,6 @@
     <Compile Include="Battles\CharacterDisplay.cs" />
     <Compile Include="Battles\BattleCardSelectionPresenter.cs" />
     <Compile Include="Battles\UIBattlePresenter.cs" />
-    <Compile Include="Maps\GameMap.cs" />
-    <Compile Include="Maps\PlayerLocation.cs" />
-    <Compile Include="Maps\TilePosition.cs" />
     <Compile Include="Plugins\AstrocellSystems.cs" />
     <Compile Include="Plugins\BattleAdvancement.cs" />
     <Compile Include="Plugins\BufferedLog.cs" />
@@ -162,6 +159,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Maps\Large.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\FireCave.events">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\Large.events">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

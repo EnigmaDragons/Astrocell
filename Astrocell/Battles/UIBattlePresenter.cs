@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using Astrocell.Battles.BattlePresentation;
 using Astrocell.Battles.Battles;
 using Astrocell.Battles.Decks;
-using Astrocell.Maps;
 using Microsoft.Xna.Framework;
 using MonoDragons.Core.Common;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.Logs;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Timing;
+using MonoDragons.TiledEditor.Maps;
 
 namespace Astrocell.Battles
 {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using MonoDragons.Core.Common;
 
-namespace MonoDragons.TiledEditor
+namespace MonoDragons.TiledEditor.Maps
 {
     public class MapOptions
     {

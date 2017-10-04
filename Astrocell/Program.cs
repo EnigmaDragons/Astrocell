@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using Astrocell.Battles;
-using Astrocell.Maps;
 using Astrocell.Plugins;
 using Astrocell.Scenes;
 using Microsoft.Xna.Framework.Input;
@@ -14,6 +13,7 @@ using MonoDragons.Core.Navigation;
 using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
 using MonoDragons.Core.Scenes;
+using MonoDragons.TiledEditor.Maps;
 using MonoDragons.TiledEditor.Scenes;
 
 namespace Astrocell
@@ -58,11 +58,11 @@ namespace Astrocell
         {
             return new SceneFactory(new Dictionary<string, Func<IScene>>
             {
-                { "FireCave", () => new FireCave(new PlayerLocation { MapName = "FireCave", Transform = new Transform2 { Location = new TilePosition(5, 8) } }) },
+                { "FireCave", () => new FireCave(new PlayerLocation { MapName = "FireCave", Transform = new Transform2 { Location = new TilePosition(5, 8, 48) } }) },
                 { "CardDisplay", () => new CardScene() },
                 { "Battle", () => new BattleScene() },
                 { "mapping", () => new MapSelector() },
-                { "Large", () => new Large(new PlayerLocation { MapName = "Large", Transform =new Transform2 { Location = new TilePosition(5, 8) } }) },
+                { "Large", () => new Large(new PlayerLocation { MapName = "Large", Transform =new Transform2 { Location = new TilePosition(5, 8, 48) } }) },
             });
         }
     }

@@ -11,22 +11,23 @@ using MonoDragons.Core.Scenes;
 using MonoDragons.Core.Tiled;
 using MonoDragons.Core.Tiled.TmxLoading;
 using MonoDragons.TiledEditor.Events;
+using MonoDragons.TiledEditor.Maps;
 
 namespace MonoDragons.TiledEditor.Scenes
 {
     public class MapTeleportSelector : EcsScene
     {
         private readonly string _path;
-        private readonly Transform2 _startPosition;
+        private readonly TilePosition _startPosition;
         private readonly MapEvents _events;
-        private readonly MapEditor _editor;
+        private readonly string _editorMap;
 
-        public MapTeleportSelector(string path, Transform2 startPosition, MapEvents events, MapEditor editor)
+        public MapTeleportSelector(string path, TilePosition startPosition, MapEvents events, string editorMap)
         {
             _path = path;
             _startPosition = startPosition;
             _events = events;
-            _editor = editor;
+            _editorMap = editorMap;
         }
 
         protected override IEnumerable<GameObject> CreateObjs()
@@ -45,8 +46,8 @@ namespace MonoDragons.TiledEditor.Scenes
                 OnExit = () => tile.With<Texture>(texture => texture.Tint = Color.White),
                 OnPressed = () => tile.With<Texture>(texture =>
                 {
-                    _events.Add(new TeleportEvent().Create(_startPosition, tile.World, _path));
-                    Navigate.To(_editor);
+                    _events.Add(new TeleportEvent().Create(_startPosition, tile.World.Location, _path));
+                    Navigate.To(new MapEditor(_editorMap, _events));
                 }),
             };
         }

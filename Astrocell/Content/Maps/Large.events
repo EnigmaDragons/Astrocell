@@ -1,0 +1,15 @@
+[
+  {
+    "TypeName": "Teleport",
+    "Details": {
+      "map name": "FireCave",
+      "x": "336",
+      "y": "624"
+    },
+    "Position": {
+      "X": 0,
+      "Y": 0,
+      "TileWidth": 48
+    }
+  }
+]

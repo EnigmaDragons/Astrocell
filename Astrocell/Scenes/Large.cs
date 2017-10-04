@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Astrocell.Maps;
 using Microsoft.Xna.Framework;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.KeyboardControls;
@@ -9,6 +8,8 @@ using MonoDragons.Core.Render.Viewports;
 using MonoDragons.Core.Scenes;
 using MonoDragons.Core.Tiled;
 using MonoDragons.Core.Tiled.TmxLoading;
+using MonoDragons.TiledEditor.Events;
+using MonoDragons.TiledEditor.Maps;
 
 namespace Astrocell.Scenes
 {
@@ -37,6 +38,8 @@ namespace Astrocell.Scenes
                 .AttachTo(player);
             foreach (var tile in new OrthographicTileMapFactory().CreateMap(Tmx.Create(Path.Combine("Maps", "Large.tmx"))))
                 yield return tile;
+            foreach (var mapEvent in MapEventsFactory.Create(Path.Combine("Content", "Maps", "Large.events")).InstantiateEvents())
+                yield return mapEvent;
         }
     }
 }

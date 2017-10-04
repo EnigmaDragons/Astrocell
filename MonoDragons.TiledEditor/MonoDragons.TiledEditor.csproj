@@ -45,8 +45,12 @@
     <Compile Include="Events\IMapEventType.cs" />
     <Compile Include="Events\MapEvent.cs" />
     <Compile Include="Events\MapEvents.cs" />
+    <Compile Include="Events\MapEventsFactory.cs" />
     <Compile Include="Events\TeleportEvent.cs" />
-    <Compile Include="MapOptions.cs" />
+    <Compile Include="Maps\GameMap.cs" />
+    <Compile Include="Maps\MapOptions.cs" />
+    <Compile Include="Maps\PlayerLocation.cs" />
+    <Compile Include="Maps\TilePosition.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\MapEditor.cs" />

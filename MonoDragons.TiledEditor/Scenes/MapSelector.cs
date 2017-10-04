@@ -8,6 +8,7 @@ using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Scenes;
 using MonoDragons.Core.UserInterface;
 using MonoDragons.TiledEditor.Events;
+using MonoDragons.TiledEditor.Maps;
 
 namespace MonoDragons.TiledEditor.Scenes
 {

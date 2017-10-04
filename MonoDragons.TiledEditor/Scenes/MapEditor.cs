@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using MonoDragons.Core.Common;
-using MonoDragons.Core.Development;
 using MonoDragons.Core.Entities;
-using MonoDragons.Core.KeyboardControls;
 using MonoDragons.Core.MouseControls;
 using MonoDragons.Core.Navigation;
 using MonoDragons.Core.PhysicsEngine;
@@ -17,15 +13,16 @@ using MonoDragons.Core.Tiled;
 using MonoDragons.Core.Tiled.TmxLoading;
 using MonoDragons.Core.UserInterface;
 using MonoDragons.TiledEditor.Events;
+using MonoDragons.TiledEditor.Maps;
 
 namespace MonoDragons.TiledEditor.Scenes
 {
     public class MapEditor : EcsScene
     {
         private readonly Color NoTint = Color.Transparent;
-        private readonly Color Hover = Color.FromNonPremultiplied(130, 177, 255, 100);
-        private readonly Color Selected = Color.FromNonPremultiplied(253, 150, 33, 150);
-        private readonly Color Event = Color.FromNonPremultiplied(137, 194, 84, 100);
+        private readonly Color Hover = Color.FromNonPremultiplied(0xFF, 0x98, 0x00, 191);
+        private readonly Color Selected = Color.FromNonPremultiplied(0xFF, 0x57, 0x22, 191);
+        private readonly Color Event = Color.FromNonPremultiplied(0x21, 0x96, 0xF3, 191);
 
         private readonly string _path;
         private readonly MapEvents _events;
@@ -45,7 +42,14 @@ namespace MonoDragons.TiledEditor.Scenes
             InitTilePanel();
             InitEditPanel();
             var tiles = new OrthographicTileMapFactory().CreateMap(Tmx.Create(_path));
-            tiles.ForEach(tile => tile.Add(CreateTileMouseActions(tile)));
+            tiles.ForEach(tile => tile.Add(new HighlightColor
+                {
+                    Color = _events.GetTileEvents(new TilePosition(tile.World)).Any() ? Event : NoTint,
+                    Offset = 10,
+                    MinOpacity = 191,
+                    MaxOpacity = 255
+                })
+                .Add(CreateTileMouseActions(tile)));
             _selectedTile = tiles.First();
             var camera = Entity.Create("Map Editor Camera", Transform2.CameraZero).Add(new Camera()).Add(new MouseDrag { Button = MouseButton.Right });
             return new List<GameObject> { camera, _tilePanel, _editPanel }.Concat(tiles);
@@ -75,43 +79,44 @@ namespace MonoDragons.TiledEditor.Scenes
                         Location = new Vector2(1410, 10),
                         ZIndex = ZIndex.Max - 12
                     },
-                    new MapOptions(map => Navigate.To(new MapTeleportSelector(map, _selectedTile.World, _events, this))).Get().ToArray()));
+                    new MapOptions(map => Navigate.To(new MapTeleportSelector(map, new TilePosition(_selectedTile.World), _events, _path))).Get().ToArray()));
         }
 
         private MouseStateActions CreateTileMouseActions(GameObject tile)
         {
             return new MouseStateActions
             {
-                OnHover = () => tile.With<Texture>(HoverTile),
-                OnExit = () => tile.With<Texture>(LeaveTile),
-                OnPressed = () => tile.With<Texture>(texture => SelectTile(texture, tile)),
+                OnHover = () => HoverTile(tile),
+                OnExit = () => LeaveTile(tile),
+                OnPressed = () => SelectTile(tile),
             };
         }
 
-        private void HoverTile(Texture texture)
+        private void HoverTile(GameObject tile)
         {
-            if (texture.Tint == Color.White)
-                texture.Tint = Color.LightBlue;
+            if (tile != _selectedTile)
+                tile.With<HighlightColor>(highlight => highlight.Color = Hover);
         }
 
-        private void LeaveTile(Texture texture)
+        private void LeaveTile(GameObject tile)
         {
-            if (texture.Tint == Color.LightBlue)
-                texture.Tint = Color.White;
+            if (tile != _selectedTile)
+                tile.With<HighlightColor>(highlight => highlight.Color = _events.GetTileEvents(new TilePosition(tile.World)).Any() ? Event : NoTint);
         }
 
-        private void SelectTile(Texture texture, GameObject tile)
+        private void SelectTile(GameObject tile)
         {
-            _selectedTile.With<Texture>(selectedTexture => selectedTexture.Tint = Color.White);
-            texture.Tint = Color.Orange;
+            var previousTile = _selectedTile;
             _selectedTile = tile;
+            LeaveTile(previousTile);
+            tile.With<HighlightColor>(highlight => highlight.Color = Selected);
             RefreshTilePanel();
         }
 
         private void RefreshTilePanel()
         {
             _tilePanel.ClearChildren();
-            _events.GetAllTouching(_selectedTile.World).ForEachIndex((e, i) =>
+            _events.GetTileEvents(new TilePosition(_selectedTile.World)).ForEachIndex((e, i) =>
             {
                 _tilePanel.Add(Entity.Create(e.TypeName,
                         new Transform2
