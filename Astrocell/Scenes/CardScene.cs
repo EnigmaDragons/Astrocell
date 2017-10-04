@@ -12,7 +12,7 @@ namespace Astrocell.Scenes
     {
         protected override IEnumerable<GameObject> CreateObjs()
         {
-            return CardDisplay.Create(Card.Load("strike"), Vector2.Zero).AsList();
+            return CardDisplay.Create(Card.Load("strike"), Vector2.Zero, true).AsList();
         }
     }
 }

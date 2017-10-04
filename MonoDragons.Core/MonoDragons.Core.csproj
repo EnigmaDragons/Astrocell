@@ -55,6 +55,7 @@
     <Compile Include="Audio\Ecs\SoundsPlayer.cs" />
     <Compile Include="Audio\Ecs\SoundSystems.cs" />
     <Compile Include="Common\Condition.cs" />
+    <Compile Include="Common\ConditionExtensions.cs" />
     <Compile Include="Common\FancyMaths.cs" />
     <Compile Include="Common\Option.cs" />
     <Compile Include="Common\Reflection\PublicProperties.cs" />

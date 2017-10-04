@@ -25,14 +25,15 @@ namespace Astrocell.Battles
 
         public object CardComponent { get; private set; }
 
-        public void SelectAction(BattleCharacter src, IList<Card> cards, BattleCharacters chars, Action<CardAction> onCardSelected)
+        public void SelectAction(BattleCharacter src, BattleHand hand, BattleCharacters chars, Action<CardAction> onCardSelected)
         {
             _registerObj(Entity.Create("Player Card Select DropZone", new Transform2 { Size = new Size2(1920, 800) })
                 .Add(new MouseDropTarget { OnDrop = x => CompleteCardSelection(src, chars, x, onCardSelected) }));
 
             var margin = 20;
             var xLoc = 100;
-            cards.ForEachIndex((x, i) => _registerObj(CardDisplay.Create(x, new Vector2(xLoc + i * (CardDisplay.Width + margin), 600))));
+            hand.Cards.ForEachIndex((x, i) => _registerObj(
+                CardDisplay.Create(x, new Vector2(xLoc + i * (CardDisplay.Width + margin), 600), hand.Playable.Contains(x))));
         }
         
         private void CompleteCardSelection(BattleCharacter src, BattleCharacters chars, GameObject obj, Action<CardAction> onCardSelected)

@@ -110,7 +110,7 @@ namespace Astrocell.Battles.Battles
             var chr = CurrentChar;
             var player = _players[chr.Loyalty];
             State = Phase.AwaitingPlayerSelection;
-            player.SelectAction(chr, chr.PlayableCards, new BattleCharacters(Characters.Snapshot), 
+            player.SelectAction(chr, chr.Hand, new BattleCharacters(Characters.Snapshot), 
                 action => Present(x => x.ShowPlayedCard(chr, action.Card, ResolveCard(action))));
         }
 

@@ -9,9 +9,9 @@ namespace Astrocell.Battles.Players
 {
     public sealed class AIPlayer : IPlayer
     {
-        public void SelectAction(BattleCharacter src, IList<Card> cards, BattleCharacters allCharacters, Action<CardAction> onCardSelected)
+        public void SelectAction(BattleCharacter src, BattleHand hand, BattleCharacters allCharacters, Action<CardAction> onCardSelected)
         {
-            var card = SelectCard(src, cards, allCharacters);
+            var card = SelectCard(src, hand.Playable, allCharacters);
             var targettedEffects = card.Effects.Select(x => SelectTargets(x, src, allCharacters)).ToList();
             onCardSelected(new CardAction { Source = src, Card = card, TargettedEffects = targettedEffects });
         }
@@ -26,7 +26,7 @@ namespace Astrocell.Battles.Players
             return new TargettedEffect(effect, possibleTargets);
         }
 
-        private Card SelectCard(BattleCharacter forCharacter, IList<Card> cards, BattleCharacters allCharacters)
+        private Card SelectCard(BattleCharacter forCharacter, IEnumerable<Card> cards, BattleCharacters allCharacters)
         {
             foreach (var card in cards)
             {
@@ -34,7 +34,7 @@ namespace Astrocell.Battles.Players
                     continue;
                 return card;
             }
-            return cards[0];
+            return cards.First();
         }
     }
 }

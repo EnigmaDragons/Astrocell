@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using Astrocell.Battles.Battles;
 using Astrocell.Battles.Decks;
 
 namespace Astrocell.Battles.Players
 {
-    public sealed class DeadPlayer : IPlayer
+    public class DeadPlayer : IPlayer
     {
-        public void SelectAction(BattleCharacter src, IList<Card> cards, BattleCharacters allCharacters, Action<CardAction> onCardSelected)
+        public void SelectAction(BattleCharacter src, BattleHand hand, BattleCharacters characters, Action<CardAction> onSelected)
         {
-            throw new InvalidOperationException("Player is dead and cannot act.");
+            throw new NotImplementedException("I'm not alive. I will never pick a card. Not any card!");
         }
     }
 }

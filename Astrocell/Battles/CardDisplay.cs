@@ -7,6 +7,7 @@ using MonoDragons.Core.PhysicsEngine;
 using MonoDragons.Core.Render;
 using MonoDragons.Core.Text;
 using Astrocell.Plugins;
+using MonoDragons.Core.Common;
 
 namespace Astrocell.Battles
 {
@@ -16,18 +17,11 @@ namespace Astrocell.Battles
 
         public const int Width = 200;
 
-        public static GameObject Create(Card card, Vector2 position)
+        public static GameObject Create(Card card, Vector2 position, bool isPlayable)
         {
             _zIndex += 3;
-            return Entity.Create($"Card: {card.Name}" ,new Transform2 { Location = position, Size = new Size2(Width, 300), ZIndex = new ZIndex(_zIndex) })
-                .Add(new HighlightColor { Offset = -2, Width = 12, CornerRadius = 5, Color = Color.Transparent })
-                .Add(o => new MouseStateActions
-                {
-                    OnPressed = () => o.With<HighlightColor>(h => h.Color = Color.Red),
-                    OnReleased = () => o.With<HighlightColor>(h => h.Color = Color.Transparent)
-                })
+            var obj = Entity.Create($"Card: {card.Name}" ,new Transform2 { Location = position, Size = new Size2(Width, 300), ZIndex = new ZIndex(_zIndex) })
                 .Add(new CardDataComponent { Card = card })
-                .Add(new MouseDragAndDrop())
                 .Add(new BorderTexture())
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.Coral, o)))
                 .Add(Entity.Create($"CardText", new Transform2 { Location = position, Size = new Size2(Width, 300), ZIndex = new ZIndex(_zIndex) })
@@ -40,6 +34,15 @@ namespace Astrocell.Battles
                         new TextDisplay {Align = TextAlign.Center, Text = () => card.Description},
                     }
                 }));
+            isPlayable.If(() =>
+                obj.Add(new HighlightColor { Offset = -2, Width = 12, CornerRadius = 5, Color = Color.Transparent })
+                    .Add(o => new MouseStateActions
+                    {
+                        OnPressed = () => o.With<HighlightColor>(h => h.Color = Color.Red),
+                        OnReleased = () => o.With<HighlightColor>(h => h.Color = Color.Transparent)
+                    })
+                    .Add(new MouseDragAndDrop()));
+            return obj;
         }
     }
 }

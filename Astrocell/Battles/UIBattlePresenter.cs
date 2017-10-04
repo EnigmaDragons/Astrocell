@@ -36,7 +36,7 @@ namespace Astrocell.Battles
 
         private GameObject ShowCard(Card card)
         {
-            var obj = CardDisplay.Create(card, new Vector2(-400, -400))
+            var obj = CardDisplay.Create(card, new Vector2(-400, -400), false)
                 .Add(o => new DurationTravel
                     {
                         Duration = TimeSpan.FromMilliseconds(1000),
