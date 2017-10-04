@@ -25,7 +25,7 @@ namespace MonoDragons.Core.Render
             var screenPosition = viewport.GetScreenPosition(o.World.WithPadding(t.Margin));
             sprites.DrawString(spriteFont, wrapped,
                 AlignPositions[t.Align](screenPosition.ToRectangle(), size).ToPoint().ToVector2(), t.Color,
-                    screenPosition.Rotation.Radians, Vector2.Zero, 1, SpriteEffects.None, 1);
+                    screenPosition.Rotation.Radians, Vector2.Zero, 1, SpriteEffects.None, (o.World.ZIndex + 1).AsDepth());
         }
 
         private static readonly Dictionary<TextAlign, Func<Rectangle, Vector2, Vector2>> AlignPositions =

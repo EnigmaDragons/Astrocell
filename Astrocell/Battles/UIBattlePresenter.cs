@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Astrocell.Battles.BattlePresentation;
 using Astrocell.Battles.Battles;
 using Astrocell.Battles.Decks;
@@ -35,21 +34,21 @@ namespace Astrocell.Battles
             _presentations.RemoveAll(x => x.IsDone);
         }
 
-        private List<GameObject> ShowCard(Card card)
+        private GameObject ShowCard(Card card)
         {
-            var objs = CardDisplay.Create(card);
-            objs.First().Add(o => new DurationTravel
-            {
-                Duration = TimeSpan.FromMilliseconds(1000),
-                Target = new Transform2 {Size = o.Local.Size, Location = new Vector2(700, 350), ZIndex = o.World.ZIndex}
-            });
-            objs.ForEach(x => _registerObj(x));
-            return objs;
+            var obj = CardDisplay.Create(card, new Vector2(-400, -400), false)
+                .Add(o => new DurationTravel
+                    {
+                        Duration = TimeSpan.FromMilliseconds(1000),
+                        Target = new Transform2 {Size = o.Local.Size, Location = new Vector2(700, 350), ZIndex = o.World.ZIndex}
+                    });
+            _registerObj(obj);
+            return obj;
         }
 
-        private void HideCard(List<GameObject> objs)
+        private void HideCard(GameObject obj)
         {
-            objs.ForEach(Entity.Destroy);
+            Entity.Destroy(obj);
         }
 
         public void ShowBattleBegan(Battle battle, Action callback)

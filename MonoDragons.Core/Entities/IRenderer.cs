@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using MonoDragons.Core.Render;
 using MonoDragons.Core.Render.Viewports;
 
 namespace MonoDragons.Core.Entities

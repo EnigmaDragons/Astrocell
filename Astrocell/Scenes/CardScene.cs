@@ -3,6 +3,8 @@ using Astrocell.Battles;
 using Astrocell.Battles.Decks;
 using MonoDragons.Core.Entities;
 using MonoDragons.Core.Scenes;
+using MonoDragons.Core.Common;
+using Microsoft.Xna.Framework;
 
 namespace Astrocell.Scenes
 {
@@ -10,7 +12,7 @@ namespace Astrocell.Scenes
     {
         protected override IEnumerable<GameObject> CreateObjs()
         {
-            return CardDisplay.Create(Card.Load("strike"));
+            return CardDisplay.Create(Card.Load("strike"), Vector2.Zero, true).AsList();
         }
     }
 }

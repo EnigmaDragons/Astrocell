@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using Astrocell.Battles.Battles;
+﻿using Astrocell.Battles.Battles;
 using Astrocell.Battles.Decks;
+using System;
 
 namespace Astrocell.Battles.Players
 {
     public interface IPlayer
     {
-        CardAction SelectAction(BattleCharacter src, IList<Card> cards, BattleCharacters characters);
+        void SelectAction(BattleCharacter src, BattleHand hand, BattleCharacters characters, Action<CardAction> onSelected);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Astrocell.Battles.Characters;
 using Astrocell.Battles.Decks;
 using Astrocell.Battles.Effects;
@@ -17,13 +16,12 @@ namespace Astrocell.Battles.Battles
         public int Initiative => _stats[BattleStat.Initiative];
         public bool IsConscious => _stats[BattleStat.CurrentHp] > 0;
         public bool CanAct => IsConscious && _effects.CanAct;
-        public bool CanPlayACard => CanAct && Hand.Cards.Any(CanAfford);
+        public bool CanPlayACard => CanAct && Hand.Playable.Any();
 
         public string Name { get; }
         public BattleSide Loyalty { get; }
         public BattleDeck Deck { get; }
         public BattleHand Hand { get; }
-        public IList<Card> PlayableCards => Hand.Cards.Where(CanAfford).ToList();
 
         public int MaxHp => _stats[BattleStat.MaxHp];
         public int CurrentHp => _stats.CurrentHp;
@@ -40,7 +38,7 @@ namespace Astrocell.Battles.Battles
         {
             _log = log;
             Name = name;
-            Hand = new BattleHand();
+            Hand = new BattleHand(() => CurrentActionPoints, () => CurrentEnergy);
             _stats = new BattleCharacterStats(stats);
             _effects = new BattleCharacterStatusEffects();
             Loyalty = loyalty;
@@ -122,11 +120,6 @@ namespace Astrocell.Battles.Battles
                 return 0;
 
             return _stats[stat];
-        }
-
-        private bool CanAfford(Card x)
-        {
-            return x.ActionPointCost <= _stats[BattleStat.CurrentActionPoints] && x.EnergyCost <= _stats[BattleStat.CurrentEnergy];
         }
 
         private void DrawCards(int n)

@@ -15,6 +15,7 @@ namespace Astrocell.Battles.Battles
             AwaitingAction,
             Presenting,
             AwaitingTurn,
+            AwaitingPlayerSelection,
             TurnFinished,
             BattleFinished
         }
@@ -108,9 +109,9 @@ namespace Astrocell.Battles.Battles
         {
             var chr = CurrentChar;
             var player = _players[chr.Loyalty];
-            var action = player.SelectAction(chr, chr.PlayableCards, new BattleCharacters(Characters.Snapshot));
-
-            Present(x => x.ShowPlayedCard(chr, action.Card, ResolveCard(action)));
+            State = Phase.AwaitingPlayerSelection;
+            player.SelectAction(chr, chr.Hand, new BattleCharacters(Characters.Snapshot), 
+                action => Present(x => x.ShowPlayedCard(chr, action.Card, ResolveCard(action))));
         }
 
         private Action ResolveCard(CardAction action)
