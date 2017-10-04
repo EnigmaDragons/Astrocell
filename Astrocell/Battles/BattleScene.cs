@@ -24,27 +24,30 @@ namespace Astrocell.Battles
             var delay = TimeSpan.FromMilliseconds(800);
             var log = new BufferedLog { BufferDuration = delay };
             var presenter = new UIBattlePresenter(log, AddObj);
+            var targetting = new BattleTargetSelection();
+
             yield return Entity.Create("Battle UI Presenter")
                 .Add(presenter);
+
             yield return Entity.Create("Battle Background", new Transform2 { Location = new Vector2(0, -100), Size = new Size2(1600, 1228), ZIndex = BackgroundLayer })
                 .Add((o, r) => new Texture(r.LoadTexture("Battle/tek-orange-room.jpg", o)));
+
             yield return Entity.Create("Battle Log", new Transform2 { Location = new Vector2(150, 50), Size = new Size2(1300, 50), ZIndex = CombatLogLayer })
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.DarkBlue, o)))
                 .Add((o, r) => new BorderTexture(r.CreateRectangle(Color.AntiqueWhite, o)))
                 .Add(log)
                 .Add(new TextDisplay { Text = () => log.Lines.Last() });
+
             var char1Battle = BattleCharacter.Create(BattleSide.Gamer, Samples.CreateElectrician());
-            yield return CharacterDisplay.Create(
-                char1Battle,
-                "Heroes/gareth.png",
-                new Vector2(1200, 450));
+            var heroDisplay = CharacterDisplay.Create(char1Battle, "Heroes/gareth.png", new Vector2(1200, 350), targetting);
+            yield return heroDisplay;
 
             var enemy1Battle = BattleCharacter.Create(BattleSide.Enemy, Enemy.CreateLaserDrone());
-            yield return CharacterDisplay.Create(enemy1Battle, "Enemies/drone1.png", new Vector2(200, 450));
+            yield return CharacterDisplay.Create(enemy1Battle, "Enemies/drone1.png", new Vector2(200, 350), targetting);
 
             BattlePresenter.Instance = presenter;
             BattleLog.Instance = log;
-            var battle = Battle.Create(new BattleCardSelectionPresenter(AddObj), new AIPlayer(), char1Battle, enemy1Battle);
+            var battle = Battle.Create(new BattleCardSelectionPresenter(AddObj, targetting), new AIPlayer(), char1Battle, enemy1Battle);
             yield return Entity.Create("Current Battle")
                 .Add(new CurrentBattle {Battle = battle});
         }

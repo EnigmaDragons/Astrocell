@@ -16,15 +16,15 @@ namespace Astrocell.Battles
     public sealed class BattleCardSelectionPresenter : IPlayer
     {
         private readonly Action<GameObject> _registerObj;
+        private readonly BattleTargetSelection _targetting;
         private readonly List<GameObject> _currentObjs = new List<GameObject>();
 
-        public BattleCardSelectionPresenter(Action<GameObject> registerObj)
+        public BattleCardSelectionPresenter(Action<GameObject> registerObj, BattleTargetSelection targetting)
         {
-            _registerObj = x => { registerObj(x); _currentObjs.Add(x); } ;
+            _registerObj = x => { registerObj(x); _currentObjs.Add(x); };
+            _targetting = targetting;
         }
-
-        public object CardComponent { get; private set; }
-
+        
         public void SelectAction(BattleCharacter src, BattleHand hand, BattleCharacters chars, Action<CardAction> onCardSelected)
         {
             _registerObj(Entity.Create("Player Card Select DropZone", new Transform2 { Size = new Size2(1920, 500) })
@@ -40,23 +40,7 @@ namespace Astrocell.Battles
         {
             var selectedCard = obj.Get<CardDataComponent>().Card;
             _currentObjs.DequeueEach(x => Entity.Destroy(x));
-            CompleteTargetSelection(src, selectedCard, chars, onCardSelected);
-        }
-
-        // TODO: Allow the player to select their own targets
-        private void CompleteTargetSelection(BattleCharacter src, Card card, BattleCharacters characters, Action<CardAction> onCardSelected)
-        {
-            var targets = card.Effects.Select(x => SelectTargets(x, src, characters)).ToList();
-            onCardSelected(new CardAction { Card = card, Source = src, TargettedEffects = targets });
-        }
-
-        private TargettedEffect SelectTargets(CardEffect effect, BattleCharacter src, BattleCharacters allCharacters)
-        {
-            var targetType = effect.Target;
-            var possibleTargets = allCharacters.GetPossibleTargets(src, targetType);
-            if (targetType == EffectTarget.One)
-                return new TargettedEffect(effect, possibleTargets.First(x => x.Loyalty != src.Loyalty).AsList());
-            return new TargettedEffect(effect, possibleTargets);
+            _targetting.OnCardSelected(src, chars, selectedCard, onCardSelected);
         }
     }
 }
