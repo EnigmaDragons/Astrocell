@@ -34,17 +34,13 @@ namespace Astrocell.Battles
                 .Add(log)
                 .Add(new TextDisplay { Text = () => log.Lines.Last() });
             var char1Battle = BattleCharacter.Create(BattleSide.Gamer, Samples.CreateElectrician());
-            var char1 = CharacterDisplay.Create(
+            yield return CharacterDisplay.Create(
                 char1Battle,
                 "Heroes/gareth.png",
                 new Vector2(1200, 450));
-            foreach(var obj in char1)
-                yield return obj;
 
             var enemy1Battle = BattleCharacter.Create(BattleSide.Enemy, Enemy.CreateLaserDrone());
-            var enemy1 = CharacterDisplay.Create(enemy1Battle, "Enemies/drone1.png", new Vector2(200, 450));
-            foreach (var obj in enemy1)
-                yield return obj;
+            yield return CharacterDisplay.Create(enemy1Battle, "Enemies/drone1.png", new Vector2(200, 450));
 
             BattlePresenter.Instance = presenter;
             BattleLog.Instance = log;

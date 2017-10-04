@@ -27,7 +27,7 @@ namespace Astrocell.Battles
 
         public void SelectAction(BattleCharacter src, BattleHand hand, BattleCharacters chars, Action<CardAction> onCardSelected)
         {
-            _registerObj(Entity.Create("Player Card Select DropZone", new Transform2 { Size = new Size2(1920, 800) })
+            _registerObj(Entity.Create("Player Card Select DropZone", new Transform2 { Size = new Size2(1920, 500) })
                 .Add(new MouseDropTarget { OnDrop = x => CompleteCardSelection(src, chars, x, onCardSelected) }));
 
             var margin = 20;
