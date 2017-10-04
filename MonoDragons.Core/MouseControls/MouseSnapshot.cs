@@ -42,6 +42,20 @@ namespace MonoDragons.Core.MouseControls
             _current = Mouse.GetState();
         }
 
+        public bool JustPressed(MouseButton button)
+        {
+            return (button == MouseButton.Left && LeftButtonJustPressed)
+                   || (button == MouseButton.Right && RightButtonJustPressed)
+                   || (button == MouseButton.Center && MiddleButtonJustPressed);
+        }
+
+        public bool JustReleased(MouseButton button)
+        {
+            return (button == MouseButton.Left && LeftButtonJustReleased)
+                   || (button == MouseButton.Right && RightButtonJustReleased)
+                   || (button == MouseButton.Center && MiddleButtonJustReleased);
+        }
+
         public MouseSnapshot Current()
         {
             return new MouseSnapshot(_current);

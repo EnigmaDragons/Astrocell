@@ -134,6 +134,11 @@ namespace MonoDragons.Core.Entities
             return this;
         }
 
+        public void ClearChildren()
+        {
+            _children.DequeueEach(x => x.Dispose());
+        }
+
         public T Get<T>() 
             where T : EntityComponent
         {
@@ -161,7 +166,7 @@ namespace MonoDragons.Core.Entities
         internal void Dispose()
         {
             _components.DequeueEach(x => x.Dispose());
-            _children.DequeueEach(x => x.Dispose());
+            ClearChildren();
             _resources.Release(this);
             _cleanup();
         }

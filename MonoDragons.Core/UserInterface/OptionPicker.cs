@@ -14,7 +14,7 @@ namespace MonoDragons.Core.UserInterface
             var picker = Entity.Create(name, transform)
                 .Add((o, r) => new Texture(r.CreateRectangle(Color.Orange, o)))
                 .Add(o => new MouseClickTarget { OnHit = () => o.ToggleChildren() })
-                .Add(new TextDisplay { Text = () => "Click Me" });
+                .Add(new TextDisplay { Text = () => name });
             options.ForEachIndex((x, i) => picker.Add(CreateItem(transform, x, i + 1)));
             return picker.DisableChildren();
         }

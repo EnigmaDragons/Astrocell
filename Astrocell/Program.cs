@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Astrocell.Battles;
 using Astrocell.Maps;
 using Astrocell.Plugins;
@@ -62,7 +63,6 @@ namespace Astrocell
                 { "Battle", () => new BattleScene() },
                 { "mapping", () => new MapSelector() },
                 { "Large", () => new Large(new PlayerLocation { MapName = "Large", Transform =new Transform2 { Location = new TilePosition(5, 8) } }) },
-                { "Picker", () => new PickerScene() }
             });
         }
     }

@@ -21,9 +21,9 @@ namespace MonoDragons.Core.MouseControls
                         m.Exit();
                     else if (!o.World.Intersects(_mouse.LastWorldPosition))
                         m.Hover();
-                    else if (_mouse.ButtonJustPressed)
+                    else if (_mouse.JustPressed(m.Button))
                         m.Click();
-                    else if (_mouse.ButtonJustReleased)
+                    else if (_mouse.JustReleased(m.Button))
                         m.Release();
                 },
                 (o, m) => m.Exit());

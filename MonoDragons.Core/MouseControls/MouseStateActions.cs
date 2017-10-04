@@ -13,6 +13,7 @@ namespace MonoDragons.Core.MouseControls
         public Action OnHover { get; set; } = () => {};
         public Action OnPressed { get; set; } = () => {};
         public Action OnExit { get; set; } = () => {};
+        public MouseButton Button { get; set; } = MouseButton.Left;
 
         public void Hover()
         {

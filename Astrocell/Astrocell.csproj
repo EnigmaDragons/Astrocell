@@ -57,7 +57,6 @@
     <Compile Include="Scenes\CardScene.cs" />
     <Compile Include="Scenes\FireCave.cs" />
     <Compile Include="Scenes\Large.cs" />
-    <Compile Include="Scenes\PickerScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
