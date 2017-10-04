@@ -9,5 +9,11 @@ namespace MonoDragons.Core.Common
             if (condition)
                 action();
         }
+
+        public static void IfNot(this bool condition, Action action)
+        {
+            if (!condition)
+                action();
+        }
     }
 }

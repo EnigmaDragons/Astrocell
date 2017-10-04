@@ -16,7 +16,7 @@ namespace Astrocell.Battles.Decks
         public int CardsDrawn { get; set; }
 
         public List<CardEffect> Effects { get; set; } = new List<CardEffect>();
-
+        
         public static Card Load(string name)
         {
             return new JsonIo().Load<Card>($"./Content/Cards/{name}.json");

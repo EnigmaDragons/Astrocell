@@ -2,7 +2,7 @@
 
 namespace MonoDragons.Core.Common
 {
-    public sealed class Optional<T>
+    public struct Optional<T>
     {
         private readonly T _value;
 
@@ -16,11 +16,6 @@ namespace MonoDragons.Core.Common
                     throw new InvalidOperationException($"Optional {typeof(T).Name} has no value.");
                 return _value;
             }
-        }
-
-        public Optional()
-        {
-            IsPresent = false;
         }
 
         public Optional(T value)
@@ -54,5 +49,7 @@ namespace MonoDragons.Core.Common
         {
             return new Optional<T>(obj);
         }
+
+        public static Optional<T> Missing => new Optional<T>();
     }
 }

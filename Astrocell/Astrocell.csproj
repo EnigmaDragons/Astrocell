@@ -40,6 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Battles\BattleFactory.cs" />
+    <Compile Include="Battles\BattleTargetSelection.cs" />
     <Compile Include="Battles\CardDisplay.cs" />
     <Compile Include="Battles\CharacterDisplay.cs" />
     <Compile Include="Battles\BattleCardSelectionPresenter.cs" />
